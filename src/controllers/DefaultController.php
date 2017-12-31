@@ -12,6 +12,7 @@ namespace martinherweg\craft3gonzo\controllers;
 
 use craft\web\View;
 use martinherweg\craft3gonzo\Craft3Gonzo;
+use martinherweg\craft3gonzo\assetbundles\gonzo\GonzoAsset;
 use Craft;
 use craft\web\Controller;
 use Illuminate\Support\Collection;
@@ -173,6 +174,7 @@ class DefaultController extends Controller
         \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
         $html = \Craft::$app->view->renderTemplate('craft-3-gonzo/styleguide.twig', $variables);
         \Craft::$app->view->setTemplateMode($oldMode);
+        \Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
         return $html;
     }
 
