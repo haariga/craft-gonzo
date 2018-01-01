@@ -1,6 +1,6 @@
 <?php
 /**
- * Craft 3 Gonzo plugin for Craft CMS 3.x
+ * Craft3 Gonzo plugin for Craft CMS 3.x
  *
  * Module Collection from your templates Folder
  *
@@ -65,6 +65,7 @@ class Craft3Gonzo extends Plugin
     public $controllerMap = [
       'template-index' => DefaultController::class
     ];
+
     public function init()
     {
         parent::init();
@@ -75,8 +76,8 @@ class Craft3Gonzo extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['styleguide'] = 'craft-3-gonzo/default/template-index';
-                $event->rules['styleguide/<myVariable:S+>'] = 'craft-3-gonzo/templateRender';
+                $event->rules['styleguide'] = 'craft3-gonzo/default/template-index';
+                $event->rules['styleguide/<myVariable:S+>'] = 'craft3-gonzo/templateRender';
             }
         );
 
@@ -111,7 +112,7 @@ class Craft3Gonzo extends Plugin
          */
         Craft::info(
             Craft::t(
-                'craft-3-gonzo',
+                'craft3-gonzo',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),

@@ -1,6 +1,6 @@
 {
-    "name": "martinherweg/craft-3-gonzo",
-    "description": "Module Collection from your templates Folder",
+    "name": "martinherweg/craft3-gonzo",
+    "description": "Component Library from your templates Folder",
     "type": "craft-plugin",
     "version": "0.0.1",
     "keywords": [
@@ -8,11 +8,11 @@
         "cms",
         "craftcms",
         "craft-plugin",
-        "craft 3 gonzo"
+        "craft3 gonzo"
     ],
     "support": {
-        "docs": "https://github.com/martinherweg/craft-3-gonzo/blob/master/README.md",
-        "issues": "https://github.com/martinherweg/craft-3-gonzo/issues"
+        "docs": "https://github.com/martinherweg/craft3-gonzo/blob/master/README.md",
+        "issues": "https://github.com/martinherweg/craft3-gonzo/issues"
     },
     "license": "MIT",
     "authors": [
@@ -31,12 +31,12 @@
         }
     },
     "extra": {
-        "name": "Craft 3 Gonzo",
-        "handle": "craft-3-gonzo",
+        "name": "Craft3 Gonzo",
+        "handle": "craft3-gonzo",
         "schemaVersion": "0.0.1",
         "hasCpSettings": false,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/martinherweg/craft-3-gonzo/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/martinherweg/craft3-gonzo/master/CHANGELOG.md",
         "class": "martinherweg\\craft3gonzo\\Craft3Gonzo"
     }
 }

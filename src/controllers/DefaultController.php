@@ -1,6 +1,6 @@
 <?php
 /**
- * Craft 3 Gonzo plugin for Craft CMS 3.x
+ * Craft3 Gonzo plugin for Craft CMS 3.x
  *
  * Module Collection from your templates Folder
  *
@@ -56,7 +56,7 @@ class DefaultController extends Controller
 
     /**
      * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/craft-3-gonzo/default
+     * e.g.: actions/craft3-gonzo/default
      *
      * @return mixed
      */
@@ -172,7 +172,7 @@ class DefaultController extends Controller
         $variables['templates'] = $treeView->toArray();
         $oldMode = \Craft::$app->view->getTemplateMode();
         \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
-        $html = \Craft::$app->view->renderTemplate('craft-3-gonzo/styleguide.twig', $variables);
+        $html = \Craft::$app->view->renderTemplate('craft3-gonzo/styleguide.twig', $variables);
         \Craft::$app->view->setTemplateMode($oldMode);
         \Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
         return $html;
