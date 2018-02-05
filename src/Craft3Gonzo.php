@@ -1,69 +1,70 @@
 <?php
-/**
- * Craft3 Gonzo plugin for Craft CMS 3.x
- *
- * Module Collection from your templates Folder
- *
- * @link      https://martinherweg.de
- * @copyright Copyright (c) 2017 Martin Herweg
- */
-
-namespace martinherweg\craft3gonzo;
-
-use Craft;
-use craft\base\Plugin;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
-use craft\web\UrlManager;
-use craft\events\RegisterUrlRulesEvent;
-use martinherweg\craft3gonzo\controllers\DefaultController;
-use yii\base\Event;
-
-/**
- * Craft plugins are very much like little applications in and of themselves. We’ve made
- * it as simple as we can, but the training wheels are off. A little prior knowledge is
- * going to be required to write a plugin.
- *
- * For the purposes of the plugin docs, we’re going to assume that you know PHP and SQL,
- * as well as some semi-advanced concepts like object-oriented programming and PHP namespaces.
- *
- * https://craftcms.com/docs/plugins/introduction
- *
- * @author    Martin Herweg
- * @package   Craft3Gonzo
- * @since     0.0.1
- *
- */
-class Craft3Gonzo extends Plugin
-{
-    // Static Properties
-    // =========================================================================
-
     /**
-     * Static property that is an instance of this plugin class so that it can be accessed via
-     * Craft3Gonzo::$plugin
+     * Craft3 Gonzo plugin for Craft CMS 3.x
      *
-     * @var Craft3Gonzo
-     */
-    public static $plugin;
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-     * Set our $plugin static property to this class so that it can be accessed via
-     * Craft3Gonzo::$plugin
+     * Module Collection from your templates Folder
      *
-     * Called after the plugin class is instantiated; do any one-time initialization
-     * here such as hooks and events.
-     *
-     * If you have a '/vendor/autoload.php' file, it will be loaded for you automatically;
-     * you do not need to load it in your init() method.
-     *
+     * @link      https://martinherweg.de
+     * @copyright Copyright (c) 2017 Martin Herweg
      */
 
-    public $controllerMap = [
-      'template-index' => DefaultController::class
+    namespace martinherweg\craft3gonzo;
+
+    use Craft;
+    use craft\base\Plugin;
+    use craft\services\Plugins;
+    use craft\events\PluginEvent;
+    use craft\web\UrlManager;
+    use craft\events\RegisterUrlRulesEvent;
+    use martinherweg\craft3gonzo\controllers\DefaultController;
+    use yii\base\Event;
+
+    /**
+     * Craft plugins are very much like little applications in and of themselves. We’ve made
+     * it as simple as we can, but the training wheels are off. A little prior knowledge is
+     * going to be required to write a plugin.
+     *
+     * For the purposes of the plugin docs, we’re going to assume that you know PHP and SQL,
+     * as well as some semi-advanced concepts like object-oriented programming and PHP namespaces.
+     *
+     * https://craftcms.com/docs/plugins/introduction
+     *
+     * @author    Martin Herweg
+     * @package   Craft3Gonzo
+     * @since     0.0.1
+     *
+     */
+    class Craft3Gonzo extends Plugin
+    {
+        // Static Properties
+        // =========================================================================
+
+        /**
+         * Static property that is an instance of this plugin class so that it can be accessed via
+         * Craft3Gonzo::$plugin
+         *
+         * @var Craft3Gonzo
+         */
+        public static $plugin;
+
+        // Public Methods
+        // =========================================================================
+
+        /**
+         * Set our $plugin static property to this class so that it can be accessed via
+         * Craft3Gonzo::$plugin
+         *
+         * Called after the plugin class is instantiated; do any one-time initialization
+         * here such as hooks and events.
+         *
+         * If you have a '/vendor/autoload.php' file, it will be loaded for you automatically;
+         * you do not need to load it in your init() method.
+         *
+         */
+
+        public $controllerMap = [
+            'template-index'  => DefaultController::class,
+            'template-render' => DefaultController::class,
     ];
 
     public function init()
@@ -77,7 +78,7 @@ class Craft3Gonzo extends Plugin
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['styleguide'] = 'craft3-gonzo/default/template-index';
-                $event->rules['styleguide/<myVariable:S+>'] = 'craft3-gonzo/templateRender';
+                $event->rules['styleguide/<myVariable:\S+>'] = 'craft3-gonzo/default/template-render';
             }
         );
 
