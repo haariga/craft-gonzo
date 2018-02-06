@@ -25,7 +25,7 @@ export default {
       return this.$store.getters.activeTemplate;
     },
     frame() {
-      const previewUrl = './styleguide/';
+      const previewUrl = './styleguide';
       return {
         src: previewUrl + this.activeComponent.relativePath,
       };
