@@ -184,11 +184,12 @@ class DefaultController extends Controller
      * @param array $variables
      * @return \yii\web\Response
      */
-    public function actionTemplateRender(array $variables)
+    public function actionTemplateRender(string $component)
     {
-        $pathinfo = pathinfo($variables['myVariable']);
-        $modulePath = $this->templatesPath . $pathinfo['dirname'];
-        $variables['component'] = $variables['myVariable'];
+        $variables = [];
+        $pathinfo = pathinfo($component);
+        $modulePath = $this->templatesPath . '/' . $pathinfo['dirname'];
+        $variables['component'] = $component;
         $variables['templateOptions'] = $this->getConfig($modulePath);
 
         return $this->renderTemplate('styleguideRenderer', $variables);

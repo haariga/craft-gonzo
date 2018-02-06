@@ -78,7 +78,7 @@
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['styleguide'] = 'craft3-gonzo/default/template-index';
-                $event->rules['styleguide/<myVariable:\S+>'] = 'craft3-gonzo/default/template-render';
+                $event->rules['styleguide/<component:\S+>'] = 'craft3-gonzo/default/template-render';
             }
         );
 
