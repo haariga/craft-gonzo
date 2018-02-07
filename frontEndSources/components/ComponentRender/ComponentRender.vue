@@ -7,11 +7,11 @@
 
             <!-- TODO: Active Class for Button -->
             <div class="pl-renderer__actions">
-                <button class="pl-renderer__button" :class="buttonActive" @click="toggleClass(); maxWidth = '320px';">
+                <button class="pl-renderer__button" :class="buttonActive" @click="toggleClass(); maxWidth = '384px';">
                     320px
                 </button>
-                <button class="pl-renderer__button" @click="maxWidth = '768px'">768px</button>
-                <button class="pl-renderer__button" @click="maxWidth = '1280px'">1280px</button>
+                <button class="pl-renderer__button" @click="maxWidth = '832px'">768px</button>
+                <button class="pl-renderer__button" @click="maxWidth = '1344px'">1280px</button>
                 <button class="pl-renderer__button" @click="maxWidth = '100%'">100%</button>
             </div>
 
