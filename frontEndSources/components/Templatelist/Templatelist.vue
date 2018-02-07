@@ -1,11 +1,9 @@
 <template>
-  <div :style="indent">
-    <a
-      href="#"
-      @click.prevent="selectActiveModule(node)">
+  <li :style="indent">
+    <a href="#" @click.prevent="selectActiveModule(node)">
       {{ node.config.title }}
     </a>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -25,7 +23,7 @@ export default {
   computed: {
     indent() {
       return {
-        transform: `translateX(${this.depth * 10}px)`,
+        // paddingLeft: `${this.depth * 10}px`,
       };
     },
   },

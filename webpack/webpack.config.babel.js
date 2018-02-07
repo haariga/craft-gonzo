@@ -33,12 +33,12 @@ const webpackConfig = env => ({
   },
   module: {
     rules: [
-      {
+      /*{
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
         include: absPath('frontEndSources/')
-      },
+      },*/
       {
         test: /\.vue$/,
         loader: 'vue-loader',

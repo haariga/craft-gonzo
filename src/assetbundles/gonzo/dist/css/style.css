@@ -1,0 +1,30 @@
+html {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+code,
+pre {
+    font-family: "Roboto Mono", monospace;
+    font-size: 13px;
+}
+
+.pl-hr {
+    width: calc(100% - 64px);
+    margin: 32px auto 16px auto;
+    border: 0;
+    background-color: #f8f8f8;
+    height: 2px;
+}
+
