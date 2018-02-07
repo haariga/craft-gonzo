@@ -29,18 +29,20 @@ const webpackConfig = env => ({
   },
   output: {
     path: absPath('src/assetbundles/gonzo/dist/'),
-    publicPath: '',
+    publicPath: 'http://localhost:8080/',
     filename: 'js/Craft3Gonzo.js',
     chunkFilename: 'js/[id].js',
   },
   devServer: {
     contentBase: absPath('resources/'),
-    hot: true,
+    publicPath: 'http://localhost:8080/',
+    hotOnly: true,
     inline: true,
     overlay: true,
     headers: {
       'Access-Control-Allow-Origin': '*'
-    }
+    },
+    disableHostCheck: true,
   },
   resolve: {
     extensions: ['.js', '.vue'],
