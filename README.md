@@ -18,7 +18,7 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-       composer require martinherweg/craft-3-gonzo
+       composer require martinherweg/craft3-gonzo
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Craft3 Gonzo.
 
