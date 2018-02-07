@@ -42,7 +42,9 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "baukasten-grid": "^1.0.10",
     "eslint-plugin-prettier": "^2.6.0",
+    "include-media": "^1.4.9",
     "interact.js": "^1.2.8",
     "lodash": "^4.17.4",
     "vue": "^2.2.3",

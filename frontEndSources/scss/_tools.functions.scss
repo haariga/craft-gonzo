@@ -1,0 +1,47 @@
+/*
+ |--------------------------------------------------------------------------
+ |  Colors
+ |--------------------------------------------------------------------------
+ */
+
+@function color($key, $tone: base) {
+  @if map-has-key($bk-colors, $key) {
+    $getTone: map-get(map-get($bk-colors, $key), $tone);
+
+    @if ($getTone != null) {
+      @return map-get(map-get($bk-colors, $key), $tone);
+    } @else {
+      @warn "'#{$tone}' is not a valid tone in: '#{$key}'";
+      @return null;
+    }
+  }
+
+  @warn "'#{$key}' is not a valid color in: '$bk-colors'";
+  @return null;
+}
+
+// Shorthand Version
+@function c($key, $tone: base) {
+  @return color($key, $tone);
+}
+
+
+/*
+ |--------------------------------------------------------------------------
+ |  Easings
+ |--------------------------------------------------------------------------
+ */
+
+@function ease($key) {
+  @if map-has-key($bk-easings, $key) {
+    @return map-get($bk-easings, $key);
+  }
+
+  @warn "Unknown '#{$key}' in #{map-keys($bk-easings)}";
+  @return null;
+}
+
+// Shorthand Version
+@function e($key) {
+  @return ease($key);
+}
