@@ -11,6 +11,7 @@
  */
 
 import Vue from 'vue';
+import './scss/app.scss';
 import store from './store';
 import App from './App';
 
