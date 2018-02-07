@@ -22,7 +22,7 @@
                     vspace="0"
                     hspace="0"
                     scrolling="yes"
-                    name="styleguideRenderer"
+                    name="patternlibRenderer"
                     frameborder="0"
                     v-if="activeComponent.relativePath"/>
             <div v-else>
@@ -147,7 +147,7 @@
                 return this.$store.getters.activeTemplate
             },
             frame() {
-                const previewUrl = './styleguide'
+                const previewUrl = './patternlib'
                 return {
                     src: previewUrl + this.activeComponent.relativePath,
                 }
