@@ -1,0 +1,63 @@
+/*
+ |--------------------------------------------------------------------------
+ |  Content
+ |--------------------------------------------------------------------------
+ */
+
+
+.pl-content {
+  position: relative;
+
+  &__section {
+    @include make-section-padding();
+  }
+
+  &__container {
+    @include make-vr();
+  }
+
+  &__container--iframeActions {
+    @include f(s(-2), s(-4), margin-bottom);
+  }
+
+  &__container--iframe {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+
+    iframe {
+      margin-top: 16px;
+      width: 100%;
+      max-width: 100%;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+      padding: 32px;
+    }
+  }
+
+
+
+  &__container--code {
+    width: 100%;
+    max-width: 100%;
+
+    pre {
+      width: 100%;
+      max-width: 100%;
+      background-color: c('black', '95');
+      color: c('black', '75');
+      border-radius: 5px;
+      padding: 32px;
+      max-height: 200px;
+      overflow: hidden;
+      transition: all 0.25s;
+
+      &.is-open {
+        overflow: scroll;
+        max-height: none;
+        background-color: c('black', '90');
+        color: c('black', '40');
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
-  <li :style="indent">
-    <a href="#" @click.prevent="selectActiveModule(node)">
+  <li class="pl-files__listItem">
+    <a href="#" class="ms-res--1" @click.prevent="selectActiveModule(node)">
       {{ node.config.title }}
     </a>
   </li>
@@ -18,13 +18,6 @@ export default {
     depth: {
       type: Number,
       default: 0,
-    },
-  },
-  computed: {
-    indent() {
-      return {
-        // paddingLeft: `${this.depth * 10}px`,
-      };
     },
   },
   methods: {

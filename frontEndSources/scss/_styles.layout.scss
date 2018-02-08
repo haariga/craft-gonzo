@@ -1,0 +1,93 @@
+.pl-wrapper {
+  @include center();
+  width: 100vw;
+  max-width: 1680px;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.pl-head {
+  @include make-col-padding(6);
+  line-height: 120px;
+  height: 120px;
+  width: 100%;
+}
+
+.pl-nav {
+  width: 100%;
+  max-width: calc(1680px - 320px);
+}
+
+.pl-aside {
+  @include make-col-padding(3);
+  padding-bottom: s(8);
+  padding-right: 0 !important;
+  width: 320px;
+  height: 100vh;
+  padding-top: 120px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pl-logo {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  height: 120px;
+  line-height: 120px;
+  font-weight: 900;
+  @include ms-respond(font-size, 1);
+  background-color: c('blue', 'light');
+  pointer-events: none;
+  padding-right: s(4);
+  text-transform: uppercase;
+
+  span {
+    font-weight: 300;
+    text-transform: none;
+    color: c('blue');
+  }
+}
+
+.pl-main {
+  @include make-col-padding(3);
+  width: calc(100% - 320px);
+  max-width: calc(1680px - 320px);
+  height: 100vh;
+  padding-bottom: s(8);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pl-main__inner {
+  @include make-col-padding(6);
+  @include make-section-padding(2);
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: c('white');
+  box-shadow: 0 20px  56px rgba(c('black'), 0.2);
+}
+
+.pl-main__footer {
+  @include make-vr();
+  @include make-col-padding(6);
+  @include make-section-padding(2);
+  width: 100%;
+  color: c('blue');
+  text-align: center;
+
+  a {
+    color: c('blue', 'dark');
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  span {
+    color: c('red');
+  }
+}

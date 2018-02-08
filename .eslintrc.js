@@ -14,8 +14,7 @@ module.exports = {
     'airbnb-base',
     'plugin:vue/recommended',
     'plugin:import/errors',
-    'plugin:import/warnings',
-    'prettier'
+    'plugin:import/warnings'
   ],
   settings: {
     'import/resolver': {

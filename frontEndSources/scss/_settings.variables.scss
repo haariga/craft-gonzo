@@ -6,7 +6,7 @@
 // Imports
 // Important to include "Include Media" at this point
 // Cause we set the map our Breakpoints to their map $breakpoints
-@import '~include-media/dist/include-media';
+@import '../../node_modules/include-media/dist/include-media';
 
 // Settings
 $bk-grid-settings-custom: (
@@ -36,13 +36,7 @@ $bk-grid-settings-custom: (
         )
 );
 
-@import '~baukasten-grid/scss/baukasten-grid';
-
-/*
- |--------------------------------------------------------------------------
- |  Colors
- |--------------------------------------------------------------------------
- */
+@import '../../node_modules/baukasten-grid/scss/baukasten-grid';
 
 /*
  |--------------------------------------------------------------------------
@@ -55,9 +49,12 @@ $color__white: #fff;
 $color__black: #000;
 
 // Colored
-$color__red: #F44336;
-$color__green: #4CAF50;
-$color__blue: #2196F3;
+$color__red: #B43E3E;
+$color__green: #5A7445;
+$color__blue: #8d99a9;
+$color__blue-light: #dae3ea;
+$color__blue-dark: #3E4145;
+$color__blue-intensive: #5B89A8;
 
 $bk-grayShades: (
         'white': (
@@ -105,14 +102,15 @@ $bk-colored: (
         ),
         'blue': (
                 'base': $color__blue,
-                'dark': mix(black, $color__blue, 10%),
-                'light': mix(white, $color__blue, 10%),
-                'trans': rgba($color__blue, 0.5),
+                'light': $color__blue-light,
+                'dark': $color__blue-dark,
+                'intensive': $color__blue-intensive,
         ),
 );
 
 // Merge Gray Shades and Colored Map
 $bk-colors: map-merge($bk-colored, $bk-grayShades);
+
 
 
 /*
@@ -171,4 +169,32 @@ $bk-easings: (
         'in-out-expo': $ease-in-out-expo,
         'in-out-circ': $ease-in-out-circ,
         'in-out-back': $ease-in-out-back
+);
+
+
+/*
+ |--------------------------------------------------------------------------
+ |  Font Sizes
+ |--------------------------------------------------------------------------
+ */
+// Dependencies
+@import '../../node_modules/modularscale-sass/stylesheets/modularscale';
+
+// Settings
+$bk-baseFontSizePx: 16px;
+$bk-baseFontSizeMaxPx: 19px;
+$bk-baseLineHeight: 1.5;
+
+// Modular Scale Settings
+$modularscale: (
+        base: $bk-baseFontSizePx,
+        ratio: $major-second,
+        $bk-minWidth: (
+                base: $bk-baseFontSizePx,
+                ratio: $major-second,
+        ),
+        $bk-maxWidth:  (
+                base: $bk-baseFontSizeMaxPx,
+                ratio: $fourth,
+        )
 );

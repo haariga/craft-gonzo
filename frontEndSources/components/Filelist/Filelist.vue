@@ -1,7 +1,7 @@
 <template>
-    <div class="tree" :style="indent">
-        <h3>{{ label }}</h3>
-        <ul>
+    <nav class="pl-files">
+        <h3 class="pl-files__headline  ms-res--1">{{ label }}</h3>
+        <ul class="pl-files__list">
             <filelist
                     v-for="(node, name) in nodes"
                     :nodes="node.children"
@@ -15,7 +15,7 @@
                     :depth="depth + 1"
                     v-else-if="typeof node === 'object'"/>
         </ul>
-    </div>
+    </nav>
 </template>
 
 <script>
@@ -39,14 +39,7 @@
         },
         components: {
             Templatelist,
-        },
-        computed: {
-            indent() {
-                return {
-                    // paddingLeft: `${this.depth * 10}px`
-                }
-            }
-        },
+        }
     }
 </script>
 

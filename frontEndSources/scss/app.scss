@@ -3,18 +3,11 @@
 @import 'tools.functions';
 @import 'tools.mixins';
 @import 'styles.base';
-
-code,
-pre {
-  font-family: "Roboto Mono", monospace;
-  font-size: 13px;
-}
-
-.pl-hr {
-  width: calc(100% - 64px);
-  margin: 32px auto 16px auto;
-  border: 0;
-  background-color: #f8f8f8;
-  height: 2px;
-}
+@import 'styles.headings';
+@import 'styles.buttons';
+@import 'styles.layout';
+@import 'styles.content';
+@import 'styles.intro';
+@import 'styles.files';
+@import 'styles.code';
 

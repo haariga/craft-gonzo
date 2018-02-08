@@ -19,7 +19,6 @@
     "babel-runtime": "^6.23.0",
     "css-loader": "^0.28.7",
     "eslint": "^4.0.0",
-    "eslint-plugin-prettier": "^2.6.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-config-defaults": "^9.0.0",
     "eslint-config-prettier": "^2.9.0",
@@ -29,6 +28,7 @@
     "eslint-loader": "^1.6.3",
     "eslint-plugin-html": "^3.0.0",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-vue": "^4.2.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "node-sass": "^4.7.2",
@@ -45,9 +45,12 @@
   "dependencies": {
     "baukasten-grid": "^1.0.10",
     "eslint-plugin-prettier": "^2.6.0",
+    "font-awesome": "^4.7.0",
     "include-media": "^1.4.9",
     "interact.js": "^1.2.8",
     "lodash": "^4.17.4",
+    "modularscale": "^2.0.1",
+    "modularscale-sass": "^3.0.5",
     "vue": "^2.2.3",
     "vuex": "^3.0.1"
   }

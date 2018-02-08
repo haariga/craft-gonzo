@@ -1,0 +1,57 @@
+/*
+ |--------------------------------------------------------------------------
+ |  Files
+ |--------------------------------------------------------------------------
+ */
+
+.pl-files {
+  $root: &;
+  width: 100%;
+
+  &__headline {
+    padding-left: s(8);
+    position: relative;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: c('blue', 'dark');
+
+    &::before {
+      font-family: "Material Icons";
+      font-weight: normal;
+      content: '\e051';
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: c('red');
+      color: c('white');
+      text-align: center;
+      line-height: 48px;
+      font-size: 28px;
+      border-radius: 100%;
+    }
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    @include make-vr();
+  }
+
+  &__list #{$root}__list {
+    padding-left: s(8);
+  }
+
+  &__listItem {
+    a {
+      display: block;
+      padding: 3px 0;
+      text-transform: capitalize;
+      color: c('blue', 'dark');
+      text-decoration: none;
+    }
+  }
+}

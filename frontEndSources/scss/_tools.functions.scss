@@ -45,3 +45,37 @@
 @function e($key) {
   @return ease($key);
 }
+
+
+/*
+ |--------------------------------------------------------------------------
+ |  Space
+ |--------------------------------------------------------------------------
+ */
+@function space($key) {
+  @return ($bk-gutter * $key);
+}
+
+// Shorthand Version
+@function s($key) {
+  @return space($key);
+}
+
+// Spacing Column Width
+@function spaceColumn($columns: 0, $context: $bk-colsMax) {
+  @if $columns > $bk-colsMax {
+    $columns: $bk-colsMax;
+  }
+
+  // Col Width
+  @if $columns == 0 {
+    @return 0;
+  } @else {
+    @return calc(#{$columns} / #{$context} * 100%);
+  }
+}
+
+// Shorthand Version
+@function sc($columns: 0, $context: $bk-colsMax) {
+  @return spaceColumn($columns, $context);
+}

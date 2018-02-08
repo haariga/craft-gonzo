@@ -1,0 +1,30 @@
+/*
+ |--------------------------------------------------------------------------
+ |  Buttons
+ |--------------------------------------------------------------------------
+ */
+
+.pl-button {
+  display: inline-block;
+  line-height: 1;
+  outline: none;
+  transition: all 0.25s;
+}
+
+.pl-button--pill {
+  margin-right: 4px;
+  border-radius: 100px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: c('black', '50');
+  border: 1px solid c('black', '10');
+  outline: none;
+  background: linear-gradient(to bottom, c('white'), c('black', '10'));
+  transition: all 0.25s;
+
+  &:hover {
+    color: c('black', '90');
+    border: 1px solid c('black', '20');
+  }
+}
