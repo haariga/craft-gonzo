@@ -6,25 +6,36 @@
   </li>
 </template>
 
+
 <script>
 export default {
   name: 'TemplateList',
   props: {
     node: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
 
     depth: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
+<<<<<<< Updated upstream
+=======
+  computed: {
+    indent() {
+      return {
+        transform: `translateX(${this.depth * 10}px)`
+      };
+    }
+  },
+>>>>>>> Stashed changes
   methods: {
     selectActiveModule(module) {
       this.$store.dispatch('setActive', module);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -35,5 +46,3 @@ button {
   background: transparent;
 }
 </style>
-
-
