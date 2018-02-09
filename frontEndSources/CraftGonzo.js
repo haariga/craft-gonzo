@@ -19,5 +19,5 @@ Vue.component('patternlib', App);
 
 new Vue({
   el: '#patternlib',
-  store
+  store,
 });

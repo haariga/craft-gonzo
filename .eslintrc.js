@@ -12,10 +12,10 @@ module.exports = {
   extends: [
     // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
     'airbnb-base',
+    'plugin:prettier/recommended',
     'plugin:vue/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:prettier/recommended',
   ],
   plugins: ['prettier'],
   settings: {
@@ -27,6 +27,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'prettier/prettier': 'error',
     camelcase: 0,
     complexity: [2, 10],
     'no-console': 0,
@@ -86,8 +87,8 @@ module.exports = {
     'vue/max-attributes-per-line': [
       2,
       {
-        singleLine: 3,
-        multiLine: {
+        singleline: 3,
+        multiline: {
           max: 3,
           allowFirstLine: true,
         },

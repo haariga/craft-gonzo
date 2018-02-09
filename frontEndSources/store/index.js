@@ -8,14 +8,14 @@ Vue.use(Vuex);
 
 const state = {
   filelist: [],
-  activeComponent: JSON.parse(localStorage.getItem('activeComponent')) || {}
+  activeComponent: JSON.parse(localStorage.getItem('activeComponent')) || {},
 };
 
 const store = new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
+  mutations,
 });
 
 /* eslint-disable */

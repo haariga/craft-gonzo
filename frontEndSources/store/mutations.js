@@ -4,5 +4,5 @@ export default {
   },
   SET_ACTIVE(state, component) {
     state.activeComponent = component;
-  }
+  },
 };

@@ -7,5 +7,5 @@ export default {
   },
   activeTemplate(state) {
     return state.activeComponent.templates ? state.activeComponent.templates[0] : {};
-  }
+  },
 };

@@ -5,5 +5,5 @@ export default {
   setActive({ commit }, component) {
     localStorage.setItem('activeComponent', JSON.stringify(component, null, 2));
     commit('SET_ACTIVE', component);
-  }
+  },
 };
