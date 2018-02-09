@@ -2,26 +2,28 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    amd: true
+    amd: true,
   },
   root: true,
   parserOptions: {
     parser: 'babel-eslint',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   extends: [
     // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
     'airbnb-base',
     'plugin:vue/recommended',
     'plugin:import/errors',
-    'plugin:import/warnings'
+    'plugin:import/warnings',
+    'plugin:prettier/recommended',
   ],
+  plugins: ['prettier'],
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'webpack/webpack.config.babel.js'
-      }
-    }
+        config: 'webpack/webpack.config.babel.js',
+      },
+    },
   },
   // add your custom rules here
   rules: {
@@ -38,8 +40,8 @@ module.exports = {
     'no-param-reassign': [
       2,
       {
-        props: false
-      }
+        props: false,
+      },
     ],
     quotes: [2, 'single'],
     strict: [2, 'global'],
@@ -48,8 +50,8 @@ module.exports = {
     'no-unused-vars': [
       'error',
       {
-        args: 'none'
-      }
+        args: 'none',
+      },
     ],
     'max-len': [2, 220],
     'comma-style': [2, 'last'],
@@ -71,15 +73,15 @@ module.exports = {
       'always',
       {
         js: 'never',
-        vue: 'never'
-      }
+        vue: 'never',
+      },
     ],
     'no-trailing-spaces': [
       'error',
       {
         skipBlankLines: true,
-        ignoreComments: true
-      }
+        ignoreComments: true,
+      },
     ],
     'vue/max-attributes-per-line': [
       2,
@@ -87,9 +89,9 @@ module.exports = {
         singleLine: 3,
         multiLine: {
           max: 3,
-          allowFirstLine: true
-        }
-      }
-    ]
-  }
+          allowFirstLine: true,
+        },
+      },
+    ],
+  },
 };
