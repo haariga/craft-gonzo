@@ -1,6 +1,6 @@
 <template>
   <li class="pl-files__listItem">
-    <a href="#" class="ms-res--1" @click.prevent="selectActiveModule(node)">
+    <a href="#" class="pl-files__listItemLink  ms-res--1" @click.prevent="selectActiveModule(node)">
       {{ node.config.title }}
     </a>
   </li>

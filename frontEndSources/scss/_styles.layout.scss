@@ -1,11 +1,15 @@
 .pl-wrapper {
   @include center();
+  @include make-col-padding();
   width: 100vw;
   max-width: 1680px;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
+
+  @include media('>=l') {
+    flex-flow: row wrap;
+    @include make-col-padding(2);
+  }
 }
 
 .pl-head {
@@ -21,26 +25,27 @@
 }
 
 .pl-aside {
-  @include make-col-padding(3);
-  padding-bottom: s(8);
-  padding-right: 0 !important;
-  width: 320px;
-  height: 100vh;
-  padding-top: 120px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
+
+  @include media('>=l') {
+    display: block;
+    padding-bottom: s(8);
+    -webkit-overflow-scrolling: touch;
+    padding-right: 0;
+    width: 280px;
+    height: calc(100vh - 120px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: fixed;
+    bottom: 0;
+  }
 }
 
 .pl-logo {
-  position: fixed;
-  z-index: 100;
-  top: 0;
   height: 120px;
   line-height: 120px;
   font-weight: 900;
   @include ms-respond(font-size, 1);
-  background-color: c('blue', 'light');
   pointer-events: none;
   padding-right: s(4);
   text-transform: uppercase;
@@ -53,24 +58,29 @@
 }
 
 .pl-main {
-  @include make-col-padding(3);
-  width: calc(100% - 320px);
-  max-width: calc(1680px - 320px);
-  height: 100vh;
-  padding-bottom: s(8);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
+
+  @include media('>=l') {
+    width: calc(100% - 280px);
+    margin-left: 280px;
+    max-width: calc(1680px - 280px);
+    padding-bottom: s(8);
+  }
 }
 
 .pl-main__inner {
-  @include make-col-padding(6);
-  @include make-section-padding(2);
+  @include make-col-padding(2);
+  @include make-section-padding();
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
   background-color: c('white');
   box-shadow: 0 20px  56px rgba(c('black'), 0.2);
+
+  @include media('>=m') {
+    @include make-col-padding(6);
+    @include make-section-padding(2);
+  }
 }
 
 .pl-main__footer {

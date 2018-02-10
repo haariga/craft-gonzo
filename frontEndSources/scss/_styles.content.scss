@@ -17,6 +17,7 @@
   }
 
   &__container--iframeActions {
+    @include make-vr(2);
     @include f(s(-2), s(-4), margin-bottom);
   }
 
@@ -28,6 +29,7 @@
     iframe {
       margin-top: 16px;
       width: 100%;
+      min-height: 500px;
       max-width: 100%;
       background-color: #f8f8f8;
       border-radius: 5px;

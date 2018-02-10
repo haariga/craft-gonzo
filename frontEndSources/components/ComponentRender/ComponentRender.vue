@@ -1,7 +1,7 @@
 <template>
   <div class="pl-content">
     <div class="pl-content__section">
-      <h2 class="pl-headline--h3">Rendered Template</h2>
+      <!--<h2 class="pl-headline&#45;&#45;h5">Code: SCSS</h2>-->
       <div class="pl-content__container  pl-content__container--iframeActions">
         <button class="pl-button  pl-button--pill" :class="buttonActive"
                 @click="toggleClass(); maxWidth = '384px';">
@@ -30,7 +30,7 @@
     <hr class="pl-hr">
 
     <div class="pl-content__section">
-      <h2 class="pl-headline--h3">Code: SCSS</h2>
+      <h2 class="pl-headline--h5">Code: SCSS</h2>
       <div class="pl-content__container  pl-content__container--code">
         <pre>
                     <code>
@@ -96,7 +96,7 @@
         </pre>
       </div>
 
-      <h2 class="pl-headline--h3">Code: HTML</h2>
+      <h2 class="pl-headline--h5">Code: HTML</h2>
       <div class="pl-content__container  pl-content__container--code">
         <pre class="is-open">
                     <code>

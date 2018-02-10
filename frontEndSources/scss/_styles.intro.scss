@@ -43,16 +43,21 @@
     }
 
     &::before {
-      content: 'Component Status';
-      display: inline-block;
-      word-break: keep-all;
-      white-space: nowrap;
-      text-transform: none;
-      position: absolute;
-      left: -8px;
-      font-weight: 400;
-      color: c('black', '25');
-      transform: translateX(-100%);
+      display: none;
+
+      @include media('>=s') {
+        content: 'Component Status';
+        display: inline-block;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-transform: none;
+        position: absolute;
+        left: -8px;
+        font-weight: 400;
+        color: c('black', '25');
+        transform: translateX(-100%);
+        display: block;
+      }
     }
   }
 

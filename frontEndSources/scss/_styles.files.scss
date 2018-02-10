@@ -7,6 +7,7 @@
 .pl-files {
   $root: &;
   width: 100%;
+  display: none;
 
   &__headline {
     padding-left: s(8);
@@ -14,6 +15,7 @@
     font-weight: 900;
     text-transform: uppercase;
     color: c('blue', 'dark');
+    cursor: pointer;
 
     &::before {
       font-family: "Material Icons";
@@ -46,12 +48,93 @@
   }
 
   &__listItem {
-    a {
-      display: block;
-      padding: 3px 0;
-      text-transform: capitalize;
-      color: c('blue', 'dark');
-      text-decoration: none;
+    padding: s(1) s(2) s(1/2) 0;
+
+  }
+
+  &__listItemLink {
+    display: block;
+    text-transform: capitalize;
+    color: c('blue', 'dark');
+    text-decoration: none;
+    position: relative;
+    padding-left: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 12px;
+      background-color: transparent;
+      transition: all 0.25s ease('out-cubic');
+    }
+
+    &:hover,
+    &--active {
+      padding-left: s(2);
+
+      &::before {
+        background-color: c('blue');
+        width: 2px;
+      }
     }
   }
+}
+
+.pl-mainNavTrigger {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+  span {
+    width: 28px;
+    height: 4px;
+    background-color: c('blue', 'dark');
+    display: inline-block;
+    position: absolute;
+    right: 6px;
+    top: 18px;
+    border-radius: 100px;
+    transition: all 0.25s ease('out-cubic');
+
+    &:nth-child(1) {
+      top: 10px;
+    }
+
+    &:nth-child(3) {
+      top: 26px;
+    }
+  }
+
+  &:hover {
+    span {
+      &:nth-child(1) {
+        top: 8px;
+      }
+
+      &:nth-child(2) {
+        right: 12px;
+        width: 16px;
+      }
+
+      &:nth-child(3) {
+        top: 28px;
+      }
+    }
+  }
+}
+
+.pl-mainNavCheckBox {
+  display: none;
+}
+
+.pl-mainNavCheckBox:checked ~ .pl-files,
+.pl-mainNavCheckBox:checked ~ .pl-files .pl-files {
+  display: block;
 }
