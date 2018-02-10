@@ -33,7 +33,7 @@
     -webkit-overflow-scrolling: touch;
     padding-right: 0;
     width: 280px;
-    height: calc(100vh - 120px);
+    height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
     position: fixed;
@@ -54,6 +54,7 @@
     font-weight: 300;
     text-transform: none;
     color: c('blue');
+    @include ms-respond(font-size, 0);
   }
 }
 

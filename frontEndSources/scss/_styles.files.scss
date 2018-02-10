@@ -9,6 +9,10 @@
   width: 100%;
   display: none;
 
+  @include media('>=l') {
+    display: block;
+  }
+
   &__headline {
     padding-left: s(8);
     position: relative;
@@ -91,6 +95,10 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
+
+  @include media('>=l') {
+    display: none;
+  }
 
   span {
     width: 28px;
