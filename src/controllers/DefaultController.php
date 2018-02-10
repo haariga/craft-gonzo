@@ -157,8 +157,10 @@ class DefaultController extends Controller
             }
             if (pathinfo($config, PATHINFO_EXTENSION) === 'php') {
                 include_once $config;
+                // TODO: Make Variable Dynamic via Setting
                 if (isset($opt)) {
-                    $mergedOptions = $options->merge($opt);
+                    $mergedOptions['opt'] = array_merge($options['opt'], $opt);
+                    $mergedOptions =  $options->merge($mergedOptions);
                 }
             }
         }
