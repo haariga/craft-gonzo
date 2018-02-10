@@ -123,4 +123,9 @@
 
     // Protected Methods
     // =========================================================================
+        protected function createSettingsModel()
+        {
+            return new models\Settings();
+        }
+
 }

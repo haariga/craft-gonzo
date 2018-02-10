@@ -63,7 +63,7 @@ class DefaultController extends Controller
     public function init()
     {
         $this->templatesPath = \Craft::$app->view->getTemplatesPath();
-        $this->searchFolders = Craft3Gonzo::$plugin->getSettings('searchFolders') ? Craft3Gonzo::$plugin->getSettings('searchFolders') : [];
+        $this->searchFolders = Craft3Gonzo::getInstance()->getSettings()->searchFolders ? Craft3Gonzo::getInstance()->getSettings()->searchFolders : [];
     }
 
     /**
