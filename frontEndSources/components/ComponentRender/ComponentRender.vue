@@ -11,9 +11,10 @@
         <button class="pl-button  pl-button--pill" @click="maxWidth = '1344px'">1280px</button>
         <button class="pl-button  pl-button--pill" @click="maxWidth = '100%'">100%</button>
       </div>
-      <div class="pl-content__container  pl-content__container--iframe">
+      <div class="pl-content__container  pl-content__container--iframe" v-show="iFrame.loaded">
         <iframe :style="{ 'max-width': maxWidth }"
                 :src="frame.src"
+                :height="iFrame.height"
                 marginheight="0"
                 marginwidth="0"
                 vspace="0"
@@ -21,7 +22,10 @@
                 scrolling="yes"
                 name="patternlibRenderer"
                 frameborder="0"
-                v-if="activeComponent.relativePath"/>
+                ref="iframe"
+                @load="iFrameSize"
+                v-if="activeComponent.relativePath"
+        />
         <div v-else>
           Please choose a component
         </div>
@@ -144,6 +148,10 @@ export default {
       maxWidth: '100%',
       buttonActive: false,
       sidebar: false,
+      iFrame: {
+        loaded: false,
+        height: 0,
+      },
     };
   },
   computed: {
@@ -157,9 +165,19 @@ export default {
       };
     },
   },
+  mounted() {
+    this.iFrameSize();
+  },
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
+    },
+    iFrameSize() {
+      const iFrame = this.$refs.iframe;
+      if (iFrame) {
+        this.iFrame.loaded = true;
+        this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 120}px`;
+      }
     },
   },
 };
