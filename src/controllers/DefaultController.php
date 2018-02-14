@@ -101,6 +101,8 @@ class DefaultController extends Controller
                             })->toArray()
                     ]] : [$info->getFilename()];
 
+
+
                     for ($depth = $obj->getDepth() - 1; $depth >= 0; $depth--) {
                         $templates = [];
                         $assets = [];
@@ -135,11 +137,20 @@ class DefaultController extends Controller
                     }
                     $arr = array_merge_recursive($arr, $path);
                 }
+                $arr = collect($arr)
+                    ->filter(function($item) {
+                        return (isset($item['config']) && count($item['config']));
+                    })->filter(function ($item) {
+                        return (isset($item['templates']) && count($item['templates']));
+                    });
                 $dirs[$item->getFilename()]['children'] = $arr;
             }
         }
 
         $collection = new Collection($dirs);
+        $collection = $collection->filter(function($item) {
+           return count($item['children']);
+        });
         return $collection;
     }
 
