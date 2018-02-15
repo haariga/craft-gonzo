@@ -1,6 +1,9 @@
 <template>
   <li class="pl-files__listItem">
-    <a href="#" class="pl-files__listItemLink  ms-res--1" @click.prevent="selectActiveModule(node)">
+    <a href="#"
+       class="pl-files__listItemLink  ms-res--1"
+       :class="{'pl-files__listItemLink--active': node.config.title === activeComponent.config.title}"
+       @click.prevent="selectActiveModule(node)">
       {{ node.config.title }}
     </a>
   </li>
@@ -22,6 +25,9 @@ export default {
     },
   },
   computed: {
+    activeComponent() {
+      return this.$store.state.activeComponent;
+    },
     indent() {
       return {
         transform: `translateX(${this.depth * 10}px)`,
