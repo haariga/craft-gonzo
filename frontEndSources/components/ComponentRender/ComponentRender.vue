@@ -3,16 +3,15 @@
     <div class="pl-content__section">
       <!--<h2 class="pl-headline&#45;&#45;h5">Code: SCSS</h2>-->
       <div class="pl-content__container  pl-content__container--iframeActions">
-        <button class="pl-button  pl-button--pill" :class="buttonActive"
-                @click="toggleClass(); maxWidth = '384px';">
-          320px
-        </button>
-        <button class="pl-button  pl-button--pill" @click="maxWidth = '832px'">768px</button>
-        <button class="pl-button  pl-button--pill" @click="maxWidth = '1344px'">1280px</button>
-        <button class="pl-button  pl-button--pill" @click="maxWidth = '100%'">100%</button>
+        <button class="pl-button pl-button--pill"
+                :class="{'pl-button--active': activeWidth === width}"
+                v-for="width in mqButtons"
+                @click="iFrameWidth(width)"
+                :key="width"
+                v-text="`${width}`" />
       </div>
       <div class="pl-content__container  pl-content__container--iframe" v-show="iFrame.loaded">
-        <iframe :style="{ 'max-width': maxWidth }"
+        <iframe :style="{ 'max-width': iFrame.width }"
                 :src="frame.src"
                 :height="iFrame.height"
                 marginheight="0"
@@ -145,12 +144,22 @@ export default {
   name: 'ComponentRender',
   data() {
     return {
-      maxWidth: '100%',
       buttonActive: false,
       sidebar: false,
+      activeWidth: 'none',
+      mqButtons: {
+        min: '320px',
+        xs: '400px',
+        s: '600px',
+        m: '800px',
+        l: '1000px',
+        max: '1440px',
+        fluid: 'none',
+      },
       iFrame: {
         loaded: false,
         height: 0,
+        width: '100%',
       },
     };
   },
@@ -171,6 +180,16 @@ export default {
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
+    },
+    iFrameWidth(width) {
+      let widthNumber = width.replace('px', '');
+      widthNumber = Number.parseInt(widthNumber, 10);
+      this.activeWidth = width;
+      if (width.includes('px')) {
+        this.$set(this.iFrame, 'width', `${widthNumber + 64}px`);
+      } else {
+        this.$set(this.iFrame, 'width', 'none');
+      }
     },
     iFrameSize() {
       const iFrame = this.$refs.iframe;
