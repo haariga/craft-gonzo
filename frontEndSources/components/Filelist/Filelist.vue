@@ -1,6 +1,11 @@
 <template>
   <nav class="pl-files">
-    <h3 class="pl-files__headline  ms-res--1" v-if="depth >= 1" @click="showTemplates = !showTemplates">{{ label }}</h3>
+    <h3 class="pl-files__headline  ms-res--1"
+        :class="{'pl-files__headline--active': showTemplates}"
+        v-if="depth >= 1"
+        @click="showTemplatesFn">
+      {{ label }}
+    </h3>
     <ul class="pl-files__list">
       <filelist
         v-for="(node, name) in nodes"
@@ -44,6 +49,17 @@ export default {
     return {
       showTemplates: false,
     };
+  },
+  methods: {
+    showTemplatesFn() {
+      this.showTemplates = !this.showTemplates;
+
+      if (this.showTemplates) {
+        const firstItem = Object.keys(this.nodes)[0];
+
+        this.$store.dispatch('setActive', this.nodes[firstItem]);
+      }
+    },
   },
 };
 </script>

@@ -38,6 +38,14 @@
       font-size: 28px;
       border-radius: 100%;
     }
+
+    &--active {
+      @include ms-respond(font-size, 1);
+
+      &::before {
+        background-color: darken(c('red'), 10%);
+      }
+    }
   }
 
   &__list {
