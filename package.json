@@ -10,9 +10,9 @@
     "babel-loader": "^7.0.0",
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.23.0",
@@ -43,6 +43,8 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "baukasten-grid": "^1.0.10",
     "eslint-plugin-prettier": "^2.6.0",
     "font-awesome": "^4.7.0",

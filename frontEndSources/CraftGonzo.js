@@ -10,6 +10,8 @@
  * @since     0.0.1
  */
 
+import 'babel-polyfill';
+
 import Vue from 'vue';
 import './scss/app.scss';
 import store from './store';
