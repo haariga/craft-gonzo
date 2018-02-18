@@ -25,6 +25,9 @@ export default {
   activeComponent(state) {
     return state.activeComponent.config ? state.activeComponent.config : {};
   },
+  activeComponentAssets(state) {
+    return state.activeComponent.assets ? state.activeComponent.assets : [];
+  },
   activeTemplate(state) {
     return state.activeComponent.templates ? state.activeComponent.templates[0] : {};
   },
