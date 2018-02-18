@@ -95,6 +95,7 @@ class DefaultController extends Controller
                 $arr = [];
                 foreach ($obj as $info) {
                     $path = $info->isDir() ? [$info->getFilename() => [
+                        'name' => $info->getFilename(),
                         'config' => collect($this->getConfig($info->getRealPath()))
                             ->filter(function ($value, $key) {
                                 return $value != null;
@@ -134,7 +135,8 @@ class DefaultController extends Controller
                             'templates' => $templates,
                             'assets' => $assets,
                         ]];
-                    }
+                    } // end of subfiles
+
                     $arr = array_merge_recursive($arr, $path);
                 }
                 $arr = collect($arr)
@@ -143,7 +145,7 @@ class DefaultController extends Controller
                     })->filter(function ($item) {
                         return (isset($item['templates']) && count($item['templates']));
                     });
-                $dirs[$item->getFilename()]['children'] = $arr;
+                $dirs[$item->getFilename()]['children'] = $arr->values()->all();
             }
         }
 
@@ -151,7 +153,12 @@ class DefaultController extends Controller
         $collection = $collection->filter(function($item) {
            return count($item['children']);
         });
-        return $collection;
+        return $collection->map(function ($item, $key) {
+            return [
+                'name' => $key,
+                'children' => $item['children']
+            ];
+        })->values()->all();
     }
 
     public function getConfig(string $path)
@@ -182,7 +189,7 @@ class DefaultController extends Controller
     public function actionTemplateIndex()
     {
         $treeView = $this->dirtree($this->templatesPath, '', true);
-        $variables['templates'] = $treeView->toArray();
+        $variables['templates'] = $treeView;
         $oldMode = \Craft::$app->view->getTemplateMode();
         \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
         $variables['pluginSettings'] = Craft3Gonzo::getInstance()->getSettings();

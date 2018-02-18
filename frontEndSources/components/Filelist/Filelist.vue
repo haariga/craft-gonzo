@@ -8,10 +8,10 @@
     </h3>
     <ul class="pl-files__list">
       <filelist
-        v-for="(node, name) in nodes"
+        v-for="node in nodes"
         :nodes="node.children"
-        :label="name"
-        :key="name"
+        :label="node.name"
+        :key="node.name"
         :depth="depth + 1"
         v-if="!node.templates && typeof node === 'object'"
       />
