@@ -43,7 +43,7 @@ class DefaultController extends Controller
     // =========================================================================
 
     protected $templatesPath;
-    protected $searchFolders;
+    protected $compFolders;
     /**
      * @var    bool|array Allows anonymous access to this controller's actions.
      *         The actions must be in 'kebab-case'
@@ -63,7 +63,7 @@ class DefaultController extends Controller
     public function init()
     {
         $this->templatesPath = \Craft::$app->view->getTemplatesPath();
-        $this->searchFolders = Craft3Gonzo::getInstance()->getSettings()->searchFolders ? Craft3Gonzo::getInstance()->getSettings()->searchFolders : [];
+        $this->compFolders = Craft3Gonzo::getInstance()->getSettings()->compFolders ? Craft3Gonzo::getInstance()->getSettings()->compFolders : [];
     }
 
     /**
@@ -88,7 +88,7 @@ class DefaultController extends Controller
                 continue;
             }
 
-            $searchFolders = count($this->searchFolders) ? in_array($item->getFilename(), $this->searchFolders) : true;
+            $searchFolders = count($this->compFolders) ? in_array($item->getFilename(), $this->compFolders) : true;
 
             if ($item->isDir() && $searchFolders) {
                 $obj = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($item->getPathname(), \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
@@ -185,6 +185,7 @@ class DefaultController extends Controller
         $variables['templates'] = $treeView->toArray();
         $oldMode = \Craft::$app->view->getTemplateMode();
         \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+        $variables['pluginSettings'] = Craft3Gonzo::getInstance()->getSettings();
         $html = \Craft::$app->view->renderTemplate('craft3-gonzo/patternlib.twig', $variables);
         \Craft::$app->view->setTemplateMode($oldMode);
         \Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);

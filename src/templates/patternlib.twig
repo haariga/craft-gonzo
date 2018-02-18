@@ -20,6 +20,7 @@ Hello from the Plugin patternlib!#}
 
 <script>
   window.filelist = {{ templates | json_encode | raw }}
+  window.pluginSettings = {{ pluginSettings | json_encode | raw }}
 </script>
 
 {# for dev, needs webpack-dev-server running #}
