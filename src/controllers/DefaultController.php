@@ -49,7 +49,7 @@ class DefaultController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['template-index', 'template-render'];
+    protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content'];
 
     // Public Methods
     // =========================================================================
@@ -214,5 +214,12 @@ class DefaultController extends Controller
         $variables['templateOptions'] = $this->getConfig($modulePath);
 
         return $this->renderTemplate('patternlib/index', $variables);
+    }
+
+    public function actionGetFileContent(string $file)
+    {
+        $modulePath = $this->templatesPath . '/' . $file;
+        $fileContents = file_get_contents($modulePath);
+        return $fileContents;
     }
 }

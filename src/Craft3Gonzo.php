@@ -65,6 +65,7 @@
         public $controllerMap = [
             'template-index'  => DefaultController::class,
             'template-render' => DefaultController::class,
+            'get-file-content' => DefaultController::class,
     ];
 
     public function init()
@@ -78,6 +79,7 @@
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['patternlib'] = 'craft3-gonzo/default/template-index';
+                $event->rules['patternlib/getfilecontent/<file:\S+>'] = 'craft3-gonzo/default/get-file-content';
                 $event->rules['patternlib/<component:\S+>'] = 'craft3-gonzo/default/template-render';
             }
         );
