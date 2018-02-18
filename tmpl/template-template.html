@@ -1,0 +1,47 @@
+{#
+/**
+*
+* Description of what this file is for
+*
+* @package  <%= projectName %>
+<% if (authors.length) { -%>
+<% if (typeof authors == 'object') { -%>
+<% for (var i=0; i < authors.length; i++) { -%>
+<% if (typeof authors[i] == 'object') { -%>
+* @author <%= authors[i].name %> [<%= authors[i].email %>]
+<% } else { -%>
+* <%= authors[i] -%>
+<% } -%>
+<% } %>
+<% } else { %>
+* <%= authors %>
+<% } -%>
+<% } %>
+*
+*/
+
+|--------------------------------------------------------------------------
+| <%= file %>
+|--------------------------------------------------------------------------
+
+*/
+#}
+
+
+
+{% set defaults = {
+classname: 'm-<%= moduleName.replace('-', '_') %>'
+} %}
+
+{% if options is defined %}
+  {% set options = defaults|merge(options) %}
+{% else %}
+  {% set options = defaults %}
+{% endif %}
+
+
+<div class="m-<%= moduleName %>">
+  <div class="m-<%= moduleName %>__inner">
+    <%= moduleName %>
+  </div>
+</div>
