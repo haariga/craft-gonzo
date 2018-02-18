@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 const state = {
   filelist: [],
+  pluginSettings: [],
   activeComponent: JSON.parse(localStorage.getItem('activeComponent')) || {},
 };
 
@@ -26,7 +27,7 @@ if (module.hot) {
     store.hotUpdate({
       getters: require('./getters'),
       actions: require('./actions'),
-      mutations: require('./mutations')
+      mutations: require('./mutations'),
     });
   });
 }
