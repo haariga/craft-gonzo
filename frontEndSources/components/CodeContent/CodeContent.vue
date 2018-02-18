@@ -2,9 +2,7 @@
   <div class="pl-content__asset" v-if="file">
     <h2 class="pl-headline--h5">Code: {{ file.extension ? file.extension.toUpperCase() : '' }}</h2>
     <div class="pl-content__container  pl-content__container--code">
-      <pre>
-        <code v-text="fileContent"/>
-      </pre>
+      <pre><code v-text="fileContent"/></pre>
     </div>
   </div>
 </template>
