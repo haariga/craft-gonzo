@@ -3,12 +3,14 @@
     <div class="pl-content__section">
       <!--<h2 class="pl-headline&#45;&#45;h5">Code: SCSS</h2>-->
       <div class="pl-content__container  pl-content__container--iframeActions">
-        <button class="pl-button pl-button--pill"
-                :class="{'pl-button--active': activeWidth === width}"
-                v-for="width in mqButtons"
-                @click="iFrameWidth(width)"
-                :key="width"
-                v-text="`${width}`"/>
+        <div class="pl-buttonGroup  pl-buttonGroup--pill">
+          <button class="pl-button pl-button--pill"
+                  :class="{'pl-button--active': activeWidth === width}"
+                  v-for="width in mqButtons"
+                  @click="iFrameWidth(width)"
+                  :key="width"
+                  v-text="`${width}`"/>
+        </div>
       </div>
       <div class="pl-content__container  pl-content__container--iframe" v-show="iFrame.loaded">
         <iframe :style="{ 'max-width': iFrame.width }"
@@ -31,7 +33,7 @@
       </div>
     </div>
     <hr class="pl-hr">
-    
+
     <div class="pl-content__section" v-if="activeComponentAssets.length">
       <code-content v-for="asset in activeComponentAssets"
                     :file="asset"

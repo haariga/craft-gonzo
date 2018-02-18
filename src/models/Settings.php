@@ -27,7 +27,7 @@ use craft\base\Model;
             'm' => '800px',
             'l' => '1000px',
             'max' => '1440px',
-            'fluid' => 'none'
+            'fluid' => '100%'
         ];
 
         public $compStatus = [

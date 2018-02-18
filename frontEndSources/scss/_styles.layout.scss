@@ -28,12 +28,13 @@
   position: relative;
 
   @include media('>=l') {
+    top: 120px;
     display: block;
     padding-bottom: s(8);
     -webkit-overflow-scrolling: touch;
     padding-right: 0;
     width: 280px;
-    height: 100vh;
+    height: calc(100vh - 120px);
     overflow-y: scroll;
     overflow-x: hidden;
     position: fixed;
@@ -43,6 +44,8 @@
 
 .pl-logo {
   height: 120px;
+  position: fixed;
+  top: 0;
   line-height: 120px;
   font-weight: 900;
   @include ms-respond(font-size, 1);

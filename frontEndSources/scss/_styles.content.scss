@@ -17,7 +17,6 @@
   }
 
   &__container--iframeActions {
-    @include make-vr(2);
     @include f(s(-2), s(-4), margin-bottom);
   }
 
