@@ -8,7 +8,7 @@
                 v-for="width in mqButtons"
                 @click="iFrameWidth(width)"
                 :key="width"
-                v-text="`${width}`" />
+                v-text="`${width}`"/>
       </div>
       <div class="pl-content__container  pl-content__container--iframe" v-show="iFrame.loaded">
         <iframe :style="{ 'max-width': iFrame.width }"
@@ -23,7 +23,7 @@
                 frameborder="0"
                 ref="iframe"
                 @load="iFrameSize"
-                v-if="activeComponent.relativePath"
+                v-if="activeTemplate.relativePath"
         />
         <div v-else>
           Please choose a component
@@ -31,117 +31,21 @@
       </div>
     </div>
     <hr class="pl-hr">
-
-    <div class="pl-content__section">
-      <h2 class="pl-headline--h5">Code: SCSS</h2>
-      <div class="pl-content__container  pl-content__container--code">
-        <pre>
-                    <code>
-                    .pl-content {
-                        position: relative;
-
-                        &__actions {
-                            padding: 16px 32px;
-                            background-color: #fff;
-                        }
-
-                        &__button {
-                            display: inline-block;
-                            margin-right: 4px;
-                            border-radius: 100px;
-                            padding: 8px 12px;
-                            font-size: 12px;
-                            font-weight: 500;
-                            color: #999;
-                            line-height: 1;
-                            border: 1px solid #eee;
-                            outline: none;
-                            background: linear-gradient(to bottom, white, #eee);
-                            transition: all 0.25s;
-
-                            &:hover {
-                                color: #333;
-                                border: 1px solid #aaa;
-                            }
-                        }
-
-                        &__frame {
-                            width: 100%;
-                            max-width: 100%;
-                            padding: 32px;
-                            position: relative;
-
-                            &::before {
-                                content: 'Rendered Template';
-                                position: absolute;
-                                left: 50%;
-                                top: 32px;
-                                transform: translate(-50%, -50%);
-                                border-radius: 100px;
-                                padding: 8px 12px;
-                                font-size: 12px;
-                                color: #999;
-                                line-height: 1;
-                                border: 1px solid #f8f8f8;
-                                background-color: #fff;
-                            }
-
-                            iframe {
-                                width: 100%;
-                                max-width: 100%;
-                                background-color: #f8f8f8;
-                                border-radius: 5px;
-                                padding: 32px;
-                            }
-                        }
-                    }
-                </code>
-        </pre>
-      </div>
-
-      <h2 class="pl-headline--h5">Code: HTML</h2>
-      <div class="pl-content__container  pl-content__container--code">
-        <pre class="is-open">
-                    <code>
-                    &__frame {
-                        width: 100%;
-                        max-width: 100%;
-                        padding: 32px;
-                        position: relative;
-
-                        &::before {
-                            content: 'Rendered Template';
-                            position: absolute;
-                            left: 50%;
-                            top: 32px;
-                            transform: translate(-50%, -50%);
-                            border-radius: 100px;
-                            padding: 8px 12px;
-                            font-size: 12px;
-                            color: #999;
-                            line-height: 1;
-                            border: 1px solid #f8f8f8;
-                            background-color: #fff;
-                        }
-
-                        iframe {
-                            width: 100%;
-                            max-width: 100%;
-                            background-color: #f8f8f8;
-                            border-radius: 5px;
-                            padding: 32px;
-                        }
-                    }
-                    </code>
-        </pre>
-      </div>
+    
+    <div class="pl-content__section" v-if="activeComponentAssets.length">
+      <code-content v-for="asset in activeComponentAssets"
+                    :file="asset"
+                    :key="asset.relativePath"/>
     </div>
   </div>
 </template>
 
 <script>
+import CodeContent from '../CodeContent/CodeContent';
+
 export default {
   name: 'ComponentRender',
+  components: { CodeContent },
   data() {
     return {
       buttonActive: false,
@@ -152,11 +56,19 @@ export default {
         height: 0,
         width: '100%',
       },
+      scssContent: '',
+      jsContent: '',
     };
   },
   computed: {
-    activeComponent() {
+    activeTemplate() {
       return this.$store.getters.activeTemplate;
+    },
+    activeComponent() {
+      return this.$store.getters.activeComponent;
+    },
+    activeComponentAssets() {
+      return [...[this.activeTemplate], ...this.$store.getters.activeComponentAssets];
     },
     mqButtons() {
       return this.$store.getters.mqButtons;
@@ -164,7 +76,7 @@ export default {
     frame() {
       const previewUrl = './patternlib';
       return {
-        src: previewUrl + this.activeComponent.relativePath,
+        src: previewUrl + this.activeTemplate.relativePath,
       };
     },
   },
