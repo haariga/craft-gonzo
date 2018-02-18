@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'CodeContent',
   props: {
@@ -31,8 +29,8 @@ export default {
   methods: {
     async getFileContent() {
       if (!this.file.relativePath) return;
-      const { data } = await axios.get(
-        `http://baukasten3.test/patternlib/getfilecontent/${this.file.relativePath}`,
+      const { data } = await window.axios.get(
+        `patternlib/getfilecontent/${this.file.relativePath}`,
       );
       this.fileContent = data;
     },

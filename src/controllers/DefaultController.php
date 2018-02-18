@@ -10,6 +10,7 @@
 
 namespace martinherweg\craft3gonzo\controllers;
 
+use craft\helpers\UrlHelper;
 use craft\web\View;
 use martinherweg\craft3gonzo\Craft3Gonzo;
 use martinherweg\craft3gonzo\assetbundles\gonzo\GonzoAsset;
@@ -193,6 +194,7 @@ class DefaultController extends Controller
         $oldMode = \Craft::$app->view->getTemplateMode();
         \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
         $variables['pluginSettings'] = Craft3Gonzo::getInstance()->getSettings();
+        $variables['patternlibBaseUrl'] = UrlHelper::siteUrl();
         $html = \Craft::$app->view->renderTemplate('craft3-gonzo/patternlib.twig', $variables);
         \Craft::$app->view->setTemplateMode($oldMode);
         \Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
@@ -218,6 +220,7 @@ class DefaultController extends Controller
 
     public function actionGetFileContent(string $file)
     {
+        Craft::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
         $modulePath = $this->templatesPath . '/' . $file;
         $fileContents = file_get_contents($modulePath);
         return $fileContents;

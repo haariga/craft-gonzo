@@ -21,6 +21,8 @@ Hello from the Plugin patternlib!#}
 <script>
   window.filelist = {{ templates | json_encode | raw }}
   window.pluginSettings = {{ pluginSettings | json_encode | raw }}
+  window.patternLibBaseUrl = '{{ patternlibBaseUrl }}';
+  window.csrfToken = '{{ craft.app.request.csrfToken }}';
 </script>
 
 {# for dev, needs webpack-dev-server running #}
