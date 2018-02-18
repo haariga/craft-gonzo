@@ -9,7 +9,7 @@ Vue.use(Vuex);
 const state = {
   filelist: [],
   pluginSettings: [],
-  activeComponent: JSON.parse(localStorage.getItem('activeComponent')) || {},
+  activeComponent: {},
 };
 
 const store = new Vuex.Store({

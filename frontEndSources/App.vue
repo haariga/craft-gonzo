@@ -40,7 +40,7 @@
 /* eslint-disable */
 import Filelist from 'Modules/Filelist/Filelist';
 import PreviewArea from 'Modules/PreviewArea/PreviewArea';
-import { find } from 'object-deep-search';
+import { flatten } from 'lodash';
 import { getParameterByName } from './helpers';
 
 export default {
@@ -62,7 +62,16 @@ export default {
   mounted() {
     this.$store.dispatch('setPluginSettings', window.pluginSettings);
 
-    this.$store.dispatch('setFilelist', window.filelist).then(() => {});
+    this.$store.dispatch('setFilelist', window.filelist).then(() => {
+      const templateParameter = getParameterByName('template');
+      if (templateParameter) {
+        const flattendFilelist = flatten(this.filelist.map(item => item.children));
+        const activeComponent = flattendFilelist.find(
+          component => component.config.path === templateParameter,
+        );
+        this.$store.dispatch('setActive', activeComponent);
+      }
+    });
   },
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
-  <li class="pl-files__listItem" v-if="node">
+  <li class="pl-files__listItem" v-if="node !== 'undefined' && node.config !== 'undefined'">
     <a href="#"
        class="pl-files__listItemLink  ms-res--1"
-       :class="{'pl-files__listItemLink--active': node.config.title === activeComponent.config.title}"
+       :class="classObject"
        @click.prevent="selectActiveModule(node)">
       {{ node.config.title }}
     </a>
@@ -26,7 +26,12 @@ export default {
   },
   computed: {
     activeComponent() {
-      return this.$store.state.activeComponent;
+      return this.$store.getters.activeComponent;
+    },
+    classObject() {
+      return {
+        'pl-files__listItemLink--active': this.node.config.title === this.activeComponent.title,
+      };
     },
     indent() {
       return {
