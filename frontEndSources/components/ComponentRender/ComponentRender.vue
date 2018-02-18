@@ -147,15 +147,6 @@ export default {
       buttonActive: false,
       sidebar: false,
       activeWidth: 'none',
-      mqButtons: {
-        min: '320px',
-        xs: '400px',
-        s: '600px',
-        m: '800px',
-        l: '1000px',
-        max: '1440px',
-        fluid: 'none',
-      },
       iFrame: {
         loaded: false,
         height: 0,
@@ -166,6 +157,9 @@ export default {
   computed: {
     activeComponent() {
       return this.$store.getters.activeTemplate;
+    },
+    mqButtons() {
+      return this.$store.getters.mqButtons;
     },
     frame() {
       const previewUrl = './patternlib';

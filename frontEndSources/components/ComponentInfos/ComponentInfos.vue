@@ -5,7 +5,10 @@
         <div class="pl-intro__type">
           <strong>{{ infos.type }}</strong> • Path: {{ infos.path }}
         </div>
-        <span class="pl-intro__status wip">{{ infos.status }}</span>
+        <span class="pl-intro__status wip"
+              :style="{backgroundColor: status.color}">
+          {{ status.name.toUpperCase() }}
+        </span>
       </div>
       <h1 class="pl-headline--h1  ms-res-5">{{ infos.title }}</h1>
       <div class="pl-intro__description  ms-res-1">
@@ -17,11 +20,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'ComponentInfos',
   computed: {
-    infos() {
-      return this.$store.getters.activeComponent;
+    ...mapGetters({
+      infos: 'activeComponent',
+    }),
+    status() {
+      return this.$store.getters.compStatus(this.infos.status);
     },
   },
 };

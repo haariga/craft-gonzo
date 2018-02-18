@@ -1,5 +1,5 @@
 <template>
-  <li class="pl-files__listItem">
+  <li class="pl-files__listItem" v-if="node">
     <a href="#"
        class="pl-files__listItemLink  ms-res--1"
        :class="{'pl-files__listItemLink--active': node.config.title === activeComponent.config.title}"

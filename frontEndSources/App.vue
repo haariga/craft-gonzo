@@ -55,6 +55,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch('setPluginSettings', window.pluginSettings);
     this.$store.dispatch('setFilelist', window.filelist);
   },
 };
