@@ -1,6 +1,6 @@
 <?php
     /**
-     * Craft3 Gonzo plugin for Craft CMS 3.x
+     * Craft Gonzo plugin for Craft CMS 3.x
      *
      * Module Collection from your templates Folder
      *
@@ -8,7 +8,7 @@
      * @copyright Copyright (c) 2017 Martin Herweg
      */
 
-    namespace martinherweg\craft3gonzo;
+    namespace martinherweg\craftgonzo;
 
     use Craft;
     use craft\base\Plugin;
@@ -16,7 +16,7 @@
     use craft\events\PluginEvent;
     use craft\web\UrlManager;
     use craft\events\RegisterUrlRulesEvent;
-    use martinherweg\craft3gonzo\controllers\DefaultController;
+    use martinherweg\craftgonzo\controllers\DefaultController;
     use yii\base\Event;
 
     /**
@@ -30,20 +30,20 @@
      * https://craftcms.com/docs/plugins/introduction
      *
      * @author    Martin Herweg
-     * @package   Craft3Gonzo
+     * @package   CraftGonzo
      * @since     0.0.1
      *
      */
-    class Craft3Gonzo extends Plugin
+    class CraftGonzo extends Plugin
     {
         // Static Properties
         // =========================================================================
 
         /**
          * Static property that is an instance of this plugin class so that it can be accessed via
-         * Craft3Gonzo::$plugin
+         * CraftGonzo::$plugin
          *
-         * @var Craft3Gonzo
+         * @var CraftGonzo
          */
         public static $plugin;
 
@@ -52,7 +52,7 @@
 
         /**
          * Set our $plugin static property to this class so that it can be accessed via
-         * Craft3Gonzo::$plugin
+         * CraftGonzo::$plugin
          *
          * Called after the plugin class is instantiated; do any one-time initialization
          * here such as hooks and events.
@@ -78,9 +78,9 @@
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['patternlib'] = 'craft3-gonzo/default/template-index';
-                $event->rules['patternlib/getfilecontent/<file:\S+>'] = 'craft3-gonzo/default/get-file-content';
-                $event->rules['patternlib/<component:\S+>'] = 'craft3-gonzo/default/template-render';
+                $event->rules['patternlib'] = 'craft-gonzo/default/template-index';
+                $event->rules['patternlib/getfilecontent/<file:\S+>'] = 'craft-gonzo/default/get-file-content';
+                $event->rules['patternlib/<component:\S+>'] = 'craft-gonzo/default/template-render';
             }
         );
 
@@ -115,7 +115,7 @@
          */
         Craft::info(
             Craft::t(
-                'craft3-gonzo',
+                'craft-gonzo',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),

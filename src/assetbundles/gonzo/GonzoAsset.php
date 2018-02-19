@@ -1,6 +1,6 @@
 <?php
 
-    namespace martinherweg\craft3gonzo\assetbundles\gonzo;
+    namespace martinherweg\craftgonzo\assetbundles\gonzo;
 
     use Craft;
     use craft\web\AssetBundle;
@@ -10,9 +10,9 @@
     {
         public function init()
         {
-            $this->sourcePath = '@martinherweg/craft3gonzo/assetbundles/gonzo/dist';
+            $this->sourcePath = '@martinherweg/craftgonzo/assetbundles/gonzo/dist';
 
-            $this->js = ['js/Craft3Gonzo.js'];
+            $this->js = ['js/CraftGonzo.js'];
 
             parent::init();
         }

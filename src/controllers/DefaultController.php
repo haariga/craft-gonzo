@@ -1,6 +1,6 @@
 <?php
 /**
- * Craft3 Gonzo plugin for Craft CMS 3.x
+ * Craft Gonzo plugin for Craft CMS 3.x
  *
  * Module Collection from your templates Folder
  *
@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2017 Martin Herweg
  */
 
-namespace martinherweg\craft3gonzo\controllers;
+namespace martinherweg\craftgonzo\controllers;
 
 use craft\helpers\UrlHelper;
 use craft\web\View;
-use martinherweg\craft3gonzo\Craft3Gonzo;
-use martinherweg\craft3gonzo\assetbundles\gonzo\GonzoAsset;
+use martinherweg\craftgonzo\CraftGonzo;
+use martinherweg\craftgonzo\assetbundles\gonzo\GonzoAsset;
 use Craft;
 use craft\web\Controller;
 use Illuminate\Support\Collection;
@@ -35,7 +35,7 @@ use Illuminate\Support\Collection;
  * https://craftcms.com/docs/plugins/controllers
  *
  * @author    Martin Herweg
- * @package   Craft3Gonzo
+ * @package   CraftGonzo
  * @since     0.0.1
  */
 class DefaultController extends Controller
@@ -57,14 +57,14 @@ class DefaultController extends Controller
 
     /**
      * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/craft3-gonzo/default
+     * e.g.: actions/craft-gonzo/default
      *
      * @return mixed
      */
     public function init()
     {
         $this->templatesPath = \Craft::$app->view->getTemplatesPath();
-        $this->compFolders = Craft3Gonzo::getInstance()->getSettings()->compFolders ? Craft3Gonzo::getInstance()->getSettings()->compFolders : [];
+        $this->compFolders = CraftGonzo::getInstance()->getSettings()->compFolders ? CraftGonzo::getInstance()->getSettings()->compFolders : [];
     }
 
     /**
@@ -193,9 +193,9 @@ class DefaultController extends Controller
         $variables['templates'] = $treeView;
         $oldMode = \Craft::$app->view->getTemplateMode();
         \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
-        $variables['pluginSettings'] = Craft3Gonzo::getInstance()->getSettings();
+        $variables['pluginSettings'] = CraftGonzo::getInstance()->getSettings();
         $variables['patternlibBaseUrl'] = UrlHelper::siteUrl();
-        $html = \Craft::$app->view->renderTemplate('craft3-gonzo/patternlib.twig', $variables);
+        $html = \Craft::$app->view->renderTemplate('craft-gonzo/patternlib.twig', $variables);
         \Craft::$app->view->setTemplateMode($oldMode);
         \Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
         return $html;

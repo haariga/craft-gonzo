@@ -27,10 +27,10 @@ Hello from the Plugin patternlib!#}
 
 {# for dev, needs webpack-dev-server running #}
 {% if craft.app.config.general.devMode %}
-<script src="http://localhost:8080/js/Craft3Gonzo.js"></script>
+<script src="http://localhost:8080/js/CraftGonzo.js"></script>
   {% else %}
     {# production build #}
-  <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craft3gonzo/assetbundles/gonzo/dist') }}/js/Craft3Gonzo.js"></script>
+  <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/js/CraftGonzo.js"></script>
 {% endif %}
 </body>
 </html>

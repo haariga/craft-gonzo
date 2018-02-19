@@ -4,22 +4,18 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const absPath = dir => path.resolve(__dirname, `../${dir}`);
 
-const CSS_STACK = ({
-  scss = true,
-  vue = false,
-  sassResources = false
-} = {}) => [
+const CSS_STACK = ({ scss = true, vue = false, sassResources = false } = {}) => [
   {
-    loader: vue ? 'vue-style-loader' : 'style-loader'
+    loader: vue ? 'vue-style-loader' : 'style-loader',
   },
   {
-    loader: 'css-loader'
+    loader: 'css-loader',
   },
   ...(scss
     ? [
         {
-          loader: 'sass-loader'
-        }
+          loader: 'sass-loader',
+        },
       ]
     : {}),
   ...(sassResources
@@ -28,26 +24,26 @@ const CSS_STACK = ({
           loader: 'sass-resoures-loader',
           options: {
             resources: [
-            absPath('frontEndSources/scss/_variables.scss'),
-            absPath('frontEndSources/scss/_mixins.scss'),
-            absPath('frontEndSources/scss/_functions.scss')
-          ]
-          }
-        }
+              absPath('frontEndSources/scss/_variables.scss'),
+              absPath('frontEndSources/scss/_mixins.scss'),
+              absPath('frontEndSources/scss/_functions.scss'),
+            ],
+          },
+        },
       ]
-    : [])
+    : []),
 ];
 
 const webpackConfig = env => ({
   devtool: 'cheap-eval-source-map',
   entry: {
-    app: absPath('frontEndSources/CraftGonzo.js')
+    app: absPath('frontEndSources/CraftGonzo.js'),
   },
   output: {
     path: absPath('src/assetbundles/gonzo/dist/'),
     publicPath: 'http://localhost:8080/',
-    filename: 'js/Craft3Gonzo.js',
-    chunkFilename: 'js/[id].js'
+    filename: 'js/CraftGonzo.js',
+    chunkFilename: 'js/[id].js',
   },
   devServer: {
     contentBase: absPath('resources/'),
@@ -56,17 +52,17 @@ const webpackConfig = env => ({
     inline: true,
     overlay: true,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
     },
-    disableHostCheck: true
+    disableHostCheck: true,
   },
   resolve: {
     extensions: ['.js', '.vue'],
     modules: [absPath('node_modules'), absPath('frontEndSources')],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      Modules: absPath('frontEndSources/components/')
-    }
+      Modules: absPath('frontEndSources/components/'),
+    },
   },
   module: {
     rules: [
@@ -74,7 +70,7 @@ const webpackConfig = env => ({
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: absPath('frontEndSources/')
+        include: absPath('frontEndSources/'),
       },
       {
         test: /\.vue$/,
@@ -83,9 +79,9 @@ const webpackConfig = env => ({
         options: {
           loaders: {
             scss: CSS_STACK({ vue: true }),
-            css: CSS_STACK({ scss: false, vue: true })
-          }
-        }
+            css: CSS_STACK({ scss: false, vue: true }),
+          },
+        },
       },
       {
         test: /\.scss$/,
@@ -94,16 +90,16 @@ const webpackConfig = env => ({
           env === 'production'
             ? ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: CSS_STACK()
+                use: CSS_STACK(),
               })
-            : CSS_STACK()
+            : CSS_STACK(),
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: absPath('frontEndSources/')
-      }
-    ]
+        include: absPath('frontEndSources/'),
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -112,12 +108,13 @@ const webpackConfig = env => ({
     ...(env === 'production'
       ? [
           new ExtractTextPlugin({
-            filename: 'css/Craft3Gonzo.css',
-            allChunks: true
-          })
+            filename: 'css/CraftGonzo.css',
+            allChunks: true,
+          }),
+          new webpack.optimize.UglifyJsPlugin(),
         ]
-      : [])
-  ]
+      : []),
+  ],
 });
 
 export default webpackConfig;

@@ -1,6 +1,6 @@
 <?php
 
-    namespace martinherweg\craft3gonzo\models;
+    namespace martinherweg\craftgonzo\models;
 
 use craft\base\Model;
     use craft\validators\ArrayValidator;

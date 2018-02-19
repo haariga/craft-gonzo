@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "webpack-dev-server --config=webpack/webpack.config.babel.js",
-    "webpack": "webpack --hide-modules --config=webpack/webpack.config.babel.js --env=development"
+    "webpack": "webpack --hide-modules --config=webpack/webpack.config.babel.js --env=development",
+    "production": "webpack --hide-modules --config=webpack/webpack.config.babel.js --env=production"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",

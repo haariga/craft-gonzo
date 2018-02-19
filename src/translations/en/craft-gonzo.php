@@ -1,6 +1,6 @@
 <?php
 /**
- * Craft3 Gonzo plugin for Craft CMS 3.x
+ * Craft Gonzo plugin for Craft CMS 3.x
  *
  * Generate a component Library from your templates folder
  *
@@ -9,17 +9,17 @@
  */
 
 /**
- * Craft3 Gonzo en Translation
+ * Craft Gonzo en Translation
  *
- * Returns an array with the string to be translated (as passed to `Craft::t('craft3-gonzo', '...')`) as
+ * Returns an array with the string to be translated (as passed to `Craft::t('craft-gonzo', '...')`) as
  * the key, and the translation as the value.
  *
  * http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html
  *
  * @author    Martin Herweg
- * @package   Craft3Gonzo
+ * @package   CraftGonzo
  * @since     0.0.1
  */
 return [
-    'Craft3 Gonzo plugin loaded' => 'Craft3 Gonzo plugin loaded',
+    'Craft Gonzo plugin loaded' => 'Craft Gonzo plugin loaded',
 ];
