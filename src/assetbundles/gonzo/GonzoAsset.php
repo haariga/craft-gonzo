@@ -13,6 +13,7 @@
             $this->sourcePath = '@martinherweg/craftgonzo/assetbundles/gonzo/dist';
 
             $this->js = ['js/CraftGonzo.js'];
+            $this->css = ['css/CraftGonzo.css'];
 
             parent::init();
         }
