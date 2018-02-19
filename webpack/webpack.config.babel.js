@@ -1,13 +1,23 @@
 import path from 'path';
 import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const absPath = dir => path.resolve(__dirname, `../${dir}`);
 
-const CSS_STACK = ({ scss = true, vue = false, sassResources = false } = {}) => [
-  {
-    loader: vue ? 'vue-style-loader' : 'style-loader',
-  },
+const CSS_STACK = ({
+  scss = true,
+  vue = false,
+  sassResources = false,
+  production = false,
+} = {}) => [
+  ...(production
+    ? []
+    : {
+        loader: vue ? 'vue-style-loader' : production ? '' : 'style-loader',
+      }),
   {
     loader: 'css-loader',
   },
@@ -35,7 +45,7 @@ const CSS_STACK = ({ scss = true, vue = false, sassResources = false } = {}) => 
 ];
 
 const webpackConfig = env => ({
-  devtool: 'cheap-eval-source-map',
+  devtool: env === 'production' ? 'source-map' : 'cheap-eval-source-map',
   entry: {
     app: absPath('frontEndSources/CraftGonzo.js'),
   },
@@ -89,8 +99,7 @@ const webpackConfig = env => ({
         use:
           env === 'production'
             ? ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: CSS_STACK(),
+                use: CSS_STACK({ production: env === 'production' }),
               })
             : CSS_STACK(),
       },
@@ -107,11 +116,33 @@ const webpackConfig = env => ({
     new webpack.NamedModulesPlugin(),
     ...(env === 'production'
       ? [
+          new webpack.DefinePlugin({
+            'process.env': {
+              NODE_ENV: JSON.stringify('production'),
+            },
+          }),
           new ExtractTextPlugin({
             filename: 'css/CraftGonzo.css',
             allChunks: true,
           }),
-          new webpack.optimize.UglifyJsPlugin(),
+          new UglifyJsPlugin({
+            uglifyOptions: {
+              compress: {
+                warnings: false,
+              },
+            },
+            sourceMap: true,
+            parallel: true,
+          }),
+          new webpack.LoaderOptionsPlugin({
+            minimize: true,
+          }),
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'disabled',
+            generateStatsFile: true,
+            statsFilename: absPath('webpack/stats.json'),
+            logLevel: 'info',
+          }),
         ]
       : []),
   ],
