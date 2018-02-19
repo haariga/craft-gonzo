@@ -1,42 +1,44 @@
 {
-    "name": "martinherweg/craft-gonzo",
-    "description": "Component Library from your templates Folder",
-    "type": "craft-plugin",
-    "version": "0.0.1",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "craft3 gonzo"
-    ],
-    "support": {
-        "docs": "https://github.com/martinherweg/craft-gonzo/blob/master/README.md",
-        "issues": "https://github.com/martinherweg/craft-gonzo/issues"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Martin Herweg",
-            "homepage": "https://martinherweg.de"
-        }
-    ],
-    "require": {
-        "craftcms/cms": "^3.0.0-RC1",
-        "tightenco/collect": "^5.5.9"
-    },
-    "autoload": {
-        "psr-4": {
-          "martinherweg\\craftgonzo\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "Craft Gonzo",
-        "handle": "craft-gonzo",
-        "schemaVersion": "0.0.1",
-        "hasCpSettings": false,
-        "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/martinherweg/craft-gonzo/master/CHANGELOG.md",
-        "class": "martinherweg\\craftgonzo\\CraftGonzo"
+  "name"       : "martinherweg/craft-gonzo",
+  "description": "Component Library from your templates Folder",
+  "type"       : "craft-plugin",
+  "version"    : "0.0.1",
+  "keywords"   : [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "craft gonzo",
+    "styleguide",
+    "patternlib"
+  ],
+  "support"    : {
+    "docs"  : "https://github.com/martinherweg/craft-gonzo/blob/master/README.md",
+    "issues": "https://github.com/martinherweg/craft-gonzo/issues"
+  },
+  "license"    : "MIT",
+  "authors"    : [
+    {
+      "name"    : "Martin Herweg",
+      "homepage": "https://martinherweg.de"
     }
+  ],
+  "require"    : {
+    "craftcms/cms"     : "^3.0.0-RC1",
+    "tightenco/collect": "^5.5.9"
+  },
+  "autoload"   : {
+    "psr-4": {
+      "martinherweg\\craftgonzo\\": "src/"
+    }
+  },
+  "extra"      : {
+    "name"         : "Craft Gonzo",
+    "handle"       : "craft-gonzo",
+    "schemaVersion": "0.0.1",
+    "hasCpSettings": false,
+    "hasCpSection" : false,
+    "changelogUrl" : "https://raw.githubusercontent.com/martinherweg/craft-gonzo/master/CHANGELOG.md",
+    "class"        : "martinherweg\\craftgonzo\\CraftGonzo"
+  }
 }
