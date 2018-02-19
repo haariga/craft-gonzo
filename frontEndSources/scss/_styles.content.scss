@@ -25,6 +25,17 @@
     max-width: 100%;
     position: relative;
 
+    &::before {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 16px;
+      bottom: 6px;
+      right: 0;
+      background-color: #fdfdfd;
+      z-index: 10;
+    }
+
     iframe {
       margin-top: 16px;
       width: 100%;
@@ -33,6 +44,8 @@
       background-color: #f8f8f8;
       border-radius: 5px;
       padding: 32px;
+      position: relative;
+      z-index: 100;
     }
   }
 
