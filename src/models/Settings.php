@@ -8,6 +8,7 @@ use craft\base\Model;
     class Settings extends Model
     {
         public $patternLibFolder = 'patternlib';
+        public $optionsKey = 'opt';
         public $compFolders = [];
         public $navigation = [
             0 => [
@@ -57,7 +58,7 @@ use craft\base\Model;
         public function rules()
         {
             return [
-                ['patternLibFolder', 'string'],
+                [['patternLibFolder', 'optionsKey'], 'string'],
                 [
                     [
                         'compFolders',

@@ -46,6 +46,7 @@
         protected $templatesPath;
         protected $compFolders;
         protected $allowedExtensions;
+        protected $optionsKey;
         /**
          * @var    bool|array Allows anonymous access to this controller's actions.
          *         The actions must be in 'kebab-case'
@@ -64,7 +65,7 @@
          */
         public function init()
         {
-            $this->templatesPath = \Craft::$app->view->getTemplatesPath();
+            $this->templatesPath = Craft::$app->view->getTemplatesPath();
             $this->compFolders = CraftGonzo::getInstance()->getSettings()->compFolders ? CraftGonzo::getInstance()->getSettings()->compFolders : [];
             $this->allowedExtensions = [
                 'css',
@@ -73,6 +74,7 @@
                 'vue',
                 'html'
             ];
+            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'opt';
         }
 
         /**
@@ -187,10 +189,9 @@
                     $options = $options->merge($jsonVariables);
                 }
                 if (pathinfo($config, PATHINFO_EXTENSION) === 'php') {
-                    include_once $config;
-                    // TODO: Make Variable Dynamic via Setting
+                    $opt = include $config;
                     if (isset($opt)) {
-                        $mergedOptions['opt'] = array_merge($options['opt'], $opt);
+                        $mergedOptions[$this->optionsKey] = array_merge($options[$this->optionsKey], $opt);
                         $mergedOptions = $options->merge($mergedOptions);
                     }
                 }
@@ -203,13 +204,13 @@
         {
             $treeView = $this->dirtree($this->templatesPath, '', true);
             $variables['templates'] = $treeView;
-            $oldMode = \Craft::$app->view->getTemplateMode();
-            \Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+            $oldMode = Craft::$app->view->getTemplateMode();
+            Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
             $variables['pluginSettings'] = CraftGonzo::getInstance()->getSettings();
             $variables['patternlibBaseUrl'] = UrlHelper::siteUrl();
-            $html = \Craft::$app->view->renderTemplate('craft-gonzo/patternlib.twig', $variables);
-            \Craft::$app->view->setTemplateMode($oldMode);
-            \Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
+            $html = Craft::$app->view->renderTemplate('craft-gonzo/patternlib.twig', $variables);
+            Craft::$app->view->setTemplateMode($oldMode);
+            Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
             return $html;
         }
 
