@@ -82,9 +82,6 @@ export default {
       };
     },
   },
-  mounted() {
-    this.iFrameSize();
-  },
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
@@ -98,12 +95,15 @@ export default {
       } else {
         this.$set(this.iFrame, 'width', 'none');
       }
+      this.$nextTick(() => this.iFrameSize());
     },
     iFrameSize() {
       const iFrame = this.$refs.iframe;
       if (iFrame) {
         this.iFrame.loaded = true;
-        this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 120}px`;
+        this.$nextTick(() => {
+          this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 120}px`;
+        });
       }
     },
   },
