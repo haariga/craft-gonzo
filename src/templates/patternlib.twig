@@ -31,7 +31,7 @@ Hello from the Plugin patternlib!#}
 </script>
 
 {# for dev, needs webpack-dev-server running #}
-{% if craft.app.config.general.devMode and craft.app.config.general.devMode == '' %}
+{% if craft.app.config.general.devMode %}
   <script src="http://localhost:8080/js/CraftGonzo.js"></script>
 {% else %}
   {# production build #}
