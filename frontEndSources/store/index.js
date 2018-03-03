@@ -10,6 +10,7 @@ const state = {
   filelist: [],
   pluginSettings: [],
   activeComponent: {},
+  openFolder: '',
 };
 
 const store = new Vuex.Store({

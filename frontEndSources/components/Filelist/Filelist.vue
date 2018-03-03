@@ -3,7 +3,7 @@
     <h3 v-if="depth >= 1"
         :class="{'pl-files__headline--active': showTemplates}"
         class="pl-files__headline  ms-res--1"
-        @click="showTemplatesFn">
+        @click="showTemplatesFn(label.toLowerCase())">
       {{ label }}
     </h3>
     <ul class="pl-files__list">
@@ -45,14 +45,17 @@ export default {
   components: {
     Templatelist,
   },
-  data() {
-    return {
-      showTemplates: false,
-    };
+  computed: {
+    openFolder() {
+      return this.$store.state.openFolder;
+    },
+    showTemplates() {
+      return this.openFolder === this.label.toLowerCase();
+    },
   },
   methods: {
-    showTemplatesFn() {
-      this.showTemplates = !this.showTemplates;
+    showTemplatesFn(name) {
+      this.$store.commit('SET_OPEN', name);
 
       if (this.showTemplates) {
         const firstItem = Object.keys(this.nodes)[0];

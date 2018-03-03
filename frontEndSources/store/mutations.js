@@ -8,4 +8,7 @@ export default {
   SET_ACTIVE(state, component) {
     state.activeComponent = component;
   },
+  SET_OPEN(state, folderName) {
+    state.openFolder = folderName;
+  },
 };
