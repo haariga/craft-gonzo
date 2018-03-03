@@ -1,16 +1,15 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "browsers": ["last 2 versions", "ie >= 10"]
         },
         "modules": false,
-        "useBuiltIns": true,
         "debug": false
       }
     ]
   ],
-  "plugins": ["syntax-dynamic-import", "transform-object-rest-spread", "transform-async-to-generator", "lodash"]
+  "plugins": ["@babel/syntax-dynamic-import", "@babel/plugin-proposal-object-rest-spread", "transform-async-to-generator", "lodash"]
 }

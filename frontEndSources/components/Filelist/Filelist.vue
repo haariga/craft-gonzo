@@ -1,25 +1,25 @@
 <template>
   <nav class="pl-files">
-    <h3 class="pl-files__headline  ms-res--1"
+    <h3 v-if="depth >= 1"
         :class="{'pl-files__headline--active': showTemplates}"
-        v-if="depth >= 1"
+        class="pl-files__headline  ms-res--1"
         @click="showTemplatesFn">
       {{ label }}
     </h3>
     <ul class="pl-files__list">
       <filelist
         v-for="node in nodes"
+        v-if="!node.templates && typeof node === 'object'"
         :nodes="node.children"
         :label="node.name"
         :key="node.name"
         :depth="depth + 1"
-        v-if="!node.templates && typeof node === 'object'"
       />
       <Templatelist
-        :node="node"
-        :depth="depth + 1"
         v-show="showTemplates"
-        v-else-if="typeof node === 'object'"/>
+        v-else-if="typeof node === 'object'"
+        :node="node"
+        :depth="depth + 1"/>
     </ul>
   </nav>
 </template>

@@ -4,16 +4,18 @@
       <!--<h2 class="pl-headline&#45;&#45;h5">Code: SCSS</h2>-->
       <div class="pl-content__container  pl-content__container--iframeActions">
         <div class="pl-buttonGroup  pl-buttonGroup--pill">
-          <button class="pl-button pl-button--pill"
+          <button v-for="width in mqButtons"
                   :class="{'pl-button--active': activeWidth === width}"
-                  v-for="width in mqButtons"
-                  @click="iFrameWidth(width)"
                   :key="width"
+                  class="pl-button pl-button--pill"
+                  @click="iFrameWidth(width)"
                   v-text="`${width}`"/>
         </div>
       </div>
-      <div class="pl-content__container  pl-content__container--iframe" v-show="iFrame.loaded">
-        <iframe :style="{ 'max-width': iFrame.width }"
+      <div v-show="iFrame.loaded" class="pl-content__container  pl-content__container--iframe">
+        <iframe v-if="activeTemplate.relativePath"
+                ref="iframe"
+                :style="{ 'max-width': iFrame.width }"
                 :src="frame.src"
                 :height="iFrame.height"
                 marginheight="0"
@@ -23,9 +25,7 @@
                 scrolling="yes"
                 name="patternlibRenderer"
                 frameborder="0"
-                ref="iframe"
                 @load="iFrameSize"
-                v-if="activeTemplate.relativePath"
         />
         <div v-else>
           Please choose a component
@@ -34,7 +34,7 @@
     </div>
     <hr class="pl-hr">
 
-    <div class="pl-content__section" v-if="activeComponentAssets.length">
+    <div v-if="activeComponentAssets.length" class="pl-content__section">
       <code-content v-for="asset in activeComponentAssets"
                     :file="asset"
                     :key="asset.relativePath"/>
@@ -109,7 +109,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-
-</style>

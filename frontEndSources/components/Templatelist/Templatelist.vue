@@ -1,8 +1,8 @@
 <template>
-  <li class="pl-files__listItem" v-if="node !== 'undefined' && node.config !== 'undefined'">
-    <a href="#"
+  <li v-if="node !== 'undefined' && node.config !== 'undefined'" class="pl-files__listItem">
+    <a :class="classObject"
+       href="#"
        class="pl-files__listItemLink  ms-res--1"
-       :class="classObject"
        @click.prevent="selectActiveModule(node)">
       {{ node.config.title }}
     </a>

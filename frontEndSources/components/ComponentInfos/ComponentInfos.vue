@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="pl-intro" v-if="infos.title">
+    <div v-if="infos.title" class="pl-intro">
       <div class="pl-intro__meta ms-res--1">
         <div class="pl-intro__type">
           <strong>{{ infos.type }}</strong> • Path: {{ infos.path }}
         </div>
-        <span class="pl-intro__status wip"
-              :style="{backgroundColor: status.color}">
+        <span :style="{backgroundColor: status.color}"
+              class="pl-intro__status wip">
           {{ status.name.toUpperCase() }}
         </span>
       </div>
@@ -34,7 +34,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-
-</style>

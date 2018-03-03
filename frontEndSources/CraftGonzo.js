@@ -10,13 +10,13 @@
  * @since     0.0.1
  */
 
-import 'babel-polyfill';
+import '@babel/polyfill'; // eslint-disable-line
 
 import Vue from 'vue';
 import axios from 'axios';
-import './scss/app.scss';
-import store from './store';
 import App from './App';
+import store from './store';
+import './scss/app.scss'; // eslint-disable-line
 
 Vue.component('patternlib', App);
 
