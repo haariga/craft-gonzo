@@ -15,7 +15,7 @@
 <p>You need to modify the variable which is given to your template render to match your templates</p>
 
 {% include component with {
-  opt: templateOptions | default([])
+  opt: templateOptions.opt | default([])
 } %}
 </body>
 </html>
