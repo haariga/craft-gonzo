@@ -4,14 +4,16 @@
       <div class="pl-logo">
         Gonzo <span>Pattern Library</span>
       </div>
-      <input class="pl-mainNavCheckBox" type="checkbox" name="mainNav"
-             id="mainNav">
+      <input id="mainNav"
+             class="pl-mainNavCheckBox"
+             type="checkbox"
+             name="mainNav">
       <label class="pl-mainNavTrigger" for="mainNav">
         <span/>
         <span/>
         <span/>
       </label>
-      <div v-show="sidebar" v-for="item in filelist" :key="item.name">
+      <div v-for="item in filelist" v-show="sidebar" :key="item.name">
         <Filelist :depth="1" :label="item.name" :nodes="item.children"/>
       </div>
     </aside>
@@ -29,7 +31,7 @@
       
       <div class="pl-main__footer">
         Made with <span>♥</span> by <a href="https://github.com/martinherweg/">Martin Herweg</a> &amp; <a
-        href="https://davidhellmann.com">David Hellmann</a>
+          href="https://davidhellmann.com">David Hellmann</a>
       </div>
     </main>
   </div>
@@ -37,7 +39,6 @@
 
 
 <script>
-/* eslint-disable */
 import Filelist from 'Modules/Filelist/Filelist';
 import PreviewArea from 'Modules/PreviewArea/PreviewArea';
 import { flatten } from 'lodash';
@@ -75,7 +76,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-
-</style>
