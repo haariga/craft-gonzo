@@ -28,6 +28,9 @@ export default {
   activeComponentAssets(state) {
     return state.activeComponent.assets ? state.activeComponent.assets : [];
   },
+  activeComponentRender(state) {
+    return state.activeComponent.templateRender ? state.activeComponent.templateRender[0] : {};
+  },
   activeTemplate(state) {
     return state.activeComponent.templates ? state.activeComponent.templates[0] : {};
   },

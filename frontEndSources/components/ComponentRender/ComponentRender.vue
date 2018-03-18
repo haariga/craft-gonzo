@@ -32,6 +32,9 @@
         </div>
       </div>
     </div>
+    
+    <code-content :file="activeComponentRender" :get-template="false" />
+    
     <hr class="pl-hr">
 
     <div v-if="activeComponentAssets.length" class="pl-content__section">
@@ -71,6 +74,9 @@ export default {
     },
     activeComponentAssets() {
       return [...[this.activeTemplate], ...this.$store.getters.activeComponentAssets];
+    },
+    activeComponentRender() {
+      return this.$store.getters.activeComponentRender;
     },
     mqButtons() {
       return this.$store.getters.mqButtons;

@@ -10,6 +10,7 @@
 
     namespace martinherweg\craftgonzo\controllers;
 
+    use craft\helpers\Template;
     use craft\helpers\UrlHelper;
     use craft\web\View;
     use martinherweg\craftgonzo\CraftGonzo;
@@ -159,6 +160,17 @@
                             return (isset($item['config']) && count($item['config']));
                         })->filter(function ($item) {
                             return (isset($item['templates']) && count($item['templates']));
+                        })->map(function ($item) {
+                            if (isset($item['templates']) && isset($item['config'])) {
+                                foreach ($item['templates'] as $template) {
+                                    $html = Craft::$app->view->renderTemplate($template['relativePath'], ['opt' => $item['config']['opt']]);
+                                    $item['templateRender'][] = [
+                                        'extension' => $item['config']['title'],
+                                        'code' => $html
+                                    ];
+                                }
+                            }
+                            return $item;
                         });
                     $dirs[$item->getFilename()]['children'] = $arr->values()->all();
                 }

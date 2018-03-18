@@ -1,5 +1,5 @@
 <template>
-  <div v-if="file" class="pl-content__asset">
+  <div v-if="fileContent" class="pl-content__asset">
     <h2 class="pl-headline--h5">Code: {{ file.extension ? file.extension.toUpperCase() : '' }}</h2>
     <div class="pl-content__container  pl-content__container--code">
       <pre><code v-text="fileContent"/></pre>
@@ -15,22 +15,39 @@ export default {
       type: Object,
       default: () => {},
     },
+    getTemplate: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
-      fileContent: '',
+      fileData: {},
     };
   },
-  mounted() {
-    this.getFileContent();
+  computed: {
+    fileContent() {
+      if (this.file && this.file.code) {
+        return this.file.code;
+      }
+      if (this.fileData) {
+        return this.fileData;
+      }
+
+      return '';
+    },
+  },
+  created() {
+    if (this.getTemplate) {
+      this.getFileContent();
+    }
   },
   methods: {
-    async getFileContent() {
-      if (!this.file.relativePath) return;
-      const { data } = await window.axios.get(
-        `patternlib/getfilecontent/${this.file.relativePath}`,
-      );
-      this.fileContent = data;
+    getFileContent() {
+      if (!this.file && !this.file.relativePath) return;
+      window.axios.get(`patternlib/getfilecontent/${this.file.relativePath}`).then(({ data }) => {
+        this.fileData = data;
+      });
     },
   },
 };

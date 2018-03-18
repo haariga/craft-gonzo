@@ -40,7 +40,7 @@
     }
 
     &--active {
-      @include ms-respond(font-size, 1);
+      color: darken(c('red'), 10%);
 
       &::before {
         background-color: darken(c('red'), 10%);
@@ -50,6 +50,7 @@
 
   &__list {
     padding: 0;
+    padding-left: s(8);
     margin: 0;
     list-style-type: none;
     @include make-vr();

@@ -36,11 +36,7 @@
     background-color: c('black', '20');
     color: c('black', '50');
     font-weight: 700;
-
-    &.wip {
-      background-color: orange;
-      color: c('white');
-    }
+    font-size: 12px;
 
     &::before {
       display: none;
@@ -54,6 +50,7 @@
         position: absolute;
         left: -8px;
         font-weight: 400;
+        font-size: 14px;
         color: c('black', '25');
         transform: translateX(-100%);
         display: block;
