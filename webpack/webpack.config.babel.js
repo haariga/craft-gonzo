@@ -3,6 +3,8 @@ import webpack from 'webpack';
 import { getIfUtils, removeEmpty } from 'webpack-config-utils';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
 
 const absPath = dir => path.resolve(__dirname, `../${dir}`);
 
@@ -62,7 +64,7 @@ const webpackConfig = (env = {}) => {
     },
     output: {
       path: absPath('src/assetbundles/gonzo/dist/'),
-      publicPath: 'http://localhost:8080/',
+      publicPath: ifProduction('', 'http://localhost:8080'),
       filename: 'js/CraftGonzo.js',
       chunkFilename: 'js/[id].js',
     },
@@ -138,6 +140,15 @@ const webpackConfig = (env = {}) => {
             }),
           ]
         : []),
+      new HtmlWebpackPlugin({
+        filename: absPath('src/templates/patternlib.twig'),
+        template: absPath('webpack/patternlib_webpack-template.twig'),
+        inject: false,
+        devServer: 'http://localhost:8080',
+        environment: ifProduction('production', 'development'),
+        alwaysWriteToDisk: true,
+      }),
+      new HtmlWebpackHarddiskPlugin(),
     ],
   };
 };
