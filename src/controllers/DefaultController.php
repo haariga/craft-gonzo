@@ -179,7 +179,8 @@
             $collection = new Collection($dirs);
             $collection = $collection->filter(function ($item) {
                 return count($item['children']);
-            });
+            })->sort()->reverse();
+
             return $collection->map(function ($item, $key) {
                 return [
                     'name'     => $key,
