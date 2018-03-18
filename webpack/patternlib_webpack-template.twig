@@ -1,0 +1,47 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>patternlib</title>
+  <link href="//fonts.googleapis.com/css?family=Roboto+Mono:300,400,500|Roboto:300,400,500,700,900" rel="stylesheet">
+  <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <% if(htmlWebpackPlugin.options.environment === 'production') { %>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+      <link href="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
+  <% } %>
+</head>
+<body>
+{#<h1>{{ siteName }} patternlib</h1>
+Hello from the Plugin patternlib!#}
+
+<div id="patternlib">
+  <patternlib></patternlib>
+</div>
+
+<script>
+  window.filelist = {{ templates | json_encode | raw }}
+    window.pluginSettings = {{ pluginSettings | json_encode | raw }}
+      window.patternLibBaseUrl = '{{ patternlibBaseUrl }}';
+  window.csrfToken = '{{ craft.app.request.csrfToken }}';
+</script>
+
+{# for dev, needs webpack-dev-server running #}
+
+<% if(htmlWebpackPlugin.options.environment === 'production') { %>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
+<% } else { %>
+  <% if (htmlWebpackPlugin.options.devServer) { %>
+    <script src="<%= htmlWebpackPlugin.options.devServer%>/js/CraftGonzo.js"></script>
+  <% } %>
+<% } %>
+
+</body>
+</html>
