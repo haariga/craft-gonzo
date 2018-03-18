@@ -1400,10 +1400,8 @@ h6,
     text-transform: uppercase;
     background-color: #cccccc;
     color: gray;
-    font-weight: 700; }
-    .pl-intro__status.wip {
-      background-color: orange;
-      color: #fff; }
+    font-weight: 700;
+    font-size: 12px; }
     .pl-intro__status::before {
       display: none; }
       @media (min-width: 600px) {
@@ -1416,6 +1414,7 @@ h6,
           position: absolute;
           left: -8px;
           font-weight: 400;
+          font-size: 14px;
           color: #bfbfbf;
           transform: translateX(-100%);
           display: block; } }
@@ -1468,17 +1467,12 @@ h6,
       font-size: 28px;
       border-radius: 100%; }
     .pl-files__headline--active {
-      font-size: 18px; }
-      @media (min-width: 320px) and (max-width: 1440px) {
-        .pl-files__headline--active {
-          font-size: calc( 18px + 7 * ( ( 100vw - 320px) / 1120 )); } }
-      @media (min-width: 1440px) {
-        .pl-files__headline--active {
-          font-size: 25px; } }
+      color: #8e3131; }
       .pl-files__headline--active::before {
         background-color: #8e3131; }
   .pl-files__list {
     padding: 0;
+    padding-left: 64px;
     margin: 0;
     list-style-type: none;
     margin-top: 16px; }
