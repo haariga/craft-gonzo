@@ -25,6 +25,31 @@
   transition: all 0.25s;
 }
 
+.pl-button--newWindow {
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: c('blue');
+  border: 1px solid darken(c('blue', 'light'), 2%);
+  outline: none;
+  background: lighten(c('blue', 'light'), 5%);
+  transition: all 0.25s;
+  z-index: 1000;
+  position: relative;
+  text-decoration: none;
+  float: right;
+  width: 100%;
+  text-align: center;
+  margin-top: s(1);
+
+  @include media('>=s') {
+    width: auto;
+    margin-top: 0;
+    margin-left: auto;
+  }
+}
+
 .pl-button--active,
 .pl-button--active:hover {
   background: c('white');
@@ -34,23 +59,42 @@
 
 /* Button Group */
 .pl-buttonGroup--pill {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  @include media('>=s') {
+    justify-content: flex-start;
+  }
+
   .pl-button--pill {
     // float: left;
     margin: 0;
     border-radius: 0;
-    border-left: none;
     overflow: hidden;
+    width: calc(50% - 4px);
+    flex: 0 1 auto;
+    margin-top: s(1);
+    text-align: center;
 
-    &:first-child {
-      border-left: 1px solid c('black', '10');
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+    @include media('>=s') {
+      width: auto;
+      margin-top: 0;
+      border-left: none;
     }
 
-    &:last-child {
-      border-right: 1px solid c('black', '10');
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
+    @include media('>=s') {
+      &:first-child {
+        border-left: 1px solid c('black', '10');
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      &:last-of-type {
+        border-right: 1px solid c('black', '10');
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
     }
   }
 }

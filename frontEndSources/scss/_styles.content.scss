@@ -39,6 +39,7 @@
     iframe {
       margin-top: 16px;
       width: 100%;
+      min-height: 400px;
       //min-height: 500px;
       max-width: 100%;
       background-color: #f8f8f8;
@@ -49,7 +50,11 @@
     }
   }
 
-
+  &__container--loaded {
+    iframe {
+      min-height: 0;
+    }
+  }
 
   &__container--code {
     width: 100%;
