@@ -26,12 +26,12 @@ export default {
     return state.activeComponent.config ? state.activeComponent.config : {};
   },
   activeComponentAssets(state) {
-    return state.activeComponent.assets ? state.activeComponent.assets : [];
+    return state.activeAssets;
   },
   activeComponentRender(state) {
-    return state.activeComponent.templateRender ? state.activeComponent.templateRender[0] : {};
+    return state.activeTemplateRender;
   },
   activeTemplate(state) {
-    return state.activeComponent.templates ? state.activeComponent.templates[0] : {};
+    return state.activeTemplate;
   },
 };
