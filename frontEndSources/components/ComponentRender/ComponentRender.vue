@@ -37,6 +37,7 @@
       </div>
     </div>
 
+    <!-- TODO: #43 Tabs einbauen Template Code / Rendered Code und dazu Copy Code => siehe Polaris -->
     <code-content :file="activeComponentRender" :get-template="false" />
 
     <hr class="pl-hr">
