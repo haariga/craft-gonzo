@@ -25,6 +25,9 @@ export default {
   activeComponent(state) {
     return state.activeComponent.config ? state.activeComponent.config : {};
   },
+  activeInfos(state) {
+    return state.activeInfos;
+  },
   activeComponentAssets(state) {
     return state.activeAssets;
   },
