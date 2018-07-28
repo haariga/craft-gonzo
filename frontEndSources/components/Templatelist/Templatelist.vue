@@ -47,7 +47,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 button {
   font: inherit;
   border: 0;

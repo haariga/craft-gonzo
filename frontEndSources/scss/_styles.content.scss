@@ -62,13 +62,13 @@
       color: c('black', '75');
       border-radius: 5px;
       padding: 32px;
-      max-height: 200px;
+      // max-height: 200px;
       overflow: hidden;
       transition: all 0.25s;
 
       &.is-open {
         overflow: scroll;
-        max-height: none;
+        // max-height: none;
         background-color: c('black', '90');
         color: c('black', '40');
       }

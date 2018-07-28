@@ -14,37 +14,91 @@
   }
 
   &__headline {
-    padding-left: s(8);
+    padding-left: s(9);
     position: relative;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-weight: 500;
+    text-transform: capitalize;
     color: c('blue', 'dark');
     cursor: pointer;
-
-    &::before {
-      font-family: "Material Icons";
-      font-weight: normal;
-      content: '\e051';
-      width: 48px;
-      height: 48px;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: c('red');
-      color: c('white');
-      text-align: center;
-      line-height: 48px;
-      font-size: 28px;
-      border-radius: 100%;
-    }
 
     &--active {
       color: darken(c('red'), 10%);
 
-      &::before {
+      #{$root}__icon {
         background-color: darken(c('red'), 10%);
+
+        .top {
+          top: 16px;
+          background-color: c('white');
+        }
+
+        .bottom {
+          bottom: 16px;
+          background-color: c('white');
+        }
+
+        .line {
+          opacity: 1;
+          transition: all 0.25s 0.375s ease-in;
+
+          &--01 {
+            margin-left: -5px;
+          }
+
+          &--03 {
+            margin-left: 5px;
+          }
+        }
       }
+    }
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(0);
+    background-color: rgba(c('blue'), 0.25);
+    color: c('white');
+    text-align: center;
+    line-height: 48px;
+    font-size: 28px;
+    border-radius: 100%;
+    transition: all 0.25s ease-in;
+
+    .top,
+    .bottom {
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      border-radius: 10px;
+      background-color: rgba(c('white'), 0.5);
+      transform: translate(-50%, 0);
+      left: 50%;
+      transform-origin: left center;
+      transition: all 0.25s 0.25s ease-in;
+    }
+
+    .top {
+      top: 20px;
+    }
+
+    .bottom {
+      bottom: 20px;
+    }
+
+    .line {
+      width: 2px;
+      height: 2px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: c('white');
+      opacity: 0;
+      transition: all 0.25s 0s ease-in;
     }
   }
 

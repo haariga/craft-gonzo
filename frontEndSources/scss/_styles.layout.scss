@@ -1,8 +1,11 @@
+// Variables
+$wrapperWidth: 1920px;
+
 .pl-wrapper {
   @include center();
   @include make-col-padding();
   width: 100vw;
-  max-width: 1680px;
+  max-width: $wrapperWidth;
   display: flex;
   flex-flow: column nowrap;
 
@@ -21,7 +24,7 @@
 
 .pl-nav {
   width: 100%;
-  max-width: calc(1680px - 320px);
+  max-width: calc($wrapperWidth - 320px);
 }
 
 .pl-aside {
@@ -67,7 +70,7 @@
   @include media('>=l') {
     width: calc(100% - 280px);
     margin-left: 280px;
-    max-width: calc(1680px - 280px);
+    max-width: calc($wrapperWidth - 280px);
     padding-bottom: s(8);
   }
 }

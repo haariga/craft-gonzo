@@ -2,9 +2,16 @@
   <nav class="pl-files">
     <h3 v-if="depth >= 1"
         :class="{'pl-files__headline--active': showTemplates}"
-        class="pl-files__headline  ms-res--1"
+        class="pl-files__headline  ms-res-0"
         @click="showTemplatesFn(label.toLowerCase())">
-      {{ label }}
+      <div class="pl-files__icon">
+        <span class="top"/>
+        <span class="line  line--01"/>
+        <span class="line  line--02"/>
+        <span class="line  line--03"/>
+        <span class="bottom"/>
+      </div>
+      {{ formattedLabel }}
     </h3>
     <ul class="pl-files__list">
       <filelist
@@ -47,10 +54,17 @@ export default {
   },
   computed: {
     openFolder() {
-      return this.$store.state.openFolder;
+        return this.$store.state.openFolder;
     },
     showTemplates() {
-      return this.openFolder === this.label.toLowerCase();
+        return this.openFolder === this.label.toLowerCase();
+    },
+    formattedLabel() {
+        let label = this.label;
+        if (label.charAt(0) === '_') {
+          label = label.substr(1);
+        }
+        return label
     },
   },
   methods: {
