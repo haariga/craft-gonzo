@@ -15,7 +15,7 @@
       </div>
       <div :class="{'pl-content__container--loaded': iFrame.loaded}" class="pl-content__container  pl-content__container--iframe">
         <transition name="fade">
-          <iframe v-if="activeTemplate.relativePath && iFrame.loaded"
+          <iframe v-show="activeTemplate.relativePath && iFrame.loaded"
                   ref="iframe"
                   :style="{ 'max-width': iFrame.width }"
                   :src="frame.src"
@@ -29,7 +29,9 @@
                   frameborder="0"
                   @load="iFrameSize"
           />
-          <div v-else>
+        </transition>
+        <transition name="fade">
+          <div v-show="!activeTemplate.relativePath && iFrame.loaded">
             Please choose a component
           </div>
         </transition>
