@@ -37,8 +37,8 @@
         </transition>
       </div>
     </div>
-
-    <code-content :file="activeComponentRender" :get-template="false" />
+    
+    <TemplateSwitcher :files="templateSwitcher" />
 
     <hr class="pl-hr">
 
@@ -51,11 +51,12 @@
 </template>
 
 <script>
+import TemplateSwitcher from 'Modules/TemplateSwitcher/TemplateSwitcher';
 import CodeContent from '../CodeContent/CodeContent';
 
 export default {
   name: 'ComponentRender',
-  components: { CodeContent },
+  components: { TemplateSwitcher, CodeContent },
   data() {
     return {
       buttonActive: false,
@@ -71,6 +72,20 @@ export default {
     };
   },
   computed: {
+    templateSwitcher() {
+      return [
+        {
+          type: 'twig',
+          getTemplate: true,
+          file: this.activeTemplate,
+        },
+        {
+          type: 'rendered',
+          getTemplate: false,
+          file: this.activeComponentRender,
+        },
+      ];
+    },
     activeTemplate() {
       return this.$store.getters.activeTemplate;
     },
@@ -78,7 +93,7 @@ export default {
       return this.$store.getters.activeComponent;
     },
     activeComponentAssets() {
-      return [...[this.activeTemplate], ...this.$store.getters.activeComponentAssets];
+      return this.$store.getters.activeComponentAssets;
     },
     activeComponentRender() {
       return this.$store.getters.activeComponentRender;
