@@ -6,6 +6,8 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
 
+import VueLoaderPlugin from 'vue-loader/lib/plugin';
+
 const absPath = dir => path.resolve(__dirname, `../${dir}`);
 
 const webpackConfig = (env = {}) => {
@@ -99,13 +101,11 @@ const webpackConfig = (env = {}) => {
           test: /\.vue$/,
           loader: 'vue-loader',
           include: absPath('frontEndSources/'),
-          options: {
-            loaders: {
-              scss: CSS_STACK({ vue: true }),
-              css: CSS_STACK({ scss: false, vue: true }),
-            },
-          },
         },
+          {
+            test: /\.css$/,
+            loader: CSS_STACK({ scss: false, vue: true }),
+          },
         {
           test: /\.scss$/,
           include: absPath('frontEndSources/'),
@@ -124,6 +124,7 @@ const webpackConfig = (env = {}) => {
       ],
     },
     plugins: [
+        new VueLoaderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProgressPlugin(),
       ...(env.production
