@@ -12,7 +12,7 @@ export default {
   name: 'CodeContent',
   props: {
     file: {
-      type: Object,
+      type: [Object, Array],
       default: () => {},
     },
     getTemplate: {
