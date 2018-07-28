@@ -81,9 +81,4 @@ export default {
 };
 </script>
 
-
-<style>
-.pl-files__listItem {
-  overflow: hidden;
-}
-</style>
+<style></style>

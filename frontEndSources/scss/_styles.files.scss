@@ -39,7 +39,7 @@
 
         .line {
           opacity: 1;
-          transition: all 0.25s 0.375s ease-in;
+          transition: all 0.25s 0.375s ease('out-cubic');
 
           &--01 {
             margin-left: -5px;
@@ -66,7 +66,7 @@
     line-height: 48px;
     font-size: 28px;
     border-radius: 100%;
-    transition: all 0.25s ease-in;
+    transition: all 0.25s ease('out-cubic');
 
     .top,
     .bottom {
@@ -78,7 +78,7 @@
       transform: translate(-50%, 0);
       left: 50%;
       transform-origin: left center;
-      transition: all 0.25s 0.25s ease-in;
+      transition: all 0.25s 0.25s ease('out-cubic');
     }
 
     .top {
@@ -98,24 +98,25 @@
       transform: translate(-50%, -50%);
       background-color: c('white');
       opacity: 0;
-      transition: all 0.25s 0s ease-in;
+      transition: all 0.25s 0s ease('out-cubic');
     }
   }
 
   &__list {
     padding: 0;
-    padding-left: s(8);
+    padding-left: s(9);
     margin: 0;
     list-style-type: none;
     @include make-vr();
   }
 
   &__list #{$root}__list {
-    padding-left: s(8);
+    padding-left: s(9);
   }
 
   &__listItem {
     padding: s(1) s(2) s(1/2) 0;
+    overflow: visible;
 
   }
 
@@ -132,20 +133,37 @@
       position: absolute;
       left: 0;
       top: 50%;
-      transform: translateY(-50%);
-      width: 0;
-      height: 12px;
-      background-color: transparent;
+      transform: translate(s(-2), -50%);
+      background-color: c('blue');
+      width: 2px;
+      height: 2px;
+      border-radius: 20px;
+      opacity: 0.5;
       transition: all 0.25s ease('out-cubic');
     }
 
-    &:hover,
+    &:hover {
+      &::before {
+        opacity: 1;
+        width: 8px;
+      }
+    }
+
     &--active {
       padding-left: s(2);
 
+      &:hover {
+        &::before {
+          opacity: 1;
+          width: 20px;
+          height: 2px;
+        }
+      }
+
       &::before {
-        background-color: c('blue');
-        width: 2px;
+        opacity: 1;
+        width: 20px;
+        background-color: c('red');
       }
     }
   }
