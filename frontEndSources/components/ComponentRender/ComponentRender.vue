@@ -15,8 +15,7 @@
       </div>
       <div :class="{'pl-content__container--loaded': iFrame.loaded}" class="pl-content__container  pl-content__container--iframe">
         <transition name="fade">
-          <iframe v-if="activeTemplate.relativePath"
-                  v-show="iFrame.loaded"
+          <iframe v-if="activeTemplate.relativePath && iFrame.loaded"
                   ref="iframe"
                   :style="{ 'max-width': iFrame.width }"
                   :src="frame.src"
