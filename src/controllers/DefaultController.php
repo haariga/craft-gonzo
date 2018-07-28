@@ -189,6 +189,19 @@
             })->values()->all();
         }
 
+        public function array_merge_recursive_distinct(array &$array1, array &$array2)
+        {
+            $merged = $array1;
+            foreach ($array2 as $key => &$value) {
+                if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+                    $merged[$key] = $this->array_merge_recursive_distinct($merged[$key], $value);
+                } else {
+                    $merged[$key] = $value;
+                }
+            }
+            return $merged;
+        }
+
         public function getConfig(string $path)
         {
             $options = new Collection();
@@ -204,8 +217,11 @@
                 if (pathinfo($config, PATHINFO_EXTENSION) === 'php') {
                     $opt = include $config;
                     if (isset($opt)) {
-                        $mergedOptions[$this->optionsKey] = array_merge($options[$this->optionsKey], $opt);
-                        $mergedOptions = $options->merge($mergedOptions);
+                        $collectedOptions = collect($opt);
+                        $array1 = $options->toArray();
+                        $array2 = $collectedOptions->toArray();
+                        $mergedOptions = $this->array_merge_recursive_distinct($array1, $array2);
+                        $mergedOptions = collect($mergedOptions);
                     }
                 }
             }
