@@ -8,6 +8,7 @@ export default {
   SET_ACTIVE(state, component) {
     state.activeComponent = component;
     state.activeInfos = component.config.meta;
+    state.activeVariants = component.config.variants;
     state.activeAssets = component.assets;
     // eslint-disable-next-line
     state.activeTemplate = component.templates[0];

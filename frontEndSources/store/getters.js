@@ -37,4 +37,7 @@ export default {
   activeTemplate(state) {
     return state.activeTemplate;
   },
+  activeComponentVariants(state) {
+    return state.activeVariants;
+  },
 };

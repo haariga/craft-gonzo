@@ -14,6 +14,7 @@ const state = {
   activeTemplate: [],
   activeAssets: [],
   activeTemplateRender: [],
+  activeVariants: {},
   openFolder: '',
 };
 
