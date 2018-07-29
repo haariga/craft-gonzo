@@ -68,7 +68,7 @@ export default {
       if (templateParameter) {
         const flattendFilelist = flatten(this.filelist.map(item => item.children));
         const activeComponent = flattendFilelist.find(
-          component => component.config.path === templateParameter,
+          component => component.config.meta.path === templateParameter,
         );
         this.$store.dispatch('setActive', activeComponent);
       }

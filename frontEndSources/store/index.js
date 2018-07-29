@@ -10,9 +10,11 @@ const state = {
   filelist: [],
   pluginSettings: [],
   activeComponent: {},
+  activeInfos: {},
   activeTemplate: [],
   activeAssets: [],
   activeTemplateRender: [],
+  activeVariants: {},
   openFolder: '',
 };
 
