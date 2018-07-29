@@ -53,7 +53,7 @@
          *         The actions must be in 'kebab-case'
          * @access protected
          */
-        protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content'];
+        protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content', 'get-file-render'];
 
         // Public Methods
         // =========================================================================
@@ -254,8 +254,10 @@
             $variables = [];
             $pathinfo = pathinfo($component);
             $modulePath = $this->templatesPath . '/' . $pathinfo['dirname'];
+            $config = $this->getConfig($modulePath);
+            $variantQueryString = Craft::$app->getRequest()->getParam('variant') ? Craft::$app->getRequest()->getParam('variant') :  $config['meta']['key'];
             $variables['component'] = $component;
-            $variables['templateOptions'] = $this->getConfig($modulePath);
+            $variables['templateOptions'] = $config['variants'][$variantQueryString];
 
             return $this->renderTemplate('patternlib/index', $variables);
         }
@@ -273,5 +275,18 @@
             $modulePath = $this->templatesPath . '/' . $file;
             $fileContents = file_get_contents($modulePath);
             return $fileContents;
+        }
+
+        public function actionGetFileRender()
+        {
+            $this->requirePostRequest();
+
+            $data = Craft::$app->getRequest()->post();
+
+            $options = json_decode($data['meta'], true);
+
+            $html = $this->renderTemplate($data['file'], ['opt' => $options]);
+
+            return $html;
         }
     }
