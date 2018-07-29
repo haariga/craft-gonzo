@@ -57,6 +57,7 @@
     "lodash": "^4.17.10",
     "modularscale": "^2.0.1",
     "modularscale-sass": "^3.0.5",
+    "prismjs": "^1.15.0",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   }

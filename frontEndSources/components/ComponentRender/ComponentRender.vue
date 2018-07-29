@@ -37,7 +37,7 @@
         </transition>
       </div>
     </div>
-    
+
     <TemplateSwitcher :files="templateSwitcher" />
 
     <hr class="pl-hr">
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import TemplateSwitcher from 'Modules/TemplateSwitcher/TemplateSwitcher';
+import TemplateSwitcher from '../TemplateSwitcher/TemplateSwitcher';
 import CodeContent from '../CodeContent/CodeContent';
 
 export default {

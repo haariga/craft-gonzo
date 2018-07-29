@@ -2,12 +2,16 @@
   <div v-if="fileContent" class="pl-content__asset">
     <h2 v-if="showHeadline" class="pl-headline--h5">Code: {{ file.extension ? file.extension.toUpperCase() : '' }}</h2>
     <div class="pl-content__container  pl-content__container--code">
-      <pre><code v-text="fileContent"/></pre>
+      <pre :class="setLang" class="line-numbers">
+        <code :class="setLang" class="line-numbers">{{ fileContent }}</code>
+      </pre>
     </div>
   </div>
 </template>
 
 <script>
+import '../../plugins/prism'; // eslint-disable-line
+
 export default {
   name: 'CodeContent',
   props: {
@@ -30,6 +34,13 @@ export default {
     };
   },
   computed: {
+    setLang() {
+      let lang = this.file.extension;
+      if (this.file.extension === 'html') {
+        lang = 'twig';
+      }
+      return `language-${lang}`;
+    },
     fileContent() {
       if (this.file && this.file.code) {
         return this.file.code;

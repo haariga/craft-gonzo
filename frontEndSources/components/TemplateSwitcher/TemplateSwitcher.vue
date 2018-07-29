@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import CodeContent from 'Modules/CodeContent/CodeContent';
+import CodeContent from '../CodeContent/CodeContent';
 
 export default {
   name: 'TemplateSwitcher',
@@ -41,7 +41,9 @@ export default {
   },
   computed: {},
   watch: {},
-  mounted() {},
+  mounted() {
+    console.log(this.files);
+  },
   created() {},
   methods: {},
 };
@@ -53,13 +55,14 @@ export default {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    background-color: c('black', '95');
-    background: #0d0d0d;
+    background-color: #1a1a1a;
     padding: 32px;
     padding-bottom: 0;
     margin-bottom: -37px;
     border-radius: 5px;
     margin-bottom: s(-4);
+    position: relative;
+    z-index: 1000;
   }
 }
 </style>
