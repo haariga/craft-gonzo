@@ -15,6 +15,12 @@ export default {
     // eslint-disable-next-line
     state.activeTemplateRender = component.templateRender[0];
   },
+  SET_TEMPLATERENDER(state, data) {
+    state.activeTemplateRender = {
+      code: data,
+      extension: '',
+    };
+  },
   SET_OPEN(state, folderName) {
     state.openFolder = folderName;
   },
