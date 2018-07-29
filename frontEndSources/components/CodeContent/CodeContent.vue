@@ -1,6 +1,6 @@
 <template>
   <div v-if="fileContent" class="pl-content__asset">
-    <h2 class="pl-headline--h5">Code: {{ file.extension ? file.extension.toUpperCase() : '' }}</h2>
+    <h2 v-if="showHeadline" class="pl-headline--h5">Code: {{ file.extension ? file.extension.toUpperCase() : '' }}</h2>
     <div class="pl-content__container  pl-content__container--code">
       <pre><code v-text="fileContent"/></pre>
     </div>
@@ -12,10 +12,14 @@ export default {
   name: 'CodeContent',
   props: {
     file: {
-      type: Object,
+      type: [Object, Array],
       default: () => {},
     },
     getTemplate: {
+      type: Boolean,
+      default: true,
+    },
+    showHeadline: {
       type: Boolean,
       default: true,
     },
@@ -36,6 +40,9 @@ export default {
 
       return '';
     },
+  },
+  watch: {
+    file: 'getFileContent',
   },
   created() {
     if (this.getTemplate) {

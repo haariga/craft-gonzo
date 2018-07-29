@@ -75,7 +75,7 @@
                 'vue',
                 'html'
             ];
-            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'opt';
+            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'meta';
         }
 
         /**
@@ -163,9 +163,9 @@
                         })->map(function ($item) {
                             if (isset($item['templates']) && isset($item['config'])) {
                                 foreach ($item['templates'] as $template) {
-                                    $html = Craft::$app->view->renderTemplate($template['relativePath'], ['opt' => $item['config']['opt']]);
+                                    $html = Craft::$app->view->renderTemplate($template['relativePath'], ['meta' => $item['config']['meta']]);
                                     $item['templateRender'][] = [
-                                        'extension' => $item['config']['title'],
+                                        'extension' => $item['config']['title'] ?? '',
                                         'code' => $html
                                     ];
                                 }
