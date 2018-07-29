@@ -56,6 +56,7 @@
     <div v-if="activeComponentAssets.length" class="pl-content__section">
       <code-content v-for="asset in activeComponentAssets"
                     :file="asset"
+                    :prism-language="asset.extension"
                     :key="asset.relativePath"/>
     </div>
   </div>
@@ -90,11 +91,13 @@ export default {
           type: 'twig',
           getTemplate: true,
           file: this.activeTemplate,
+          prism: 'twig',
         },
         {
           type: 'rendered',
           getTemplate: false,
           file: this.activeComponentRender,
+          prism: 'html',
         },
       ];
     },

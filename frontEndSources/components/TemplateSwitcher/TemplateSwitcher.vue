@@ -16,6 +16,7 @@
       <code-content v-for="file in files" v-show="active === file.type"
                     :key="file.type"
                     :file="file.file" :get-template="file.getTemplate"
+                    :prism-language="file.prism"
                     :show-headline="false"
       />
     </div>
