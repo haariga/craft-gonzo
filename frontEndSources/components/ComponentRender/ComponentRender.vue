@@ -122,7 +122,7 @@ export default {
     frame() {
       const previewUrl = './patternlib';
       return {
-        src: `${previewUrl}${this.activeTemplate.relativePath}?variant=${this.selectedVariant}`,
+        src: `${previewUrl}${this.activeTemplate.relativePath}/variant/${this.selectedVariant}`,
       };
     },
   },

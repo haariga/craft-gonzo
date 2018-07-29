@@ -249,15 +249,26 @@
          * @param array $variables
          * @return \yii\web\Response
          */
-        public function actionTemplateRender(string $component)
+        public function actionTemplateRender(string $component, string $variant)
         {
+
+            if (!$component) {
+                return 'Kein Template gefunden.';
+            } elseif (!$variant) {
+                return 'Keine Variante gefunden.';
+            }
+
             $variables = [];
             $pathinfo = pathinfo($component);
             $modulePath = $this->templatesPath . '/' . $pathinfo['dirname'];
             $config = $this->getConfig($modulePath);
-            $variantQueryString = Craft::$app->getRequest()->getParam('variant') ? Craft::$app->getRequest()->getParam('variant') :  $config['meta']['key'];
+            $variantQueryString = $variant;
             $variables['component'] = $component;
-            $variables['templateOptions'] = $config['variants'][$variantQueryString];
+            $variables['templateOptions'] = $config['variants'][$variantQueryString] ?? '';
+
+            if (!$variables['templateOptions']) {
+                return 'Keine Config gefunden';
+            }
 
             return $this->renderTemplate('patternlib/index', $variables);
         }
