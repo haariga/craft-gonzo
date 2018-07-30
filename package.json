@@ -3,12 +3,8 @@
     "dev": "webpack-dev-server --env.development --mode=development --config=webpack/webpack.config.babel.js",
     "webpack": "webpack --config=webpack/webpack.config.babel.js --env.development --mode=development",
     "production": "webpack --hide-modules --config=webpack/webpack.config.babel.js --env.production --mode=production",
-    "webpack:analyze": "webpack-bundle-analyzer webpack/stats.json src/assetbundles/gonzo/dist/"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run production"
-    }
+    "webpack:analyze": "webpack-bundle-analyzer webpack/stats.json src/assetbundles/gonzo/dist/",
+    "precommit": "npm run production"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.54",
