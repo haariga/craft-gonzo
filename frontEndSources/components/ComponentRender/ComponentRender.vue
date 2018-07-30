@@ -44,7 +44,7 @@
             @change="switchVariant($event)">
       <!-- eslint-disable vue/no-unused-vars -->
       <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
-              v-text="variant"/>
+              v-text="values.title"/>
     </select>
     
     <hr class="pl-hr">
@@ -115,6 +115,9 @@ export default {
     },
     activeVariants() {
       return this.$store.getters.activeComponentVariants;
+    },
+    activeVariant() {
+      return this.activeVariants[this.selectedVariant];
     },
     mqButtons() {
       return this.$store.getters.mqButtons;
