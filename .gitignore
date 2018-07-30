@@ -33,3 +33,4 @@ prepros-6.config
 .history/
 /.php_cs.cache
 /webpack/stats.json
+/.vs

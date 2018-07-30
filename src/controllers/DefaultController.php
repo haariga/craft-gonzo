@@ -53,7 +53,7 @@
          *         The actions must be in 'kebab-case'
          * @access protected
          */
-        protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content'];
+        protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content', 'get-file-render'];
 
         // Public Methods
         // =========================================================================
@@ -253,13 +253,26 @@
          * @param array $variables
          * @return \yii\web\Response
          */
-        public function actionTemplateRender(string $component)
+        public function actionTemplateRender(string $component, string $variant)
         {
+
+            if (!$component) {
+                return 'Kein Template gefunden.';
+            } elseif (!$variant) {
+                return 'Keine Variante gefunden.';
+            }
+
             $variables = [];
             $pathinfo = pathinfo($component);
             $modulePath = $this->templatesPath . '/' . $pathinfo['dirname'];
+            $config = $this->getConfig($modulePath);
+            $variantQueryString = $variant;
             $variables['component'] = $component;
-            $variables['templateOptions'] = $this->getConfig($modulePath);
+            $variables['templateOptions'] = $config['variants'][$variantQueryString] ?? '';
+
+            if (!$variables['templateOptions']) {
+                return 'Keine Config gefunden';
+            }
 
             return $this->renderTemplate('patternlib/index', $variables);
         }
@@ -277,5 +290,18 @@
             $modulePath = $this->templatesPath . '/' . $file;
             $fileContents = file_get_contents($modulePath);
             return $fileContents;
+        }
+
+        public function actionGetFileRender()
+        {
+            $this->requirePostRequest();
+
+            $data = Craft::$app->getRequest()->post();
+
+            $options = json_decode($data['meta'], true);
+
+            $html = $this->renderTemplate($data['file'], ['opt' => $options]);
+
+            return $html;
         }
     }

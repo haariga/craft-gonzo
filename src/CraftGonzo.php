@@ -80,7 +80,8 @@
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['patternlib'] = 'craft-gonzo/default/template-index';
                 $event->rules['patternlib/getfilecontent/<file:\S+>'] = 'craft-gonzo/default/get-file-content';
-                $event->rules['patternlib/<component:\S+>'] = 'craft-gonzo/default/template-render';
+                $event->rules['patternlib/getfilerender'] = 'craft-gonzo/default/get-file-render';
+                $event->rules['patternlib/<component:.+?>/variant/<variant:[^\/]+$>/'] = 'craft-gonzo/default/template-render';
             }
         );
 
