@@ -37,18 +37,22 @@
         </transition>
       </div>
     </div>
-    
+
     Varianten:
-  
+
     <select id="variants" v-model="selectedVariant" name="variants"
             @change="switchVariant($event)">
       <!-- eslint-disable vue/no-unused-vars -->
       <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
               v-text="values.title"/>
     </select>
-    
-    <hr class="pl-hr">
-    
+
+    <div>{{ activeVariant.title }}</div>
+    <p>{{ activeVariant.description }}</p>
+    <p>{{ activeVariant.status }}</p>
+
+    <hr class="pl-hr" style="margin-bottom: 32px;">
+
     <TemplateSwitcher :files="templateSwitcher" />
 
     <hr class="pl-hr">
