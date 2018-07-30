@@ -38,6 +38,17 @@
       </div>
     </div>
     
+    Varianten:
+  
+    <select id="variants" v-model="selectedVariant" name="variants"
+            @change="switchVariant($event)">
+      <!-- eslint-disable vue/no-unused-vars -->
+      <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
+              v-text="variant"/>
+    </select>
+    
+    <hr class="pl-hr">
+    
     <TemplateSwitcher :files="templateSwitcher" />
 
     <hr class="pl-hr">
@@ -45,13 +56,14 @@
     <div v-if="activeComponentAssets.length" class="pl-content__section">
       <code-content v-for="asset in activeComponentAssets"
                     :file="asset"
+                    :prism-language="asset.extension"
                     :key="asset.relativePath"/>
     </div>
   </div>
 </template>
 
 <script>
-import TemplateSwitcher from 'Modules/TemplateSwitcher/TemplateSwitcher';
+import TemplateSwitcher from '../TemplateSwitcher/TemplateSwitcher';
 import CodeContent from '../CodeContent/CodeContent';
 
 export default {
@@ -59,6 +71,7 @@ export default {
   components: { TemplateSwitcher, CodeContent },
   data() {
     return {
+      selectedVariant: '',
       buttonActive: false,
       sidebar: false,
       activeWidth: 'none',
@@ -78,11 +91,13 @@ export default {
           type: 'twig',
           getTemplate: true,
           file: this.activeTemplate,
+          prism: 'twig',
         },
         {
           type: 'rendered',
           getTemplate: false,
           file: this.activeComponentRender,
+          prism: 'html',
         },
       ];
     },
@@ -98,19 +113,40 @@ export default {
     activeComponentRender() {
       return this.$store.getters.activeComponentRender;
     },
+    activeVariants() {
+      return this.$store.getters.activeComponentVariants;
+    },
     mqButtons() {
       return this.$store.getters.mqButtons;
     },
     frame() {
       const previewUrl = './patternlib';
       return {
-        src: previewUrl + this.activeTemplate.relativePath,
+        src: `${previewUrl}${this.activeTemplate.relativePath}/variant/${this.selectedVariant}`,
       };
+    },
+  },
+  watch: {
+    activeVariants(newValue) {
+      // eslint-disable-next-line
+      this.selectedVariant = Object.keys(newValue)[0];
     },
   },
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
+    },
+    switchVariant(e) {
+      const formData = new FormData();
+
+      console.log(this.activeVariants[e.target.value]);
+
+      formData.append('file', this.activeTemplate.relativePath);
+      formData.append('meta', JSON.stringify(this.activeVariants[e.target.value]));
+
+      window.axios.post('patternlib/getfilerender/', formData).then(({ data }) => {
+        this.$store.commit('SET_TEMPLATERENDER', data);
+      });
     },
     iFrameWidth(width) {
       let widthNumber = width.replace('px', '');
