@@ -172,14 +172,18 @@
                             }
                             return $item;
                         });
-                    $dirs[$item->getFilename()]['children'] = $arr->values()->all();
+                    $dirs[$item->getFilename()]['children'] = $arr->sortBy(function ($item, $key) {
+                        return $item['name'];
+                    })->values()->all();
                 }
             }
 
             $collection = new Collection($dirs);
             $collection = $collection->filter(function ($item) {
                 return count($item['children']);
-            })->sort()->reverse();
+            })->sortBy(function ($item, $key) {
+                return $key;
+            });
 
             return $collection->map(function ($item, $key) {
                 return [
