@@ -1,6 +1,27 @@
 <template>
   <div class="pl-content">
     <div class="pl-content__section">
+      <div class="pl-content__examples">
+        <div class="pl-content__examplesText">
+          Beispiele:
+        </div>
+        <select id="variants"
+                v-model="selectedVariant"
+                class="pl-content__examplesDropdown"
+                name="variants"
+                @change="switchVariant($event)">
+          <!-- eslint-disable vue/no-unused-vars -->
+          <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
+                  v-text="values.title"/>
+        </select>
+        <div class="pl-content__examplesArrow" />
+      </div>
+
+      <p>{{ activeVariant.description }}</p>
+      <p>{{ activeVariant.status }}</p>
+    </div>
+
+    <div class="pl-content__section">
       <div class="pl-content__container  pl-content__container--iframeActions">
         <div class="pl-buttonGroup  pl-buttonGroup--pill">
           <button v-for="width in mqButtons"
@@ -38,18 +59,9 @@
       </div>
     </div>
 
-    Varianten:
 
-    <select id="variants" v-model="selectedVariant" name="variants"
-            @change="switchVariant($event)">
-      <!-- eslint-disable vue/no-unused-vars -->
-      <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
-              v-text="values.title"/>
-    </select>
 
-    <div>{{ activeVariant.title }}</div>
-    <p>{{ activeVariant.description }}</p>
-    <p>{{ activeVariant.status }}</p>
+
 
     <hr class="pl-hr" style="margin-bottom: 32px;">
 
