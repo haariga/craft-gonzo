@@ -151,8 +151,7 @@ export default {
   },
   watch: {
     activeVariants(newValue) {
-      // eslint-disable-next-line
-      this.selectedVariant = Object.keys(newValue)[0];
+      [this.selectedVariant] = Object.keys(newValue);
     },
   },
   created() {
