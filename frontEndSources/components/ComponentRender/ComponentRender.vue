@@ -7,6 +7,7 @@
         </div>
         <select id="variants"
                 v-model="selectedVariant"
+                :disabled="getVariantsLength <= 1"
                 class="pl-content__examplesDropdown"
                 name="variants"
                 @change="switchVariant($event)">
@@ -116,6 +117,9 @@ export default {
           prism: 'html',
         },
       ];
+    },
+    getVariantsLength() {
+      return Object.keys(this.activeVariants).length;
     },
     activeTemplate() {
       return this.$store.getters.activeTemplate;
