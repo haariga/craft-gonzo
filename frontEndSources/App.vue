@@ -66,18 +66,22 @@ export default {
       return this.$store.getters.filelist;
     },
   },
-  mounted() {
+  created() {
     this.$store.dispatch('setPluginSettings', window.pluginSettings);
 
     this.$store.dispatch('setFilelist', window.filelist).then(() => {
+      let activeComponent;
       const templateParameter = getParameterByName('template');
+      const flattendFilelist = flatten(this.filelist.map(item => item.children));
+
       if (templateParameter) {
-        const flattendFilelist = flatten(this.filelist.map(item => item.children));
-        const activeComponent = flattendFilelist.find(
+        activeComponent = flattendFilelist.find(
           component => component.config.meta.path === templateParameter,
         );
-        this.$store.dispatch('setActive', activeComponent);
+      } else {
+        [activeComponent] = flattendFilelist;
       }
+      this.$store.dispatch('setActive', activeComponent);
     });
   },
 };
