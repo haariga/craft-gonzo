@@ -155,6 +155,9 @@ export default {
       this.selectedVariant = Object.keys(newValue)[0];
     },
   },
+  created() {
+    [this.selectedVariant] = Object.keys(this.activeVariants);
+  },
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
