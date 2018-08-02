@@ -15,5 +15,6 @@ export default {
       `?template=${component.config.meta.path}`,
     );
     commit('SET_ACTIVE', component);
+    commit('SET_LOADING_STATUS', true);
   },
 };

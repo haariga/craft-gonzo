@@ -26,7 +26,10 @@
         </nav>
       </header>
       <div class="pl-main__inner">
-        <PreviewArea/>
+        <PreviewArea v-if="applicationLoaded"/>
+        <div v-else>
+          Loading Component.
+        </div>
       </div>
       
       <div class="pl-main__footer">
@@ -56,6 +59,9 @@ export default {
     };
   },
   computed: {
+    applicationLoaded() {
+      return this.$store.state.applicationLoaded;
+    },
     filelist() {
       return this.$store.getters.filelist;
     },
