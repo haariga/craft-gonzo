@@ -161,6 +161,11 @@ export default {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
     },
+    getRenderedFile(formData) {
+      window.axios.post('patternlib/getfilerender/', formData).then(({ data }) => {
+        this.$store.commit('SET_TEMPLATERENDER', data);
+      });
+    },
     switchVariant(e) {
       const formData = new FormData();
 
@@ -169,9 +174,7 @@ export default {
       formData.append('file', this.activeTemplate.relativePath);
       formData.append('meta', JSON.stringify(this.activeVariants[e.target.value]));
 
-      window.axios.post('patternlib/getfilerender/', formData).then(({ data }) => {
-        this.$store.commit('SET_TEMPLATERENDER', data);
-      });
+      this.getRenderedFile(formData);
     },
     iFrameWidth(width) {
       let widthNumber = width.replace('px', '');
