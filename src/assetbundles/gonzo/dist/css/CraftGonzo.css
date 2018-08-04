@@ -1424,6 +1424,66 @@ h6,
         overflow: scroll;
         background-color: #1a1a1a;
         color: #999999; }
+  .pl-content__examples {
+    margin-top: 32px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative; }
+    @media screen and (min-width: 320px) {
+      .pl-content__examples {
+        margin-top: calc(32px + 32 * (100vw - 320px) / (1120)); } }
+    @media screen and (min-width: 1440px) {
+      .pl-content__examples {
+        margin-top: 64px; } }
+  .pl-content__examplesText {
+    font-size: 16px;
+    width: 120px;
+    flex: 0 1 auto; }
+    @media (min-width: 320px) and (max-width: 1440px) {
+      .pl-content__examplesText {
+        font-size: calc( 16px + 3 * ( ( 100vw - 320px) / 1120 )); } }
+    @media (min-width: 1440px) {
+      .pl-content__examplesText {
+        font-size: 19px; } }
+  .pl-content__examplesDropdown {
+    display: inline-block;
+    width: calc(100% - 120px);
+    flex: 1 1 auto;
+    -webkit-appearance: none;
+    cursor: pointer;
+    height: 48px;
+    font-size: 16px;
+    padding: 0 16px;
+    border: 1px solid #dae3ea;
+    border-radius: 5px;
+    line-height: 48px;
+    background-color: #fff;
+    transition: all 0.125s ease-in-out;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05); }
+    @media (min-width: 320px) and (max-width: 1440px) {
+      .pl-content__examplesDropdown {
+        font-size: calc( 16px + 3 * ( ( 100vw - 320px) / 1120 )); } }
+    @media (min-width: 1440px) {
+      .pl-content__examplesDropdown {
+        font-size: 19px; } }
+    .pl-content__examplesDropdown:focus, .pl-content__examplesDropdown:hover {
+      outline: none;
+      border-color: transparent;
+      box-shadow: inset 0 0 0 2px #3E4145; }
+    .pl-content__examplesDropdown + .pl-content__examplesArrow {
+      width: 16px;
+      height: 16px;
+      border-radius: 16px;
+      background-color: #3E4145;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(-16px, -50%);
+      z-index: 100; }
 
 /*
  |--------------------------------------------------------------------------

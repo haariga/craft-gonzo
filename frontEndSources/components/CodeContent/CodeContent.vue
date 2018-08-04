@@ -14,6 +14,7 @@
 
 <script>
 import Prism from '../../plugins/prism'; // eslint-disable-line
+// import '../../plugins/prism-normalize-whitespace';  // eslint-disable-line
 
 export default {
   name: 'CodeContent',

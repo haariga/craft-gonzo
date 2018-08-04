@@ -6,6 +6,7 @@
 
 
 .pl-content {
+  $root: &;
   position: relative;
 
   &__section {
@@ -76,6 +77,90 @@
         // max-height: none;
         background-color: c('black', '90');
         color: c('black', '40');
+      }
+    }
+  }
+
+
+  &__examples {
+    @include make-vr(2);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+  }
+
+  &__examplesText {
+    @include ms-respond('font-size', 0);
+    width: 120px;
+    flex: 0 1 auto;
+  }
+
+  &__examplesDropdown {
+    display: inline-block;
+    width: calc(100% - 120px);
+    flex: 1 1 auto;
+    -webkit-appearance: none;
+    cursor: pointer;
+    height: s(6);
+    @include ms-respond('font-size', 0);
+    padding: 0 s(2);
+    border: 1px solid c('blue', 'light');
+    border-radius: 5px;
+    line-height: s(6);
+    color: c('black', 'dark');
+    background-color: c('white');
+    transition: all 0.125s ease-in-out;
+    box-shadow: inset 0 1px 5px rgba(c('black'), 0.05);
+
+    &:focus,
+    &:hover {
+      outline: none;
+      border-color: transparent;
+      box-shadow: inset 0 0 0 2px c('blue', 'dark');
+    }
+
+    + #{$root}__examplesArrow {
+      width: s(6);
+      height: s(6);
+      border-radius: s(6);
+      position: absolute;
+      right: s(-2);
+      top: 50%;
+      transform: translate(-16px, -50%) rotate(45deg);
+      z-index: 100;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 2px;
+        height: 12px;
+        background-color: c('blue', 'dark');
+      }
+
+      &::before {
+        transform-origin: bottom right;
+        transform: rotate(-90deg) translate(-20px, 21px);
+      }
+
+      &::after {
+        transform: translate(22px, 21px);
+      }
+    }
+
+    &:disabled {
+      box-shadow: inset 0 1px 5px rgba(c('black'), 0.05);
+      border: 1px solid c('blue', 'light');
+      cursor: not-allowed;
+      color: c('black', '15');
+
+      + #{$root}__examplesArrow {
+        opacity: 0.25;
       }
     }
   }
