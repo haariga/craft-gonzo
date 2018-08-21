@@ -12,7 +12,7 @@
   
   <% if(htmlWebpackPlugin.options.environment === 'production') { %>
     <% for (var css in htmlWebpackPlugin.files.css) { %>
-      <link href="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+      <link href="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.css[css].path %>" rel="stylesheet">
     <% } %>
   <% } %>
 </head>
@@ -34,8 +34,8 @@ Hello from the Plugin patternlib!#}
 {# for dev, needs webpack-dev-server running #}
 
 <% if(htmlWebpackPlugin.options.environment === 'production') { %>
-  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-    <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% for (var chunk in htmlWebpackPlugin.files.js) { %>
+    <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.js[chunk].path %>"></script>
   <% } %>
 <% } else { %>
   <% if (htmlWebpackPlugin.options.devServer) { %>
