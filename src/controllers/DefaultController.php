@@ -53,7 +53,7 @@
          *         The actions must be in 'kebab-case'
          * @access protected
          */
-        protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content'];
+        protected $allowAnonymous = ['template-index', 'template-render', 'get-file-content', 'get-file-render'];
 
         // Public Methods
         // =========================================================================
@@ -75,7 +75,7 @@
                 'vue',
                 'html'
             ];
-            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'opt';
+            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'meta';
         }
 
         /**
@@ -163,23 +163,27 @@
                         })->map(function ($item) {
                             if (isset($item['templates']) && isset($item['config'])) {
                                 foreach ($item['templates'] as $template) {
-                                    $html = Craft::$app->view->renderTemplate($template['relativePath'], ['opt' => $item['config']['opt']]);
+                                    $html = Craft::$app->view->renderTemplate($template['relativePath'], ['meta' => $item['config']['meta']]);
                                     $item['templateRender'][] = [
-                                        'extension' => $item['config']['title'],
+                                        'extension' => $item['config']['title'] ?? '',
                                         'code' => $html
                                     ];
                                 }
                             }
                             return $item;
                         });
-                    $dirs[$item->getFilename()]['children'] = $arr->values()->all();
+                    $dirs[$item->getFilename()]['children'] = $arr->sortBy(function ($item, $key) {
+                        return $item['name'];
+                    })->values()->all();
                 }
             }
 
             $collection = new Collection($dirs);
             $collection = $collection->filter(function ($item) {
                 return count($item['children']);
-            })->sort()->reverse();
+            })->sortBy(function ($item, $key) {
+                return $key;
+            });
 
             return $collection->map(function ($item, $key) {
                 return [
@@ -187,6 +191,19 @@
                     'children' => $item['children']
                 ];
             })->values()->all();
+        }
+
+        public function array_merge_recursive_distinct(array &$array1, array &$array2)
+        {
+            $merged = $array1;
+            foreach ($array2 as $key => &$value) {
+                if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+                    $merged[$key] = $this->array_merge_recursive_distinct($merged[$key], $value);
+                } else {
+                    $merged[$key] = $value;
+                }
+            }
+            return $merged;
         }
 
         public function getConfig(string $path)
@@ -204,8 +221,11 @@
                 if (pathinfo($config, PATHINFO_EXTENSION) === 'php') {
                     $opt = include $config;
                     if (isset($opt)) {
-                        $mergedOptions[$this->optionsKey] = array_merge($options[$this->optionsKey], $opt);
-                        $mergedOptions = $options->merge($mergedOptions);
+                        $collectedOptions = collect($opt);
+                        $array1 = $options->toArray();
+                        $array2 = $collectedOptions->toArray();
+                        $mergedOptions = $this->array_merge_recursive_distinct($array1, $array2);
+                        $mergedOptions = collect($mergedOptions);
                     }
                 }
             }
@@ -233,13 +253,26 @@
          * @param array $variables
          * @return \yii\web\Response
          */
-        public function actionTemplateRender(string $component)
+        public function actionTemplateRender(string $component, string $variant)
         {
+
+            if (!$component) {
+                return 'Kein Template gefunden.';
+            } elseif (!$variant) {
+                return 'Keine Variante gefunden.';
+            }
+
             $variables = [];
             $pathinfo = pathinfo($component);
             $modulePath = $this->templatesPath . '/' . $pathinfo['dirname'];
+            $config = $this->getConfig($modulePath);
+            $variantQueryString = $variant;
             $variables['component'] = $component;
-            $variables['templateOptions'] = $this->getConfig($modulePath);
+            $variables['templateOptions'] = $config['variants'][$variantQueryString] ?? '';
+
+            if (!$variables['templateOptions']) {
+                return 'Keine Config gefunden';
+            }
 
             return $this->renderTemplate('patternlib/index', $variables);
         }
@@ -257,5 +290,18 @@
             $modulePath = $this->templatesPath . '/' . $file;
             $fileContents = file_get_contents($modulePath);
             return $fileContents;
+        }
+
+        public function actionGetFileRender()
+        {
+            $this->requirePostRequest();
+
+            $data = Craft::$app->getRequest()->post();
+
+            $options = json_decode($data['meta'], true);
+
+            $html = $this->renderTemplate($data['file'], ['opt' => $options]);
+
+            return $html;
         }
     }

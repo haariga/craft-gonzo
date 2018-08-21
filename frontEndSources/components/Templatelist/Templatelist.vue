@@ -4,7 +4,8 @@
        href="#"
        class="pl-files__listItemLink  ms-res--1"
        @click.prevent="selectActiveModule(node)">
-      {{ node.config.title }}
+      <!-- TODO: Fix this if configs are all new -->
+      {{ node.config.meta.title || node.config.title }}
     </a>
   </li>
 </template>

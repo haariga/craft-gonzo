@@ -11,6 +11,7 @@
  */
 
 import '@babel/polyfill'; // eslint-disable-line
+import './plugins/prism'; // eslint-disable-line
 
 import Vue from 'vue';
 import axios from 'axios';

@@ -1,6 +1,28 @@
 <template>
   <div class="pl-content">
     <div class="pl-content__section">
+      <div class="pl-content__examples">
+        <div class="pl-content__examplesText">
+          Beispiele:
+        </div>
+        <select id="variants"
+                v-model="selectedVariant"
+                :disabled="getVariantsLength <= 1"
+                class="pl-content__examplesDropdown"
+                name="variants"
+                @change="switchVariant($event)">
+          <!-- eslint-disable vue/no-unused-vars -->
+          <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
+                  v-text="values.title"/>
+        </select>
+        <div class="pl-content__examplesArrow" />
+      </div>
+
+      <VariantMeta :active-variant="activeVariant" :status="status" />
+
+    </div>
+
+    <div class="pl-content__section">
       <div class="pl-content__container  pl-content__container--iframeActions">
         <div class="pl-buttonGroup  pl-buttonGroup--pill">
           <button v-for="width in mqButtons"
@@ -15,8 +37,7 @@
       </div>
       <div :class="{'pl-content__container--loaded': iFrame.loaded}" class="pl-content__container  pl-content__container--iframe">
         <transition name="fade">
-          <iframe v-if="activeTemplate.relativePath"
-                  v-show="iFrame.loaded"
+          <iframe v-show="activeTemplate.relativePath && iFrame.loaded"
                   ref="iframe"
                   :style="{ 'max-width': iFrame.width }"
                   :src="frame.src"
@@ -30,34 +51,38 @@
                   frameborder="0"
                   @load="iFrameSize"
           />
-          <div v-else>
+        </transition>
+        <transition name="fade">
+          <div v-show="!activeTemplate.relativePath && iFrame.loaded">
             Please choose a component
           </div>
         </transition>
       </div>
     </div>
+    <TemplateSwitcher :files="templateSwitcher" />
 
-    <!-- TODO: #43 Tabs einbauen Template Code / Rendered Code und dazu Copy Code => siehe Polaris -->
-    <code-content :file="activeComponentRender" :get-template="false" />
-
-    <hr class="pl-hr">
 
     <div v-if="activeComponentAssets.length" class="pl-content__section">
       <code-content v-for="asset in activeComponentAssets"
                     :file="asset"
+                    :prism-language="asset.extension"
                     :key="asset.relativePath"/>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import VariantMeta from './VariantMeta';
+import TemplateSwitcher from '../TemplateSwitcher/TemplateSwitcher';
 import CodeContent from '../CodeContent/CodeContent';
 
 export default {
   name: 'ComponentRender',
-  components: { CodeContent },
+  components: { TemplateSwitcher, CodeContent, VariantMeta },
   data() {
     return {
+      selectedVariant: '',
       buttonActive: false,
       sidebar: false,
       activeWidth: 'none',
@@ -71,6 +96,31 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      infos: 'activeInfos',
+    }),
+    templateSwitcher() {
+      return [
+        {
+          type: 'twig',
+          getTemplate: true,
+          file: this.activeTemplate,
+          prism: 'twig',
+        },
+        {
+          type: 'rendered',
+          getTemplate: false,
+          file: this.activeComponentRender,
+          prism: 'html',
+        },
+      ];
+    },
+    status() {
+      return this.$store.getters.compStatus(this.infos.status);
+    },
+    getVariantsLength() {
+      return Object.keys(this.activeVariants).length;
+    },
     activeTemplate() {
       return this.$store.getters.activeTemplate;
     },
@@ -78,10 +128,16 @@ export default {
       return this.$store.getters.activeComponent;
     },
     activeComponentAssets() {
-      return [...[this.activeTemplate], ...this.$store.getters.activeComponentAssets];
+      return this.$store.getters.activeComponentAssets;
     },
     activeComponentRender() {
       return this.$store.getters.activeComponentRender;
+    },
+    activeVariants() {
+      return this.$store.getters.activeComponentVariants;
+    },
+    activeVariant() {
+      return this.activeVariants[this.selectedVariant];
     },
     mqButtons() {
       return this.$store.getters.mqButtons;
@@ -89,13 +145,36 @@ export default {
     frame() {
       const previewUrl = './patternlib';
       return {
-        src: previewUrl + this.activeTemplate.relativePath,
+        src: `${previewUrl}${this.activeTemplate.relativePath}/variant/${this.selectedVariant}`,
       };
     },
+  },
+  watch: {
+    activeVariants(newValue) {
+      [this.selectedVariant] = Object.keys(newValue);
+    },
+  },
+  created() {
+    [this.selectedVariant] = Object.keys(this.activeVariants);
   },
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
+    },
+    getRenderedFile(formData) {
+      window.axios.post('patternlib/getfilerender/', formData).then(({ data }) => {
+        this.$store.commit('SET_TEMPLATERENDER', data);
+      });
+    },
+    switchVariant(e) {
+      const formData = new FormData();
+
+      console.log(this.activeVariants[e.target.value]);
+
+      formData.append('file', this.activeTemplate.relativePath);
+      formData.append('meta', JSON.stringify(this.activeVariants[e.target.value]));
+
+      this.getRenderedFile(formData);
     },
     iFrameWidth(width) {
       let widthNumber = width.replace('px', '');

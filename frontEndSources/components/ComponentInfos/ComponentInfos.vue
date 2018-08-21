@@ -26,7 +26,7 @@ export default {
   name: 'ComponentInfos',
   computed: {
     ...mapGetters({
-      infos: 'activeComponent',
+      infos: 'activeInfos',
     }),
     status() {
       return this.$store.getters.compStatus(this.infos.status);
