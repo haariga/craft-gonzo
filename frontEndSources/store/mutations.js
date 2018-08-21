@@ -1,4 +1,7 @@
 export default {
+  SET_LOADING_STATUS(state, status) {
+    state.applicationLoaded = status;
+  },
   SET_FILELIST(state, filelist) {
     state.filelist = filelist;
   },

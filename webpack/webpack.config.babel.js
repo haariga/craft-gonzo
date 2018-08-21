@@ -31,6 +31,10 @@ const webpackConfig = (env = {}) => {
       ? [
           {
             loader: 'sass-loader',
+              options: {
+                  includePaths: [absPath('frontEndSources/scss/')],
+                  data: "@import 'settings.variables';\n" + "@import 'tools.functions'; \n" + "@import 'tools.mixins';",
+              }
           },
         ]
       : [];

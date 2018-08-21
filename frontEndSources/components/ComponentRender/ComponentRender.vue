@@ -1,6 +1,28 @@
 <template>
   <div class="pl-content">
     <div class="pl-content__section">
+      <div class="pl-content__examples">
+        <div class="pl-content__examplesText">
+          Beispiele:
+        </div>
+        <select id="variants"
+                v-model="selectedVariant"
+                :disabled="getVariantsLength <= 1"
+                class="pl-content__examplesDropdown"
+                name="variants"
+                @change="switchVariant($event)">
+          <!-- eslint-disable vue/no-unused-vars -->
+          <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
+                  v-text="values.title"/>
+        </select>
+        <div class="pl-content__examplesArrow" />
+      </div>
+
+      <VariantMeta :active-variant="activeVariant" :status="status" />
+
+    </div>
+
+    <div class="pl-content__section">
       <div class="pl-content__container  pl-content__container--iframeActions">
         <div class="pl-buttonGroup  pl-buttonGroup--pill">
           <button v-for="width in mqButtons"
@@ -37,21 +59,8 @@
         </transition>
       </div>
     </div>
-    
-    Varianten:
-  
-    <select id="variants" v-model="selectedVariant" name="variants"
-            @change="switchVariant($event)">
-      <!-- eslint-disable vue/no-unused-vars -->
-      <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
-              v-text="variant"/>
-    </select>
-    
-    <hr class="pl-hr">
-    
     <TemplateSwitcher :files="templateSwitcher" />
 
-    <hr class="pl-hr">
 
     <div v-if="activeComponentAssets.length" class="pl-content__section">
       <code-content v-for="asset in activeComponentAssets"
@@ -63,12 +72,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import VariantMeta from './VariantMeta';
 import TemplateSwitcher from '../TemplateSwitcher/TemplateSwitcher';
 import CodeContent from '../CodeContent/CodeContent';
 
 export default {
   name: 'ComponentRender',
-  components: { TemplateSwitcher, CodeContent },
+  components: { TemplateSwitcher, CodeContent, VariantMeta },
   data() {
     return {
       selectedVariant: '',
@@ -85,6 +96,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      infos: 'activeInfos',
+    }),
     templateSwitcher() {
       return [
         {
@@ -101,6 +115,12 @@ export default {
         },
       ];
     },
+    status() {
+      return this.$store.getters.compStatus(this.infos.status);
+    },
+    getVariantsLength() {
+      return Object.keys(this.activeVariants).length;
+    },
     activeTemplate() {
       return this.$store.getters.activeTemplate;
     },
@@ -116,6 +136,9 @@ export default {
     activeVariants() {
       return this.$store.getters.activeComponentVariants;
     },
+    activeVariant() {
+      return this.activeVariants[this.selectedVariant];
+    },
     mqButtons() {
       return this.$store.getters.mqButtons;
     },
@@ -128,13 +151,20 @@ export default {
   },
   watch: {
     activeVariants(newValue) {
-      // eslint-disable-next-line
-      this.selectedVariant = Object.keys(newValue)[0];
+      [this.selectedVariant] = Object.keys(newValue);
     },
+  },
+  created() {
+    [this.selectedVariant] = Object.keys(this.activeVariants);
   },
   methods: {
     toggleClass() {
       this.buttonActive = !this.buttonActive;
+    },
+    getRenderedFile(formData) {
+      window.axios.post('patternlib/getfilerender/', formData).then(({ data }) => {
+        this.$store.commit('SET_TEMPLATERENDER', data);
+      });
     },
     switchVariant(e) {
       const formData = new FormData();
@@ -144,9 +174,7 @@ export default {
       formData.append('file', this.activeTemplate.relativePath);
       formData.append('meta', JSON.stringify(this.activeVariants[e.target.value]));
 
-      window.axios.post('patternlib/getfilerender/', formData).then(({ data }) => {
-        this.$store.commit('SET_TEMPLATERENDER', data);
-      });
+      this.getRenderedFile(formData);
     },
     iFrameWidth(width) {
       let widthNumber = width.replace('px', '');

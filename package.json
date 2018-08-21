@@ -5,6 +5,11 @@
     "production": "webpack --hide-modules --config=webpack/webpack.config.babel.js --env.production --mode=production",
     "webpack:analyze": "webpack-bundle-analyzer webpack/stats.json src/assetbundles/gonzo/dist/"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run production"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.54",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.54",
@@ -31,6 +36,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^4.0.0-alpha",
+    "husky": "^1.0.0-rc.13",
     "node-sass": "^4.9.2",
     "prettier-eslint-cli": "^4.7.1",
     "prettier-stylelint": "^0.4.2",

@@ -40,13 +40,6 @@ export default {
       active: 'twig',
     };
   },
-  computed: {},
-  watch: {},
-  mounted() {
-    console.log(this.files);
-  },
-  created() {},
-  methods: {},
 };
 </script>
 
