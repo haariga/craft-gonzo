@@ -8,6 +8,7 @@
     <div :class="`${cn}__right`">
       <p>
         {{ variantData.description }}
+
       </p>
     </div>
   </div>
