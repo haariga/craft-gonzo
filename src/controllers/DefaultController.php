@@ -75,7 +75,7 @@
                 'vue',
                 'html'
             ];
-            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'meta';
+            $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'opt';
         }
 
         /**
@@ -163,10 +163,16 @@
                         })->map(function ($item) {
                             if (isset($item['templates']) && isset($item['config'])) {
                                 foreach ($item['templates'] as $template) {
-                                    $html = Craft::$app->view->renderTemplate($template['relativePath'], ['meta' => $item['config']['meta']]);
+                                    if (isset($item['config']['variants']) && is_array($item['config']['variants'])) {
+                                        $html = Craft::$app->view->renderTemplate($template['relativePath'], [$this->optionsKey => reset($item['config']['variants'])]);
+//                                        $item['name'] === 'richText' ? dd(trim(preg_replace('/\s\s+/', '', $html))) : '';
+                                    } else {
+                                        $html = 'no options available';
+                                    }
+
                                     $item['templateRender'][] = [
                                         'extension' => $item['config']['title'] ?? '',
-                                        'code' => $html
+                                        'code' => !empty(trim($html)) ? trim($html) : 'no template code available',
                                     ];
                                 }
                             }
