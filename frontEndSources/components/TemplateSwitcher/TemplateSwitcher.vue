@@ -52,9 +52,8 @@ export default {
     background-color: #1a1a1a;
     padding: 32px;
     padding-bottom: 0;
-    margin-bottom: -37px;
     border-radius: 5px;
-    margin-bottom: s(-4);
+    margin-bottom: -40px;
     position: relative;
     z-index: 1000;
   }
