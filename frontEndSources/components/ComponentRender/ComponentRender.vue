@@ -1,9 +1,9 @@
 <template>
   <div class="pl-content">
     <div class="pl-content__section">
-      <div class="pl-content__examples">
+      <div v-if="getVariantsLength > 1" class="pl-content__examples" >
         <div class="pl-content__examplesText">
-          Beispiele:
+          Variants:
         </div>
         <select id="variants"
                 v-model="selectedVariant"
@@ -17,7 +17,6 @@
         </select>
         <div class="pl-content__examplesArrow" />
       </div>
-
       <VariantMeta :active-variant="activeVariant" :status="status" />
 
     </div>
