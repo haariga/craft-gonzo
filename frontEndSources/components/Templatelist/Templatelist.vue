@@ -1,5 +1,6 @@
 <template>
-  <li v-if="node !== 'undefined' && node.config !== 'undefined'" class="pl-files__listItem">
+  <!-- TODO: Fix this if configs are all new -->
+  <li v-if="node !== 'undefined' && node.config !== 'undefined' && node.config.meta.visible !== undefined ? node.config.meta.visible : true" class="pl-files__listItem">
     <a :class="classObject"
        href="#"
        class="pl-files__listItemLink  ms-res--1"
