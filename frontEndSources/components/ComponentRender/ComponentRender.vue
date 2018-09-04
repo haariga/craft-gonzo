@@ -1,61 +1,62 @@
 <template>
   <div class="pl-content">
-    <div class="pl-content__section">
-      <div v-if="getVariantsLength > 1" class="pl-content__examples" >
-        <div class="pl-content__examplesText">
-          Variants:
-        </div>
-        <select id="variants"
-                v-model="selectedVariant"
-                :disabled="getVariantsLength <= 1"
-                class="pl-content__examplesDropdown"
-                name="variants"
-                @change="switchVariant($event)">
-          <!-- eslint-disable vue/no-unused-vars -->
-          <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
-                  v-text="values.title"/>
-        </select>
-        <div class="pl-content__examplesArrow" />
-      </div>
-      <VariantMeta :active-variant="activeVariant" :status="status" />
-
-    </div>
-
-    <div class="pl-content__section">
-      <div class="pl-content__container  pl-content__container--iframeActions">
-        <div class="pl-buttonGroup  pl-buttonGroup--pill">
-          <button v-for="width in mqButtons"
-                  :class="{'pl-button--active': activeWidth === width}"
-                  :key="width"
-                  class="pl-button pl-button--pill"
-                  @click="iFrameWidth(width)"
-                  v-text="`${width}`"/>
-
-          <a :href="frame.src" class="pl-button pl-button--newWindow" target="_blank">Open in new tab</a>
-        </div>
-      </div>
-      <div :class="{'pl-content__container--loaded': iFrame.loaded}" class="pl-content__container  pl-content__container--iframe">
-        <transition name="fade">
-          <iframe v-show="activeTemplate.relativePath && iFrame.loaded"
-                  ref="iframe"
-                  :style="{ 'max-width': iFrame.width }"
-                  :src="frame.src"
-                  :height="iFrame.height"
-                  marginheight="0"
-                  marginwidth="0"
-                  vspace="0"
-                  hspace="0"
-                  scrolling="yes"
-                  name="patternlibRenderer"
-                  frameborder="0"
-                  @load="iFrameSize"
-          />
-        </transition>
-        <transition name="fade">
-          <div v-show="!activeTemplate.relativePath && iFrame.loaded">
-            Please choose a component
+    <div class="pl-content__component">
+      <div class="pl-content__section">
+        <div v-if="getVariantsLength > 1" class="pl-content__examples" >
+          <div class="pl-content__examplesText">
+            Variants:
           </div>
-        </transition>
+          <select id="variants"
+                  v-model="selectedVariant"
+                  :disabled="getVariantsLength <= 1"
+                  class="pl-content__examplesDropdown"
+                  name="variants"
+                  @change="switchVariant($event)">
+            <!-- eslint-disable vue/no-unused-vars -->
+            <option v-for="(values, variant) in activeVariants" :value="variant" :key="variant"
+                    v-text="values.title"/>
+          </select>
+          <div class="pl-content__examplesArrow" />
+        </div>
+        <VariantMeta :active-variant="activeVariant" :status="status" />
+
+      </div>
+      <div class="pl-content__section">
+        <div class="pl-content__container  pl-content__container--iframeActions">
+          <div class="pl-buttonGroup  pl-buttonGroup--pill">
+            <button v-for="width in mqButtons"
+                    :class="{'pl-button--active': activeWidth === width}"
+                    :key="width"
+                    class="pl-button pl-button--pill"
+                    @click="iFrameWidth(width)"
+                    v-text="`${width}`"/>
+
+            <a :href="frame.src" class="pl-button pl-button--newWindow" target="_blank">Open in new tab</a>
+          </div>
+        </div>
+        <div :class="{'pl-content__container--loaded': iFrame.loaded}" class="pl-content__container  pl-content__container--iframe">
+          <transition name="fade">
+            <iframe v-show="activeTemplate.relativePath && iFrame.loaded"
+                    ref="iframe"
+                    :style="{ 'max-width': iFrame.width }"
+                    :src="frame.src"
+                    :height="iFrame.height"
+                    marginheight="0"
+                    marginwidth="0"
+                    vspace="0"
+                    hspace="0"
+                    scrolling="yes"
+                    name="patternlibRenderer"
+                    frameborder="0"
+                    @load="iFrameSize"
+            />
+          </transition>
+          <transition name="fade">
+            <div v-show="!activeTemplate.relativePath && iFrame.loaded">
+              Please choose a component
+            </div>
+          </transition>
+        </div>
       </div>
     </div>
     <TemplateSwitcher :files="templateSwitcher" />
@@ -183,7 +184,7 @@ export default {
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
       if (width.includes('px')) {
-        this.$set(this.iFrame, 'width', `${widthNumber + 64}px`);
+        this.$set(this.iFrame, 'width', `${widthNumber}px`);
       } else {
         this.$set(this.iFrame, 'width', 'none');
       }
