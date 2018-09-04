@@ -2384,7 +2384,7 @@ html {
   color: #3E4145;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background-color: #dae3ea; }
+  background-color: #f2f2f2; }
 
 *,
 *::before,
@@ -2956,6 +2956,47 @@ h6,
  */
 .pl-content {
   position: relative; }
+  .pl-content__component {
+    position: relative;
+    padding-top: 16px;
+    padding-bottom: 32px;
+    margin-bottom: 32px; }
+    @media screen and (min-width: 320px) {
+      .pl-content__component {
+        padding-top: calc(16px + 16 * (100vw - 320px) / (1120)); } }
+    @media screen and (min-width: 1440px) {
+      .pl-content__component {
+        padding-top: 32px; } }
+    @media screen and (min-width: 320px) {
+      .pl-content__component {
+        padding-bottom: calc(32px + 32 * (100vw - 320px) / (1120)); } }
+    @media screen and (min-width: 1440px) {
+      .pl-content__component {
+        padding-bottom: 64px; } }
+    @media screen and (min-width: 320px) {
+      .pl-content__component {
+        margin-bottom: calc(32px + 32 * (100vw - 320px) / (1120)); } }
+    @media screen and (min-width: 1440px) {
+      .pl-content__component {
+        margin-bottom: 64px; } }
+    .pl-content__component::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -48px;
+      right: -48px;
+      background-color: #f1f4f7;
+      border-top: 2px solid #e7edf1;
+      border-bottom: 2px solid #e7edf1; }
+      @media screen and (min-width: 320px) {
+        .pl-content__component::before {
+          left: calc(-48px + -48 * (100vw - 320px) / (1120));
+          right: calc(-48px + -48 * (100vw - 320px) / (1120)); } }
+      @media screen and (min-width: 1440px) {
+        .pl-content__component::before {
+          left: -96px;
+          right: -96px; } }
   .pl-content__section {
     padding-top: 0;
     padding-bottom: 16px; }
@@ -2974,7 +3015,9 @@ h6,
       .pl-content__container {
         margin-top: 32px; } }
   .pl-content__container--iframeActions {
-    margin-bottom: -16px; }
+    margin-bottom: -16px;
+    position: relative;
+    z-index: 10; }
     @media screen and (min-width: 320px) {
       .pl-content__container--iframeActions {
         margin-bottom: calc(-16px + -16 * (100vw - 320px) / (1120)); } }
@@ -2992,18 +3035,19 @@ h6,
       top: 16px;
       bottom: 6px;
       right: 0;
-      background-color: #fdfdfd;
-      z-index: 10; }
+      z-index: 10;
+      border-radius: 5px;
+      background-color: #eaeff3; }
     .pl-content__container--iframe iframe {
       margin-top: 16px;
       width: 100%;
       min-height: 400px;
       max-width: 100%;
-      background-color: #f8f8f8;
-      border-radius: 5px;
-      padding: 32px;
       position: relative;
-      z-index: 100; }
+      z-index: 100;
+      border-radius: 5px;
+      padding: 8px;
+      border: 3px solid #fff; }
   .pl-content__container--loaded iframe {
     min-height: 0; }
   .pl-content__container--code {
@@ -3056,12 +3100,12 @@ h6,
     height: 48px;
     font-size: 16px;
     padding: 0 16px;
-    border: 1px solid #dae3ea;
+    border-color: transparent;
     border-radius: 5px;
     line-height: 48px;
     background-color: #fff;
     transition: all 0.125s ease-in-out;
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05); }
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05), 0 0 0 1px #dae3ea; }
     @media (min-width: 320px) and (max-width: 1440px) {
       .pl-content__examplesDropdown {
         font-size: calc( 16px + 3 * ( ( 100vw - 320px) / 1120 )); } }
@@ -3071,7 +3115,7 @@ h6,
     .pl-content__examplesDropdown:focus, .pl-content__examplesDropdown:hover {
       outline: none;
       border-color: transparent;
-      box-shadow: inset 0 0 0 2px #3E4145; }
+      box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05), 0 0 0 3px #cdd9e3; }
     .pl-content__examplesDropdown + .pl-content__examplesArrow {
       width: 48px;
       height: 48px;
@@ -3087,7 +3131,7 @@ h6,
         display: inline-block;
         width: 2px;
         height: 12px;
-        background-color: #3E4145; }
+        background-color: #b3c5d4; }
       .pl-content__examplesDropdown + .pl-content__examplesArrow::before {
         transform-origin: bottom right;
         transform: rotate(-90deg) translate(-20px, 21px); }
