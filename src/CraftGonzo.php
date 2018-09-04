@@ -17,6 +17,7 @@
     use craft\web\UrlManager;
     use craft\events\RegisterUrlRulesEvent;
     use martinherweg\craftgonzo\controllers\DefaultController;
+    use martinherweg\craftgonzo\services\GonzoService;
     use yii\base\Event;
 
     /**
@@ -37,7 +38,7 @@
     class CraftGonzo extends Plugin
     {
         // Static Properties
-        // =========================================================================
+        // ====================================================================xxxxxx=====
 
         /**
          * Static property that is an instance of this plugin class so that it can be accessed via
@@ -72,6 +73,10 @@
         {
             parent::init();
             self::$plugin = $this;
+
+            $this->setComponents([
+               'helper' => GonzoService::class,
+            ]);
 
             // Register our site routes
             Event::on(

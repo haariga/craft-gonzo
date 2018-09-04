@@ -17,6 +17,7 @@ const state = {
   activeTemplateRender: [],
   activeVariants: {},
   openFolder: '',
+  iFrameSize: 'none',
 };
 
 const store = new Vuex.Store({

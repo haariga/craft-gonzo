@@ -71,7 +71,9 @@ export default {
 
     this.$store.dispatch('setFilelist', window.filelist).then(() => {
       let activeComponent;
+      let frameSize;
       const templateParameter = getParameterByName('template');
+      const frameWidthParam = getParameterByName('iframe');
       const flattendFilelist = flatten(this.filelist.map(item => item.children));
 
       if (templateParameter) {
@@ -81,7 +83,17 @@ export default {
       } else {
         [activeComponent] = flattendFilelist;
       }
-      this.$store.dispatch('setActive', activeComponent);
+
+      console.log(frameWidthParam);
+
+      if (frameWidthParam) {
+        frameSize = frameWidthParam;
+        this.$store.commit('UPDATE_IFRAME_SIZE', frameWidthParam);
+      } else {
+        frameSize = this.$store.state.iFrameSize;
+      }
+
+      this.$store.dispatch('setActive', { component: activeComponent, frameSize });
     });
   },
 };
