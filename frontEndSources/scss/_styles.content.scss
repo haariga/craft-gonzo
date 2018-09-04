@@ -52,9 +52,9 @@
       top: 16px;
       bottom: 6px;
       right: 0;
-      background-color: lighten(c('blue', 'light'), 5%);
       z-index: 10;
       border-radius: 5px;
+      background-color: lighten(c('blue', 'light'), 5%);
     }
 
     iframe {
@@ -65,7 +65,8 @@
       position: relative;
       z-index: 100;
       border-radius: 5px;
-      box-shadow: 0 5px 50px rgba(c('black'), 0.05);
+      padding: 8px;
+      border: 3px solid c('white');
     }
   }
 
