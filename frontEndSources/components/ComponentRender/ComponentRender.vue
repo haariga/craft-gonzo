@@ -153,6 +153,9 @@ export default {
       [this.selectedVariant] = Object.keys(newValue);
     },
   },
+  mounted() {
+    this.iFrame.width = this.$store.state.iFrameSize;
+  },
   created() {
     [this.selectedVariant] = Object.keys(this.activeVariants);
   },
@@ -184,6 +187,7 @@ export default {
       } else {
         this.$set(this.iFrame, 'width', 'none');
       }
+      this.$store.dispatch('updateIframeSize', width);
       this.$nextTick(() => this.iFrameSize());
     },
     iFrameSize() {
