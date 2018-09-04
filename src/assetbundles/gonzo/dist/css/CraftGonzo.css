@@ -3037,7 +3037,7 @@ h6,
       right: 0;
       z-index: 10;
       border-radius: 5px;
-      background-color: #eaeff3; }
+      background-color: #eef2f5; }
     .pl-content__container--iframe iframe {
       margin-top: 16px;
       width: 100%;
@@ -3047,7 +3047,7 @@ h6,
       z-index: 100;
       border-radius: 5px;
       padding: 8px;
-      border: 3px solid #fff; }
+      background-color: #e7edf1; }
   .pl-content__container--loaded iframe {
     min-height: 0; }
   .pl-content__container--code {
