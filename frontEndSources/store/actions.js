@@ -8,20 +8,11 @@ export default {
   setPluginSettings({ commit }, settings) {
     commit('SET_PLUGIN_SETTINGS', settings);
   },
-  updateIframeSize({ commit }, iFrameSize) {
-    const paramsStrings = window.location.search;
-    const searchParams = new URLSearchParams(paramsStrings);
-    searchParams.set('iframe', iFrameSize);
-    window.history.pushState({}, '', `?${searchParams.toString()}`);
-    commit('UPDATE_IFRAME_SIZE', iFrameSize);
-  },
-  setActive({ commit, state }, payload) {
-    const { frameSize: iFrameSize, component } = payload;
-
+  setActive({ commit, state }, component) {
     window.history.pushState(
       {},
       component.config.meta.title,
-      `?template=${component.config.meta.path}&iframe=${iFrameSize}`,
+      `?template=${component.config.meta.path}`,
     );
     commit('SET_ACTIVE', component);
 

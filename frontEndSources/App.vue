@@ -17,8 +17,8 @@
         <Filelist :depth="1" :label="item.name" :nodes="item.children"/>
       </div>
     </aside>
-    
-    
+
+
     <main class="pl-main">
       <header class="pl-head">
         <nav class="pl-nav">
@@ -31,7 +31,7 @@
           Loading Component.
         </div>
       </div>
-      
+
       <div class="pl-main__footer">
         Made with <span>♥</span> by <a href="https://github.com/martinherweg/">Martin Herweg</a> &amp; <a
           href="https://davidhellmann.com">David Hellmann</a>
@@ -71,9 +71,7 @@ export default {
 
     this.$store.dispatch('setFilelist', window.filelist).then(() => {
       let activeComponent;
-      let frameSize;
       const templateParameter = getParameterByName('template');
-      const frameWidthParam = getParameterByName('iframe');
       const flattendFilelist = flatten(this.filelist.map(item => item.children));
 
       if (templateParameter) {
@@ -84,16 +82,7 @@ export default {
         [activeComponent] = flattendFilelist;
       }
 
-      console.log(frameWidthParam);
-
-      if (frameWidthParam) {
-        frameSize = frameWidthParam;
-        this.$store.commit('UPDATE_IFRAME_SIZE', frameWidthParam);
-      } else {
-        frameSize = this.$store.state.iFrameSize;
-      }
-
-      this.$store.dispatch('setActive', { component: activeComponent, frameSize });
+      this.$store.dispatch('setActive', activeComponent);
     });
   },
 };

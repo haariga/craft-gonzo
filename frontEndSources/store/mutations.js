@@ -27,7 +27,4 @@ export default {
   SET_OPEN(state, folderName) {
     state.openFolder = folderName;
   },
-  UPDATE_IFRAME_SIZE(state, newSize) {
-    state.iFrameSize = newSize;
-  },
 };
