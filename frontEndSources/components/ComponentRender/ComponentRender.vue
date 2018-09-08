@@ -192,7 +192,9 @@ export default {
       if (iFrame) {
         this.iFrame.loaded = true;
         this.$nextTick(() => {
-          this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 120}px`;
+          setTimeout(() => {
+            this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 120}px`;
+          }, 250);
         });
       }
     },
