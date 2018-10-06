@@ -6,7 +6,7 @@
   </header>
 </template>
 <script>
-  export default {
-    name: 'MainNavigation'
-  };
+export default {
+  name: 'MainNavigation',
+};
 </script>
