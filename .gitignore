@@ -34,3 +34,4 @@ prepros-6.config
 /.php_cs.cache
 /webpack/stats.json
 /.vs
+_legacyfrontEndSources
