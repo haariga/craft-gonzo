@@ -39,6 +39,11 @@ module.exports = {
       postfix: '',
       extension: 'vue',
     },
+    vuetest: {
+      name: '',
+      postfix: '.spec',
+      extension: 'js',
+    },
     fractal: {
       name: '',
       postfix: 'config',
@@ -50,8 +55,8 @@ module.exports = {
     modulePath: 'src/assetbundles/gonzo/src/vue/',
     pathOptions: {
       // the first character of each key works as an alias for the path so you could use `-a` as an alias for atomic
-        components: 'components/',
-        views: 'views/',
+      components: 'components/',
+      views: 'views/',
     },
   },
 };

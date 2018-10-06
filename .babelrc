@@ -17,5 +17,21 @@
     "@babel/transform-async-to-generator",
     "transform-vue-jsx",
     "lodash"
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": { "node": 6 },
+            "useBuiltIns": "usage",
+            "debug": false,
+            "modules": "commonjs"
+          }
+        ]
+      ],
+      "plugins": ["dynamic-import-node", "import-remove-resource-query", "transform-vue-jsx"]
+    }
+  }
 }
