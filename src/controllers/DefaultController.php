@@ -106,10 +106,12 @@
                     $obj = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($item->getPathname(),
                         \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
                     $arr = [];
+                    $test = $item->getFilename();
                     foreach ($obj as $info) {
                         $path = $info->isDir() ? [
                             $info->getFilename() => [
                                 'name'   => $info->getFilename(),
+                                'identifier' => $test . '.' . $info->getFilename(),
                                 'config' => collect($this->getConfig($info->getRealPath()))
                                     ->filter(function ($value, $key) {
                                         return $value != null;
