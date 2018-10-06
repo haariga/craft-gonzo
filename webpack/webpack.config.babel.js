@@ -5,10 +5,13 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
+import Stylish from 'webpack-stylish';
 
 import VueLoaderPlugin from 'vue-loader/lib/plugin';
 
 const absPath = dir => path.resolve(__dirname, `../${dir}`);
+const assetBundles = (dir = '') =>
+  path.resolve(__dirname, '..', 'src', 'assetbundles', 'gonzo', dir);
 
 const webpackConfig = (env = {}) => {
   const { ifDevelopment, ifProduction } = getIfUtils(env);
@@ -31,10 +34,13 @@ const webpackConfig = (env = {}) => {
       ? [
           {
             loader: 'sass-loader',
-              options: {
-                  includePaths: [absPath('frontEndSources/scss/')],
-                  data: "@import 'settings.variables';\n" + "@import 'tools.functions'; \n" + "@import 'tools.mixins';",
-              }
+            options: {
+              includePaths: [assetBundles('src/scss/')],
+              data:
+                "@import 'settings.variables';\n" +
+                "@import 'tools.functions'; \n" +
+                "@import 'tools.mixins';",
+            },
           },
         ]
       : [];
@@ -45,9 +51,9 @@ const webpackConfig = (env = {}) => {
             loader: 'sass-resoures-loader',
             options: {
               resources: [
-                absPath('frontEndSources/scss/_variables.scss'),
-                absPath('frontEndSources/scss/_mixins.scss'),
-                absPath('frontEndSources/scss/_functions.scss'),
+                assetBundles('src/scss/_variables.scss'),
+                assetBundles('src/scss/_mixins.scss'),
+                assetBundles('src/scss/_functions.scss'),
               ],
             },
           },
@@ -64,22 +70,31 @@ const webpackConfig = (env = {}) => {
     ];
   };
 
+  const devPublic = 'http://localhost:8080/';
+
   return {
     entry: {
-      app: absPath('frontEndSources/CraftGonzo.js'),
+      app: assetBundles('src/main.js'),
     },
     output: {
-      path: absPath('src/assetbundles/gonzo/dist/'),
-      publicPath: ifProduction('', 'http://localhost:8080'),
-      filename: 'js/CraftGonzo.js',
+      path: assetBundles('dist'),
+      publicPath: ifProduction('', devPublic),
+      filename: 'js/main.js',
       chunkFilename: 'js/[id].js',
+      hotUpdateMainFilename: 'js/[hash].hot-update.json',
     },
+    stats: 'none',
     devServer: {
       contentBase: absPath('resources/'),
-      publicPath: 'http://localhost:8080/',
+      host: '0.0.0.0',
+      publicPath: devPublic,
       hotOnly: true,
       inline: true,
       overlay: true,
+      stats: 'errors-only',
+      watchOptions: {
+        poll: true,
+      },
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -87,10 +102,12 @@ const webpackConfig = (env = {}) => {
     },
     resolve: {
       extensions: ['.js', '.vue'],
-      modules: [absPath('node_modules'), absPath('frontEndSources')],
+      modules: [absPath('node_modules'), assetBundles('src')],
       alias: {
         vue$: 'vue/dist/vue.esm.js',
-        Modules: absPath('frontEndSources/components/'),
+        Modules: assetBundles('src/vue/components/'),
+        '@Components': assetBundles('src/vue/components/'),
+        '@Views': assetBundles('src/vue/views/'),
       },
     },
     module: {
@@ -99,20 +116,23 @@ const webpackConfig = (env = {}) => {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           enforce: 'pre',
-          include: absPath('frontEndSources/'),
+          include: assetBundles('src'),
         },
         {
           test: /\.vue$/,
           loader: 'vue-loader',
-          include: absPath('frontEndSources/'),
+          include: assetBundles('src'),
         },
-          {
-            test: /\.css$/,
-            loader: CSS_STACK({ scss: false, vue: true }),
-          },
+        {
+          test: /\.css$/,
+          loader: CSS_STACK({
+            scss: false,
+            vue: true,
+          }),
+        },
         {
           test: /\.scss$/,
-          include: absPath('frontEndSources/'),
+          include: assetBundles('src'),
           use: ifProduction(
             ExtractTextPlugin.extract({
               use: CSS_STACK({ production: env.production }),
@@ -123,12 +143,12 @@ const webpackConfig = (env = {}) => {
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          include: absPath('frontEndSources/'),
+          include: assetBundles('src'),
         },
       ],
     },
     plugins: [
-        new VueLoaderPlugin(),
+      new VueLoaderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProgressPlugin(),
       ...(env.production
@@ -149,11 +169,13 @@ const webpackConfig = (env = {}) => {
         filename: absPath('src/templates/patternlib.twig'),
         template: absPath('webpack/patternlib_webpack-template.twig'),
         inject: false,
-        devServer: 'http://localhost:8080',
+        devServer: devPublic,
         environment: ifProduction('production', 'development'),
         alwaysWriteToDisk: true,
       }),
       new HtmlWebpackHarddiskPlugin(),
+      new webpack.NamedModulesPlugin(),
+      new Stylish(),
     ],
   };
 };

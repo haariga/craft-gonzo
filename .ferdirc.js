@@ -47,9 +47,11 @@ module.exports = {
   },
   paths: {
     templateBase: 'tmpl/',
-    modulePath: 'frontEndSources/components/',
+    modulePath: 'src/assetbundles/gonzo/src/vue/',
     pathOptions: {
       // the first character of each key works as an alias for the path so you could use `-a` as an alias for atomic
+        components: 'components/',
+        views: 'views/',
     },
   },
 };
