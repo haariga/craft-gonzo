@@ -6,7 +6,9 @@ import mutations from './mutations';
 
 Vue.use(Vuex);
 
-const state = {};
+const state = {
+  filelist: window.filelist,
+};
 
 const store = new Vuex.Store({
   state,
