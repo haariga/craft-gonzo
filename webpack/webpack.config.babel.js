@@ -88,7 +88,7 @@ const webpackConfig = (env = {}) => {
       contentBase: absPath('resources/'),
       host: '0.0.0.0',
       publicPath: devPublic,
-      hotOnly: true,
+      hot: true,
       inline: true,
       overlay: true,
       stats: 'errors-only',

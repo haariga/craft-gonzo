@@ -12,12 +12,15 @@
 
 import Vue from 'vue';
 import axios from 'axios';
+import { sync } from 'vuex-router-sync';
 import App from './vue/App';
 import store from './vue/store';
 import router from './vue/router';
 import './scss/app.scss'; // eslint-disable-line
 
 Vue.component('patternlib', App);
+
+const unsync = sync(store, router); // eslint-disable-line
 
 window.axios = axios;
 
