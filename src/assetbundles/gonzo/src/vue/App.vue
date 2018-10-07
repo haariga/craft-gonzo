@@ -5,7 +5,7 @@
       <main class="pl-main">
         <MainNavigation/>
         <div class="pl-main__inner">
-          <router-view />
+          <router-view :key="$route.name || $route.params.name" />
         </div>
         <AppFooter/>
       </main>
