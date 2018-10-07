@@ -52,6 +52,7 @@ export default {
   watch: {},
   created() {
     [this.selectedVariant] = Object.keys(this.variants);
+    this.$emit('variantSelected', this.selectedVariant);
   },
   methods: {
     getRenderedFile(formData) {
@@ -64,7 +65,7 @@ export default {
 
       formData.append('file', this.template.relativePath);
       formData.append('meta', JSON.stringify(this.variants[e.target.value]));
-
+      this.$emit('variantSelected', this.selectedVariant);
       this.getRenderedFile(formData);
     },
   },

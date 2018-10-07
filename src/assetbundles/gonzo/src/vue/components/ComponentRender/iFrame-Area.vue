@@ -12,6 +12,18 @@
         <a href="" class="pl-button pl-button--newWindow">Open in new tab</a>
       </div>
     </div>
+    
+    <div class="pl-content__container pl-content__container--iframe">
+      <iframe :src="frameSrc"
+              marginheight="0"
+              marginwidth="0"
+              vspace="0"
+              hspace="0"
+              scrolling="yes"
+              name="patternlibRenderer"
+              frameborder="0"/>
+    </div>
+    
   </div>
 </template>
 
@@ -19,10 +31,20 @@
 export default {
   name: 'IFrameArea',
   components: {},
-  props: {},
+  props: {
+    frameSrc: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       activeWidth: '100%',
+      iFrame: {
+        loaded: false,
+        height: 0,
+        width: '100%',
+      },
     };
   },
   computed: {
