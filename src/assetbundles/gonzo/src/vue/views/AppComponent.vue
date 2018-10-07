@@ -2,15 +2,17 @@
   <div class="pl-component">
     Das ist eine Komponente mit id von {{ $route.params.name }}
     <ComponentInfos :infos="infos" />
+    <ComponentRender :render="render"/>
   </div>
 </template>
 
 <script>
 import ComponentInfos from '@Components/ComponentInfos';
+import ComponentRender from '@Components/ComponentRender/ComponentRender';
 
 export default {
   name: 'AppComponent',
-  components: { ComponentInfos },
+  components: { ComponentRender, ComponentInfos },
   data() {
     return {};
   },
@@ -26,6 +28,17 @@ export default {
     infos() {
       const { meta } = this.componentData.config;
       return meta;
+    },
+    render() {
+      const { variants } = this.componentData.config;
+      const { assets, templates, templateRender } = this.componentData;
+
+      return {
+        assets,
+        templates,
+        templateRender: templateRender[0],
+        variants,
+      };
     },
   },
   watch: {},
