@@ -5,8 +5,17 @@
     </div>
   </div>
 </template>
+
 <script>
+import Filelist from '@Components/Filelist';
+
 export default {
   name: 'TemplatelistNavigation',
+  components: { Filelist },
+  computed: {
+    filelist() {
+      return this.$store.state.filelist;
+    },
+  },
 };
 </script>

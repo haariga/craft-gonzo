@@ -3,15 +3,15 @@
 <script>
 export default {
   name: '<%= moduleName.replace('-', '_') %>',
-  props: [],
+  components: {},
+  props: {},
   data() {
     return {};
   },
   computed: {},
-  methods: {},
   watch: {},
   mounted() {},
   created() {},
-  components: {},
+  methods: {},
 };
 </script>
