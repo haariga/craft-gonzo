@@ -80,6 +80,7 @@
     "include-media": "^1.4.9",
     "interact.js": "^1.2.8",
     "lodash": "^4.17.10",
+    "lodash-es": "^4.17.11",
     "modularscale": "^2.0.1",
     "modularscale-sass": "^3.0.5",
     "prismjs": "^1.15.0",
