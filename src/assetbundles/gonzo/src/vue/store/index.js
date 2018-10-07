@@ -1,13 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import getters from './getters';
 import actions from './actions';
+import getters from './getters';
 import mutations from './mutations';
 
 Vue.use(Vuex);
 
 const state = {
-  filelist: window.filelist,
+  filelist: {
+    activeFolder: '',
+    items: window.filelist,
+  },
+  pluginSettings: window.pluginSettings,
 };
 
 const store = new Vuex.Store({
