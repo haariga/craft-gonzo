@@ -31,9 +31,9 @@
 </template>
 
 <script>
-  import Templatelist from './Templatelist';
-  
-  export default {
+import Templatelist from './Templatelist';
+
+export default {
   name: 'Filelist',
   components: { Templatelist },
   props: {
