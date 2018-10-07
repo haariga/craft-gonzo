@@ -1,6 +1,9 @@
 <template>
   <nav class="pl-files">
-    <h3 v-if="depth >= 1" class="pl-files__headline  ms-res-0" @click="setActiveFolder(label)">
+    <h3 v-if="depth >= 1"
+        :class="{'pl-files__headline--active': showTemplates }"
+        class="pl-files__headline  ms-res-0"
+        @click="setActiveFolder(label)">
       <div class="pl-files__icon">
         <span class="top"/>
         <span class="line  line--01"/>
@@ -28,9 +31,9 @@
 </template>
 
 <script>
-import Templatelist from './Templatelist';
-
-export default {
+  import Templatelist from './Templatelist';
+  
+  export default {
   name: 'Filelist',
   components: { Templatelist },
   props: {
