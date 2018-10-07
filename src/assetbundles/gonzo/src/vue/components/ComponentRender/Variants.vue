@@ -51,8 +51,12 @@ export default {
   },
   watch: {},
   created() {
-    [this.selectedVariant] = Object.keys(this.variants);
-    this.$emit('variantSelected', this.selectedVariant);
+    if (!this.$route.query.variant) {
+      [this.selectedVariant] = Object.keys(this.variants);
+      this.$emit('variantSelected', this.selectedVariant);
+    } else {
+      this.selectedVariant = this.$route.query.variant;
+    }
   },
   methods: {
     getRenderedFile(formData) {

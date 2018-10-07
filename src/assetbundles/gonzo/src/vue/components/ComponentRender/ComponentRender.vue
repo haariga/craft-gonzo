@@ -4,7 +4,7 @@
       <Variants v-if="Object.keys(render.variants).length > 1"
                 :variants="render.variants"
                 :template="render.templates[0]"
-                @variantSelected="activeVariant = $event"
+                @variantSelected="changeVariant($event)"
       />
       <i-frame-area :frame-src="frameSrc"/>
     </div>
@@ -36,21 +36,29 @@ export default {
     frameSrc() {
       // TODO: make configurable
       const previewUrl = '/patternlib';
-
-      if (Object.keys(this.render.variants).length > 1) {
-        return `${previewUrl}${this.render.templates[0].relativePath}/variant/${
-          this.activeVariant
-        }`;
-      }
-
-      const [variantName] = Object.keys(this.render.variants);
-
-      return `${previewUrl}${this.render.templates[0].relativePath}/variant/${variantName}`;
+      return `${previewUrl}${this.render.templates[0].relativePath}/variant/${this.activeVariant}`;
     },
   },
   watch: {},
-  mounted() {},
-  created() {},
-  methods: {},
+  created() {
+    if (Object.keys(this.render.variants).length === 1) {
+      const [variantName] = Object.keys(this.render.variants);
+      this.activeVariant = variantName;
+      this.addVariantQueryString(variantName);
+    }
+
+    if (this.$route.query.variant) {
+      this.activeVariant = this.$route.query.variant;
+    }
+  },
+  methods: {
+    changeVariant(variant) {
+      this.activeVariant = variant;
+      this.addVariantQueryString(variant);
+    },
+    addVariantQueryString(string) {
+      this.$router.push({ query: { variant: string } });
+    },
+  },
 };
 </script>
