@@ -30,16 +30,7 @@ export default {
   },
   computed: {
     status() {
-      const { pluginSettings } = this.$store.state;
-      if (!pluginSettings) {
-        return {};
-      }
-      // eslint-disable-next-line
-      const matchedStatus =
-        pluginSettings.compStatus.find(
-          status => status.name.toLowerCase() === this.infos.status.toLowerCase(),
-        ) || 'wip';
-      return matchedStatus;
+      return this.$store.getters.compStatus(this.infos.status);
     },
   },
 };
