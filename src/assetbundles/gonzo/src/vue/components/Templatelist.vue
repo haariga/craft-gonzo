@@ -22,17 +22,5 @@ export default {
       default: 0,
     },
   },
-  data() {
-    return {
-      activeComponent: {
-        title: 'Foo',
-      },
-    };
-  },
-  computed: {},
-  watch: {},
-  mounted() {},
-  created() {},
-  methods: {},
 };
 </script>
