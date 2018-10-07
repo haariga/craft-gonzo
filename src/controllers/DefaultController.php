@@ -198,7 +198,7 @@
                     'name'     => $key,
                     'children' => $item['children']
                 ];
-            })->values()->all();
+            })->all();
         }
 
         public function array_merge_recursive_distinct(array &$array1, array &$array2)
