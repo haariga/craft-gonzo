@@ -68,7 +68,7 @@ export default {
   watch: {},
   mounted() {
     // setting active component on reload
-    if (this.$route.params.name.includes(this.label)) {
+    if (this.$route.params.name && this.$route.params.name.includes(this.label)) {
       this.$store.commit('SET_ACTIVE_FOLDER', this.label);
     }
   },
