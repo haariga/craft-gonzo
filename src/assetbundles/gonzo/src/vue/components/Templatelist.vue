@@ -2,7 +2,7 @@
   <li class="pl-files__listItem">
     <router-link :to="`/component/${node.identifier}`"
                  class="pl-files__listItemLink ms-res--1"
-                 exact-active-class="pl-files__listItemLink--active">
+                 active-class="pl-files__listItemLink--active">
       {{ node.config.meta.title || node.config.title }}
     </router-link>
   </li>

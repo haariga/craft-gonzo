@@ -13,15 +13,21 @@
       </div>
     </div>
     
-    <div class="pl-content__container pl-content__container--iframe">
-      <iframe :src="frameSrc"
+    <div :class="{ 'pl-content__container--loaded': iFrame.loaded }"
+         class="pl-content__container pl-content__container--iframe">
+      <iframe ref="iFrame"
+              :src="frameSrc"
+              :style="{'max-width': iFrame.width, height: iFrame.height }"
+              :height="parseInt( iFrame.height, 10)"
               marginheight="0"
               marginwidth="0"
               vspace="0"
               hspace="0"
               scrolling="yes"
               name="patternlibRenderer"
-              frameborder="0"/>
+              frameborder="0"
+              @load="iFrameSize"
+      />
     </div>
     
   </div>
@@ -54,9 +60,24 @@ export default {
   },
   methods: {
     iFrameWidth(width) {
-      // let widthNumber = width.replace('px', '');
-      // widthNumber = Number.parseInt(widthNumber, 10);
+      let widthNumber = width.replace('px', '');
+      widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
+      if (width.includes('px')) {
+        this.$set(this.iFrame, 'width', `${widthNumber + 64}px`);
+      } else {
+        this.$set(this.iFrame, 'width', 'none');
+      }
+      this.$nextTick(() => this.iFrameSize());
+    },
+    iFrameSize() {
+      const { iFrame } = this.$refs;
+      this.iFrame.loaded = true;
+      if (iFrame) {
+        this.$nextTick(() => {
+          this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 100}px`;
+        });
+      }
     },
   },
 };
