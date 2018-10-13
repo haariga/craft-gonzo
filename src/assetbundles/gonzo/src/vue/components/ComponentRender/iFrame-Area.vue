@@ -17,7 +17,7 @@
          class="pl-content__container pl-content__container--iframe">
       <iframe ref="iFrame"
               :src="frameSrc"
-              :style="{'max-width': iFrame.width, height: iFrame.height }"
+              :style="{'width': iFrame.width, height: iFrame.height }"
               :height="parseInt( iFrame.height, 10)"
               marginheight="0"
               marginwidth="0"
