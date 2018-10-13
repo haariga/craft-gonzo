@@ -1,6 +1,5 @@
 <template>
   <div class="pl-component">
-    Das ist eine Komponente mit id von {{ $route.params.name }}
     <ComponentInfos :infos="infos" />
     <ComponentRender :render="render"/>
   </div>
