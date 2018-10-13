@@ -11,10 +11,6 @@
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   
-    
-      <link href="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/css/CraftGonzo.css" rel="stylesheet">
-    
-  
 </head>
 <body>
 {#<h1>{{ siteName }} patternlib</h1>
@@ -33,8 +29,9 @@ Hello from the Plugin patternlib!#}
 
 
 
+{# for dev, needs webpack-dev-server running #}
   
-    <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/js/main.js"></script>
+    <script src="http://localhost:8080/js/main.js"></script>
   
 
 

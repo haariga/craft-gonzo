@@ -45,11 +45,11 @@ export default {
   },
   data() {
     return {
-      activeWidth: '100%',
+      activeWidth: '100vw',
       iFrame: {
         loaded: false,
         height: 0,
-        width: '100%',
+        width: '100vw',
       },
     };
   },
@@ -60,11 +60,13 @@ export default {
   },
   methods: {
     iFrameWidth(width) {
-      let widthNumber = width.replace('px', '');
+      let widthNumber = width.replace('px', '').replace('vw', '');
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
       if (width.includes('px')) {
         this.$set(this.iFrame, 'width', `${widthNumber}px`);
+      } else if (width.includes('vw')) {
+        this.$set(this.iFrame, 'width', `${widthNumber}vw`);
       } else {
         this.$set(this.iFrame, 'width', 'none');
       }
