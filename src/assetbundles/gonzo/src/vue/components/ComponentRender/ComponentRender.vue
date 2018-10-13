@@ -1,6 +1,6 @@
 <template>
   <div class="pl-content">
-    <div class="pl-content__section">
+    <div class="pl-content__component">
       <Variants v-if="Object.keys(render.variants).length > 1"
                 :variants="render.variants"
                 :template="render.templates[0]"

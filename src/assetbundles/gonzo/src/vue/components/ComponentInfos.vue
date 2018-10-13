@@ -15,7 +15,7 @@
         {{ infos.description }}
       </div>
     </div>
-    <hr class="pl-hr" >
+    <!--<hr class="pl-hr" >-->
   </div>
 </template>
 
