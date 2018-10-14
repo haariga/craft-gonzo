@@ -11,9 +11,13 @@
             </button>
           </div>
         </div>
-        
+  
         <div class="c-templateSwitcher__code">
-          <pre v-html="activeRender"/>
+          <pre class="line-numbers">
+            <code ref="prismContainer"
+                  :class="prismLang"
+                  v-html="activeRender"/>
+          </pre>
         </div>
       </div>
     </div>
@@ -21,6 +25,8 @@
 </template>
 
 <script>
+import Prism from 'prismjs';
+
 export default {
   name: 'CodePreview',
   components: {},
@@ -40,24 +46,34 @@ export default {
     buttons() {
       return ['twig', 'html', ...this.filesToRender.assets.map(asset => asset.type)];
     },
+    prismLang() {
+      return `language-${this.activeTab}`;
+    },
     activeRender() {
+      let codeToRender = '';
       const template = this.filesToRender.templates[0];
       const activeVariant = this.filesToRender.variants[this.$route.query.variant];
 
       if (this.activeTab === 'twig') {
-        return template.content;
-      }
-      if (this.activeTab === 'html') {
+        codeToRender = template.content;
+      } else if (this.activeTab === 'html') {
         this.getFileContent(template, activeVariant);
-        return this.variantRender;
+        codeToRender = this.variantRender;
+      } else {
+        const activeAsset = this.filesToRender.assets.find(asset => asset.type === this.activeTab);
+        codeToRender = activeAsset.content;
       }
 
-      const activeAsset = this.filesToRender.assets.find(asset => asset.type === this.activeTab);
-
-      return activeAsset.content;
+      return Prism.highlight(codeToRender, Prism.languages[this.activeTab]);
     },
   },
-  watch: {},
+  watch: {
+    activeRender() {
+      this.$nextTick(() => {
+        Prism.highlightAll();
+      });
+    },
+  },
   mounted() {},
   created() {},
   methods: {

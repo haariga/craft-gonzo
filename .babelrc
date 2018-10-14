@@ -16,7 +16,13 @@
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/transform-async-to-generator",
     "transform-vue-jsx",
-    "lodash"
+    "lodash",
+    ["prismjs", {
+      "languages": ["javascript", "css", "markup", "twig", "scss"],
+      "plugins": ["line-numbers"],
+      "theme": "dark",
+      "css": true
+    }]
   ],
   "env": {
     "test": {
