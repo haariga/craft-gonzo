@@ -98,3 +98,7 @@
     }
   }
 }
+
+.pl-buttonGroup--margin {
+  @include make-vr();
+}
