@@ -1,6 +1,6 @@
 <template>
   <div class="pl-content__section">
-    <div class="pl__container pl-content__container pl-content__container--iFrameActions">
+    <div class="pl-content__container pl-content__container--iFrameActions">
       <div class="pl-buttonGroup pl-buttonGroup--pill">
         <button v-for="width in mqButtons"
                 :key="width"
@@ -8,16 +8,16 @@
                 class="pl-button pl-button--pill"
                 @click="iFrameWidth(width)"
                 v-text="width" />
-  
+
         <a href="" class="pl-button pl-button--newWindow">Open in new tab</a>
       </div>
     </div>
-    
+
     <div :class="{ 'pl-content__container--loaded': iFrame.loaded }"
          class="pl-content__container pl-content__container--iframe">
       <iframe ref="iFrame"
               :src="frameSrc"
-              :style="{'max-width': iFrame.width, height: iFrame.height }"
+              :style="{'width': iFrame.width, height: iFrame.height }"
               :height="parseInt( iFrame.height, 10)"
               marginheight="0"
               marginwidth="0"
@@ -29,7 +29,7 @@
               @load="iFrameSize"
       />
     </div>
-    
+
   </div>
 </template>
 
@@ -45,11 +45,11 @@ export default {
   },
   data() {
     return {
-      activeWidth: '100%',
+      activeWidth: '100vw',
       iFrame: {
         loaded: false,
         height: 0,
-        width: '100%',
+        width: '100vw',
       },
     };
   },
@@ -60,11 +60,13 @@ export default {
   },
   methods: {
     iFrameWidth(width) {
-      let widthNumber = width.replace('px', '');
+      let widthNumber = width.replace('px', '').replace('vw', '');
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
       if (width.includes('px')) {
-        this.$set(this.iFrame, 'width', `${widthNumber + 64}px`);
+        this.$set(this.iFrame, 'width', `${widthNumber}px`);
+      } else if (width.includes('vw')) {
+        this.$set(this.iFrame, 'width', `${widthNumber}vw`);
       } else {
         this.$set(this.iFrame, 'width', 'none');
       }
@@ -75,7 +77,9 @@ export default {
       this.iFrame.loaded = true;
       if (iFrame) {
         this.$nextTick(() => {
-          this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 100}px`;
+          setTimeout(() => {
+            this.iFrame.height = `${iFrame.contentWindow.document.body.scrollHeight + 120}px`;
+          }, 250);
         });
       }
     },

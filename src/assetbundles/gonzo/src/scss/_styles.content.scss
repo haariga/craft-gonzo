@@ -13,7 +13,6 @@
     position: relative;
     @include make-section-padding(2);
     @include f(s(4), s(8), margin-bottom);
-
     &::before {
       content: '';
       position: absolute;
@@ -34,7 +33,7 @@
     @include make-vr();
   }
 
-  &__container--iframeActions {
+  &__container--iFrameActions {
     @include f(s(-2), s(-4), margin-bottom);
     position: relative;
     z-index: 10;
@@ -59,7 +58,7 @@
 
     iframe {
       margin-top: 16px;
-      width: 100%;
+      width: 100vw;
       min-height: 400px;
       max-width: 100%;
       position: relative;
