@@ -31,15 +31,15 @@ Hello from the Plugin patternlib!#}
   window.csrfToken = '{{ craft.app.request.csrfToken }}';
 </script>
 
-{# for dev, needs webpack-dev-server running #}
 
 <% if(htmlWebpackPlugin.options.environment === 'production') { %>
   <% for (var chunk in htmlWebpackPlugin.files.js) { %>
     <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/<%= htmlWebpackPlugin.files.js[chunk].path %>"></script>
   <% } %>
 <% } else { %>
+{# for dev, needs webpack-dev-server running #}
   <% if (htmlWebpackPlugin.options.devServer) { %>
-    <script src="<%= htmlWebpackPlugin.options.devServer%>/js/CraftGonzo.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.devServer%>js/main.js"></script>
   <% } %>
 <% } %>
 

@@ -1,10 +1,13 @@
-<template></template>
+<template>
+  <div>
+    Willkommen auf dem Styleguide.
+  </div>
+</template>
 
 <script>
 export default {
-  name: '<%= moduleName.replace('-', '_') %>',
+  name: 'Home',
   components: {},
-  props: {},
   data() {
     return {};
   },

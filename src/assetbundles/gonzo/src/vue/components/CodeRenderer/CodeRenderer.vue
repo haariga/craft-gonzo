@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  name: '<%= moduleName.replace('-', '_') %>',
+  name: 'CodeRenderer',
   components: {},
   props: {},
   data() {

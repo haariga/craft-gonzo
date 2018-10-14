@@ -76,6 +76,7 @@ module.exports = {
     'import/imports-first': 2,
     'import/max-dependencies': [2, { max: 14 }],
     'import/no-anonymous-default-export': 'off',
+    'import/no-extraneous-dependencies': 0,
     'import/no-absolute-path': 2,
     'import/no-deprecated': 1, // this is an in progress rule
     'import/no-duplicates': 2,

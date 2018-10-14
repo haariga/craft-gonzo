@@ -31,11 +31,10 @@ Hello from the Plugin patternlib!#}
   window.csrfToken = '{{ craft.app.request.csrfToken }}';
 </script>
 
-{# for dev, needs webpack-dev-server running #}
 
 
   
-    <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/js/CraftGonzo.js"></script>
+    <script src="{{ view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/js/main.js"></script>
   
 
 
