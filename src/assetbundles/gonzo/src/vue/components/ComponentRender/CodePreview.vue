@@ -74,7 +74,11 @@ export default {
       });
     },
   },
-  mounted() {},
+  mounted() {
+    this.$nextTick(() => {
+      Prism.highlightAll();
+    });
+  },
   created() {},
   methods: {
     getFileContent(template, activeVariant) {
