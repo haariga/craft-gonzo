@@ -126,18 +126,21 @@
                             $basename = pathinfo($info)['filename'];
                             $name = $info->getFilename();
                             $fullPath = $info->getRealPath();
+                            $relativePath = str_replace($this->templatesPath, '', $fullPath);
 
                             $file = [
                                 'name'         => $basename,
                                 'extension'    => $info->getExtension(),
                                 'filename'     => $name,
                                 'fullPath'     => $fullPath,
-                                'relativePath' => str_replace($this->templatesPath, '', $fullPath),
+                                'relativePath' => $relativePath,
+                                'fileContent' => $this->actionGetFileContent($relativePath),
                             ];
 
                             switch ($info->getExtension()) {
                                 case 'html':
                                 case 'twig':
+                                    $file['templateRender'] =
                                     $templates[] = $file;
                                     break;
                                 case 'js':
@@ -165,17 +168,7 @@
                         })->map(function ($item) {
                             if (isset($item['templates']) && isset($item['config'])) {
                                 foreach ($item['templates'] as $template) {
-                                    if (isset($item['config']['variants']) && is_array($item['config']['variants'])) {
-                                        $html = Craft::$app->view->renderTemplate($template['relativePath'], [$this->optionsKey => reset($item['config']['variants'])]);
-//                                        $item['name'] === 'richText' ? dd(trim(preg_replace('/\s\s+/', '', $html))) : '';
-                                    } else {
-                                        $html = 'no options available';
-                                    }
-
-                                    $item['templateRender'][] = [
-                                        'extension' => $item['config']['title'] ?? '',
-                                        'code' => !empty(trim($html)) ? trim($html) : 'no template code available',
-                                    ];
+                                    $item = $this->addTemplateRender($item, $template);
                                 }
                             }
                             return $item;
@@ -199,6 +192,28 @@
                     'children' => $item['children']
                 ];
             })->all();
+        }
+
+        /**
+         * @param $item
+         * @param $template
+         * @return mixed
+         */
+        private function addTemplateRender($item, $template)
+        {
+            if (isset($item['config']['variants']) && is_array($item['config']['variants'])) {
+                $html = Craft::$app->view->renderTemplate($template['relativePath'],
+                    [$this->optionsKey => reset($item['config']['variants'])]);
+            } else {
+                $html = 'no options available';
+            }
+
+            $item['templateRender'][] = [
+                'extension' => $item['config']['title'] ?? '',
+                'code'      => !empty(trim($html)) ? trim($html) : 'no template code available',
+            ];
+            
+            return $item;
         }
 
         public function array_merge_recursive_distinct(array &$array1, array &$array2)
