@@ -1782,6 +1782,9 @@ h6,
       padding: 8px;
       resize: both;
       background-color: #e7edf1; }
+  .pl-content__container--iframePages iframe {
+    padding: 0;
+    background-color: #fff; }
   .pl-content__container--loaded iframe {
     min-height: 0; }
   .pl-content__container--code {
