@@ -7,17 +7,19 @@
                 @variantSelected="changeVariant($event)"
       />
       <i-frame-area :frame-src="frameSrc"/>
+      <code-preview />
     </div>
   </div>
 </template>
 
 <script>
+import CodePreview from 'Modules/ComponentRender/CodePreview';
 import IFrameArea from 'Modules/ComponentRender/iFrame-Area';
 import Variants from 'Modules/ComponentRender/Variants';
 
 export default {
   name: 'ComponentRender',
-  components: { IFrameArea, Variants },
+  components: { CodePreview, IFrameArea, Variants },
   props: {
     render: {
       type: Object,
