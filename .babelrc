@@ -15,6 +15,29 @@
     "@babel/syntax-dynamic-import",
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/transform-async-to-generator",
-    "lodash"
-  ]
+    "transform-vue-jsx",
+    "lodash",
+    ["prismjs", {
+      "languages": ["javascript", "css", "markup", "twig", "scss"],
+      "plugins": ["line-numbers"],
+      "theme": "dark",
+      "css": true
+    }]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": { "node": 6 },
+            "useBuiltIns": "usage",
+            "debug": false,
+            "modules": "commonjs"
+          }
+        ]
+      ],
+      "plugins": ["dynamic-import-node", "import-remove-resource-query", "transform-vue-jsx"]
+    }
+  }
 }

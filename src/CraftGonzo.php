@@ -66,6 +66,7 @@
         public $controllerMap = [
             'template-index'   => DefaultController::class,
             'template-render'  => DefaultController::class,
+            'page-render'  => DefaultController::class,
             'get-file-content' => DefaultController::class,
         ];
 
@@ -87,6 +88,7 @@
                     $event->rules['patternlib/getfilecontent/<file:\S+>'] = 'craft-gonzo/default/get-file-content';
                     $event->rules['patternlib/getfilerender'] = 'craft-gonzo/default/get-file-render';
                     $event->rules['patternlib/<component:.+?>/variant/<variant:[^\/]+$>/'] = 'craft-gonzo/default/template-render';
+                    $event->rules['patternlib/pages-render/<page:.+?>'] = 'craft-gonzo/default/page-render';
                 }
             );
 
