@@ -50,6 +50,10 @@ use craft\base\Model;
             ],
         ];
 
+        public $pages = [
+            'typography',
+        ];
+
         public function init()
         {
             parent::init();
@@ -63,6 +67,7 @@ use craft\base\Model;
                     [
                         'compFolders',
                         'navigation',
+                        'pages',
                         'mqButtons',
                         'compStatus'
                     ],
