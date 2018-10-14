@@ -1,17 +1,33 @@
 <template>
-  <div>
-    <iFrame ref="iFrame"
-            :src="frameSrc"
-            :style="frameSyle"
-            marginheight="0"
-            marginwidth="0"
-            vspace="0"
-            hspace="0"
-            scrolling="yes"
-            name="patternlibRenderer"
-            frameborder="0"
-            @load="iFrameSize"
-    />
+  <div class="pl-content__section">
+    <div class="pl-content__container pl-content__container--iFrameActions">
+      <div class="pl-buttonGroup pl-buttonGroup--pill">
+        <button v-for="width in mqButtons"
+                :key="width"
+                :class="{ 'pl-button--active': activeWidth === width }"
+                class="pl-button pl-button--pill"
+                @click="iFrameWidth(width)"
+                v-text="width" />
+
+        <a href="" class="pl-button pl-button--newWindow">Open in new tab</a>
+      </div>
+    </div>
+
+    <div :class="{ 'pl-content__container--loaded': iFrame.loaded }"
+         class="pl-content__container pl-content__container--iframe  pl-content__container--iframePages">
+      <iFrame ref="iFrame"
+              :src="frameSrc"
+              :style="frameSyle"
+              marginheight="0"
+              marginwidth="0"
+              vspace="0"
+              hspace="0"
+              scrolling="yes"
+              name="patternlibRenderer"
+              frameborder="0"
+              @load="iFrameSize"
+      />
+    </div>
   </div>
 </template>
 
@@ -38,8 +54,24 @@ export default {
       const previewUrl = '/patternlib';
       return `${previewUrl}/pages-render/${this.$route.params.name}`;
     },
+    mqButtons() {
+      return this.$store.state.pluginSettings.mqButtons;
+    },
   },
   methods: {
+    iFrameWidth(width) {
+      let widthNumber = width.replace('px', '').replace('vw', '');
+      widthNumber = Number.parseInt(widthNumber, 10);
+      this.activeWidth = width;
+      if (width.includes('px')) {
+        this.$set(this.iFrame, 'width', `${widthNumber}px`);
+      } else if (width.includes('vw')) {
+        this.$set(this.iFrame, 'width', `${widthNumber}vw`);
+      } else {
+        this.$set(this.iFrame, 'width', 'none');
+      }
+      this.$nextTick(() => this.iFrameSize());
+    },
     iFrameSize() {
       const { iFrame } = this.$refs;
       this.iFrame.loaded = true;

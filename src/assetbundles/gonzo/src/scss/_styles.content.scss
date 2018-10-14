@@ -70,6 +70,13 @@
     }
   }
 
+  &__container--iframePages {
+    iframe {
+      padding: 0;
+      background-color: c('white');
+    }
+  }
+
   &__container--loaded {
     iframe {
       min-height: 0;
