@@ -7,8 +7,8 @@
                 @variantSelected="changeVariant($event)"
       />
       <i-frame-area :frame-src="frameSrc"/>
-      <code-preview />
     </div>
+    <code-preview :files-to-render="codeRender" />
   </div>
 </template>
 
@@ -39,6 +39,19 @@ export default {
       // TODO: make configurable
       const previewUrl = '/patternlib';
       return `${previewUrl}${this.render.templates[0].relativePath}/variant/${this.activeVariant}`;
+    },
+    codeRender() {
+      return {
+        variants: this.render.variants,
+        templates: this.render.templates.map(template => ({
+          content: template.fileContent,
+          relativePath: template.relativePath,
+        })),
+        assets: this.render.assets.map(asset => ({
+          content: asset.fileContent,
+          type: asset.extension,
+        })),
+      };
     },
   },
   watch: {},
