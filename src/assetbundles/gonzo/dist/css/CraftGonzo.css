@@ -1562,6 +1562,8 @@ h6,
     @media (min-width: 1440px) {
       .pl-nav a {
         font-size: 14px; } }
+    .pl-nav a:hover {
+      color: #3E4145; }
     .pl-nav a::after {
       opacity: 0;
       transition: all 0.25s ease-in-out; }
