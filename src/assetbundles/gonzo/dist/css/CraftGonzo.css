@@ -1485,6 +1485,15 @@ h6,
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px; } }
 
+.pl-buttonGroup--margin {
+  margin-top: 16px; }
+  @media screen and (min-width: 320px) {
+    .pl-buttonGroup--margin {
+      margin-top: calc(16px + 16 * (100vw - 320px) / (1120)); } }
+  @media screen and (min-width: 1440px) {
+    .pl-buttonGroup--margin {
+      margin-top: 32px; } }
+
 .pl-wrapper {
   float: none;
   margin-left: auto;
@@ -1534,7 +1543,40 @@ h6,
 
 .pl-nav {
   width: 100%;
-  max-width: calc($wrapperWidth - 320px); }
+  max-width: calc($wrapperWidth - 320px);
+  display: flex;
+  justify-content: flex-end; }
+  .pl-nav a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 48px;
+    color: #8d99a9;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px; }
+    @media (min-width: 320px) and (max-width: 1440px) {
+      .pl-nav a {
+        font-size: calc( 14px + 0 * ( ( 100vw - 320px) / 1120 )); } }
+    @media (min-width: 1440px) {
+      .pl-nav a {
+        font-size: 14px; } }
+    .pl-nav a::after {
+      opacity: 0;
+      transition: all 0.25s ease-in-out; }
+  .pl-nav .router-link-exact-active {
+    color: #3E4145; }
+    .pl-nav .router-link-exact-active::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: #3E4145;
+      left: 0;
+      top: 50%;
+      transform: translateY(12px);
+      opacity: 1; }
 
 .pl-aside {
   position: relative; }
@@ -1881,6 +1923,8 @@ h6,
       color: #d9d9d9; }
       .pl-content__examplesDropdown:disabled + .pl-content__examplesArrow {
         opacity: 0.25; }
+  .pl-content__templateSwitcherCode {
+    margin-top: 16px; }
 
 /*
  |--------------------------------------------------------------------------
@@ -2241,23 +2285,26 @@ pre[class*="language-"] {
 
 pre.line-numbers {
   position: relative;
-  padding-left: 120px;
+  padding-left: 120px !important;
   counter-reset: linenumber; }
+
+pre.line-numbers > code {
+  position: static !important; }
 
 .line-numbers .line-numbers-rows {
   position: absolute;
-  pointer-events: none;
+  pointer-events: all;
   top: 0;
   bottom: 0;
   font-size: 100%;
   left: 0;
   padding: 32px 20px;
   width: 96px;
-  background: #161616;
-  user-select: none; }
+  border-right: 1px solid #121212;
+  background: #161616; }
 
 .line-numbers-rows > span {
-  pointer-events: none;
+  pointer-events: all;
   display: block;
   counter-increment: linenumber; }
 
