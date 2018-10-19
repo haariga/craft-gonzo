@@ -9,7 +9,7 @@
                 @click="iFrameWidth(width)"
                 v-text="width" />
 
-        <a :href="frameSrc" class="pl-button pl-button--newWindow">Open in new tab</a>
+        <a target="_blank" :href="frameSrc" class="pl-button pl-button--newWindow">Open in new tab</a>
       </div>
     </div>
 
