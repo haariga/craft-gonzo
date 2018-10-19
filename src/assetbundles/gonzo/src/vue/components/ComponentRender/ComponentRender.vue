@@ -72,7 +72,7 @@ export default {
       this.addVariantQueryString(variant);
     },
     addVariantQueryString(string) {
-      this.$router.push({ query: { variant: string } });
+      this.$router.push({ query: { ...this.$route.query, variant: string } });
     },
   },
 };
