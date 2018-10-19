@@ -130,29 +130,30 @@ pre[class*="language-"] {
 
 pre.line-numbers {
   position: relative;
-  padding-left: 120px;
+  padding-left: 120px !important;
   counter-reset: linenumber;
 }
 
 pre.line-numbers > code {
-  // position: relative;
+  position: static !important;
 }
 
 .line-numbers .line-numbers-rows {
   position: absolute;
-  pointer-events: none;
+  pointer-events: all;
   top: 0;
   bottom: 0;
   font-size: 100%;
   left: 0;
   padding: s(4) 20px;
   width: 96px;
+  border-right: 1px solid mix(c('black'), c('black', '90'), 30%);
   background: mix(c('black'), c('black', '90'), 15%);
-  user-select: none;
+  // user-select: none;
 }
 
 .line-numbers-rows > span {
-  pointer-events: none;
+  pointer-events: all;
   display: block;
   counter-increment: linenumber;
 }

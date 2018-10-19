@@ -20,7 +20,7 @@
     ["prismjs", {
       "languages": ["javascript", "css", "markup", "twig", "scss"],
       "plugins": ["line-numbers"],
-      "theme": "dark",
+      "theme": "okaidia",
       "css": true
     }]
   ],

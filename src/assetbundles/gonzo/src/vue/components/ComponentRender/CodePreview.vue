@@ -1,18 +1,20 @@
 <template>
   <div class="pl-content__section">
     <div class="pl-content__container">
-      <div class="c-templateSwitcher">
-        <div class="c-templateSwitcher__switcher">
-          <div class="pl-buttonGroup--pill">
+      <div class="pl-content__templateSwitcher">
+        <div class="pl-content__templateSwitcherSwitcher">
+          <h2>Source code</h2>
+          <div class="pl-buttonGroup--pill  pl-buttonGroup--margin">
             <button v-for="button in buttons" :key="button"
+                    :class="{ 'pl-button--active': activeTab === button }"
                     class="pl-button pl-button--pill"
                     @click="activeTab = button">
               {{ button }}
             </button>
           </div>
         </div>
-  
-        <div class="c-templateSwitcher__code">
+
+        <div class="pl-content__templateSwitcherCode">
           <pre class="line-numbers">
             <code ref="prismContainer"
                   :class="prismLang"
@@ -74,7 +76,11 @@ export default {
       });
     },
   },
-  mounted() {},
+  mounted() {
+    this.$nextTick(() => {
+      Prism.highlightAll();
+    });
+  },
   created() {},
   methods: {
     getFileContent(template, activeVariant) {
