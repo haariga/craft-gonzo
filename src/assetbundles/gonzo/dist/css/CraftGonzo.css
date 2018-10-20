@@ -1805,6 +1805,26 @@ h6,
     width: 100%;
     max-width: 100%;
     position: relative; }
+    .pl-content__container--iframe::after {
+      content: '';
+      opacity: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      border: 2px solid #dae3ea;
+      z-index: 100;
+      border-radius: 100%;
+      transition: opacity 0.25s ease-in-out;
+      animation: bounce 0.5s infinite alternate linear; }
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, -50%) scale(1); }
+  100% {
+    transform: translate(-50%, -50%) scale(2); } }
     .pl-content__container--iframe::before {
       position: absolute;
       content: '';
@@ -1814,23 +1834,27 @@ h6,
       right: 0;
       z-index: 10;
       border-radius: 5px;
-      background-color: #eef2f5; }
+      background-color: #e7edf1; }
     .pl-content__container--iframe iframe {
       margin-top: 16px;
       width: 100vw;
-      min-height: 400px;
+      min-height: 240px;
       max-width: 100%;
       position: relative;
       z-index: 100;
       border-radius: 5px;
       padding: 8px;
       resize: both;
-      background-color: #e7edf1; }
+      background-color: #e7edf1;
+      opacity: 0;
+      transition: opacity 0.25s 0.5s ease-in-out; }
+      .pl-content__container--iframe iframe.iFrameLoaded {
+        opacity: 1; }
+  .pl-content__container--loaded::after {
+    opacity: 0; }
   .pl-content__container--iframePages iframe {
     padding: 0;
     background-color: #fff; }
-  .pl-content__container--loaded iframe {
-    min-height: 0; }
   .pl-content__container--code {
     width: 100%;
     max-width: 100%; }
@@ -2020,12 +2044,12 @@ h6,
     position: relative;
     font-weight: 500;
     text-transform: capitalize;
-    color: #3E4145;
+    color: #8d99a9;
     cursor: pointer; }
     .pl-files__headline--active {
-      color: #8e3131; }
+      color: #3E4145; }
       .pl-files__headline--active .pl-files__icon {
-        background-color: #8e3131; }
+        background-color: #3E4145; }
         .pl-files__headline--active .pl-files__icon .top {
           top: 16px;
           background-color: #fff; }
@@ -2126,7 +2150,7 @@ h6,
       .pl-files__listItemLink--active::before {
         opacity: 1;
         width: 20px;
-        background-color: #B43E3E; }
+        background-color: #3E4145; }
 
 .pl-mainNavTrigger {
   position: absolute;

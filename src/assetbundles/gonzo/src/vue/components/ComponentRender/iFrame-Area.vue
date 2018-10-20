@@ -17,6 +17,7 @@
          class="pl-content__container pl-content__container--iframe">
       <iframe ref="iFrame"
               :src="frameSrc"
+              :class="{ 'iFrameLoaded': iFrame.loaded }"
               :style="{'width': iFrame.width, height: iFrame.height }"
               :height="parseInt( iFrame.height, 10)"
               marginheight="0"
@@ -48,7 +49,7 @@ export default {
       activeWidth: '100vw',
       iFrame: {
         loaded: false,
-        height: 0,
+        height: '240px',
         width: '100vw',
       },
     };
