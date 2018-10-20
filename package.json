@@ -73,6 +73,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@vue/test-utils": "^1.0.0-beta.25",
+    "animated-scroll-to": "^1.2.2",
     "axios": "^0.18.0",
     "babel-plugin-prismjs": "^1.0.2",
     "baukasten-grid": "^1.0.10",
