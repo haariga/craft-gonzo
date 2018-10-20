@@ -14,8 +14,7 @@
                    :key="pageOptions.label"
                    :to="`/pages/${page}`"
                    :class="{'router-link-exact-active': $route.path.includes(page)}"
-                   @click.native="$store.commit('SET_ACTIVE_FOLDER', '')"
-      >
+                   @click.native="$store.commit('SET_ACTIVE_FOLDER', '')">
         {{ pageOptions.label }}
       </router-link>
     </nav>
