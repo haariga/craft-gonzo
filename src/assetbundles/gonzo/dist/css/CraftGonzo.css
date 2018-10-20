@@ -2020,12 +2020,12 @@ h6,
     position: relative;
     font-weight: 500;
     text-transform: capitalize;
-    color: #3E4145;
+    color: #8d99a9;
     cursor: pointer; }
     .pl-files__headline--active {
-      color: #8e3131; }
+      color: #3E4145; }
       .pl-files__headline--active .pl-files__icon {
-        background-color: #8e3131; }
+        background-color: #3E4145; }
         .pl-files__headline--active .pl-files__icon .top {
           top: 16px;
           background-color: #fff; }
@@ -2126,7 +2126,7 @@ h6,
       .pl-files__listItemLink--active::before {
         opacity: 1;
         width: 20px;
-        background-color: #B43E3E; }
+        background-color: #3E4145; }
 
 .pl-mainNavTrigger {
   position: absolute;
