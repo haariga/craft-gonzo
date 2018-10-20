@@ -17,6 +17,7 @@
          class="pl-content__container pl-content__container--iframe  pl-content__container--iframePages">
       <iFrame ref="iFrame"
               :src="frameSrc"
+              :class="{ 'iFrameLoaded': iFrame.loaded }"
               :style="frameSyle"
               marginheight="0"
               marginwidth="0"
