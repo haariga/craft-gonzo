@@ -7,14 +7,13 @@
 <script>
 export default {
   name: 'Home',
-  components: {},
-  data() {
-    return {};
+  metaInfo() {
+    return {
+      title: 'patternlib',
+      bodyAttrs: {
+        class: 'home',
+      },
+    };
   },
-  computed: {},
-  watch: {},
-  mounted() {},
-  created() {},
-  methods: {},
 };
 </script>
