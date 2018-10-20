@@ -18,14 +18,14 @@
     position: relative;
     font-weight: 500;
     text-transform: capitalize;
-    color: c('blue', 'dark');
+    color: c('blue');
     cursor: pointer;
 
     &--active {
-      color: darken(c('red'), 10%);
+      color: c('blue', 'dark');
 
       #{$root}__icon {
-        background-color: darken(c('red'), 10%);
+        background-color: c('blue', 'dark');
 
         .top {
           top: 16px;
@@ -163,7 +163,7 @@
       &::before {
         opacity: 1;
         width: 20px;
-        background-color: c('red');
+        background-color: c('blue', 'dark');
       }
     }
   }
