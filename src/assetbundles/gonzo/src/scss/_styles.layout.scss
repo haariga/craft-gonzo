@@ -49,7 +49,7 @@ $wrapperWidth: 2200px;
     }
   }
 
-  .router-link-active {
+  .router-link-exact-active {
     color: c('blue', 'dark');
 
     &::after {
