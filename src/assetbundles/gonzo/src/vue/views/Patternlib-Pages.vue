@@ -17,6 +17,7 @@
          class="pl-content__container pl-content__container--iframe  pl-content__container--iframePages">
       <iFrame ref="iFrame"
               :src="frameSrc"
+              :class="{ 'iFrameLoaded': iFrame.loaded }"
               :style="frameSyle"
               marginheight="0"
               marginwidth="0"
@@ -34,12 +35,21 @@
 <script>
 export default {
   name: 'PatternlibPages',
+  metaInfo() {
+    return {
+      title: `patternlib - ${this.$route.params.name}`,
+      bodyAttrs: {
+        class: 'page',
+      },
+    };
+  },
   data() {
     return {
+      activeWidth: '100vw',
       iFrame: {
         loaded: false,
         height: 0,
-        width: '100%',
+        width: '100vw',
       },
     };
   },
@@ -58,11 +68,25 @@ export default {
       return this.$store.state.pluginSettings.mqButtons;
     },
   },
+  mounted() {
+    if (!this.$route.query.frameSize) {
+      this.setFrameSizeQuery('100vw');
+    } else {
+      this.activeWidth = this.$route.query.frameSize;
+      this.iFrame.width = this.$route.query.frameSize;
+    }
+  },
   methods: {
+    setFrameSizeQuery(size) {
+      this.$router.push({
+        query: { ...this.$route.query, frameSize: size },
+      });
+    },
     iFrameWidth(width) {
       let widthNumber = width.replace('px', '').replace('vw', '');
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
+      this.setFrameSizeQuery(width);
       if (width.includes('px')) {
         this.$set(this.iFrame, 'width', `${widthNumber}px`);
       } else if (width.includes('vw')) {

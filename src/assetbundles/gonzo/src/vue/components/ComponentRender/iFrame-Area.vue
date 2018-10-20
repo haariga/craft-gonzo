@@ -17,6 +17,7 @@
          class="pl-content__container pl-content__container--iframe">
       <iframe ref="iFrame"
               :src="frameSrc"
+              :class="{ 'iFrameLoaded': iFrame.loaded }"
               :style="{'width': iFrame.width, height: iFrame.height }"
               :height="parseInt( iFrame.height, 10)"
               marginheight="0"
@@ -48,7 +49,7 @@ export default {
       activeWidth: '100vw',
       iFrame: {
         loaded: false,
-        height: 0,
+        height: '240px',
         width: '100vw',
       },
     };
@@ -58,11 +59,27 @@ export default {
       return this.$store.state.pluginSettings.mqButtons;
     },
   },
+  mounted() {
+    if (!this.$route.query.frameSize) {
+      this.setFrameSizeQuery('100vw');
+    } else {
+      this.activeWidth = this.$route.query.frameSize;
+      this.iFrame.width = this.$route.query.frameSize;
+    }
+  },
   methods: {
+    setFrameSizeQuery(size) {
+      this.$router.push({
+        query: { ...this.$route.query, frameSize: size },
+      });
+    },
     iFrameWidth(width) {
       let widthNumber = width.replace('px', '').replace('vw', '');
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
+
+      this.setFrameSizeQuery(width);
+
       if (width.includes('px')) {
         this.$set(this.iFrame, 'width', `${widthNumber}px`);
       } else if (width.includes('vw')) {
