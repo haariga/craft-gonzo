@@ -34,12 +34,21 @@
 <script>
 export default {
   name: 'PatternlibPages',
+  metaInfo() {
+    return {
+      title: `patternlib - ${this.$route.params.name}`,
+      bodyAttrs: {
+        class: 'page',
+      },
+    };
+  },
   data() {
     return {
+      activeWidth: '100vw',
       iFrame: {
         loaded: false,
         height: 0,
-        width: '100%',
+        width: '100vw',
       },
     };
   },
