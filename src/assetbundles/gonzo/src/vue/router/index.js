@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import VueRouter from 'vue-router';
+import Meta from 'vue-meta';
 import animateScrollTo from 'animated-scroll-to';
 
 import Home from '@Views/Home';
@@ -8,6 +9,7 @@ import AppComponent from '@Views/AppComponent';
 import PatternlibPages from '@Views/Patternlib-Pages';
 
 Vue.use(VueRouter);
+Vue.use(Meta);
 
 export default new VueRouter({
   routes: [
