@@ -12,8 +12,13 @@ import ComponentRender from '@Components/ComponentRender/ComponentRender';
 export default {
   name: 'AppComponent',
   components: { ComponentRender, ComponentInfos },
-  data() {
-    return {};
+  metaInfo() {
+    return {
+      title: `patternlib - ${this.componentData.config.type}.${this.componentData.config.title}`,
+      bodyAttrs: {
+        class: 'component',
+      },
+    };
   },
   computed: {
     componentData() {
@@ -40,9 +45,5 @@ export default {
       };
     },
   },
-  watch: {},
-  mounted() {},
-  created() {},
-  methods: {},
 };
 </script>
