@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import VueRouter from 'vue-router';
+import animateScrollTo from 'animated-scroll-to';
 
 import Home from '@Views/Home';
 import AppComponent from '@Views/AppComponent';
@@ -24,4 +25,13 @@ export default new VueRouter({
       component: PatternlibPages,
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.path !== from.path) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => animateScrollTo(0), 250);
+      });
+    }
+
+    return savedPosition;
+  },
 });
