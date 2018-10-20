@@ -87,6 +87,7 @@
     "pretty": "^2.0.0",
     "prismjs": "^1.15.0",
     "vue": "^2.5.17",
+    "vue-meta": "^1.5.5",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
