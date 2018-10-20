@@ -1,7 +1,7 @@
 <template>
   <header class="pl-head">
     <nav class="pl-nav">
-      <router-link :to="{ name: 'Home' }">Components</router-link>
+      <router-link :to="{ name: 'Home' }" exact>Components</router-link>
       <router-link v-for="(pageOptions, page) in patternlibPages" :key="pageOptions.label" :to="`/pages/${page}`">
         {{ pageOptions.label }}
       </router-link>
