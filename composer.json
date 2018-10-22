@@ -1,5 +1,5 @@
 {
-  "name"       : "martinherweg/craft-gonzo",
+  "name"       : "haariga/craft-gonzo",
   "description": "Component Library from your templates Folder",
   "type"       : "craft-plugin",
   "version"    : "0.0.1",
@@ -13,14 +13,18 @@
     "patternlib"
   ],
   "support"    : {
-    "docs"  : "https://github.com/martinherweg/craft-gonzo/blob/master/README.md",
-    "issues": "https://github.com/martinherweg/craft-gonzo/issues"
+    "docs"  : "https://github.com/haariga/craft-gonzo/blob/master/README.md",
+    "issues": "https://github.com/haariga/craft-gonzo/issues"
   },
   "license"    : "MIT",
   "authors"    : [
     {
       "name"    : "Martin Herweg",
       "homepage": "https://martinherweg.de"
+    },
+    {
+      "name": "David Hellmann",
+      "homepage": "https://davidhellmann.com"
     }
   ],
   "require"    : {
@@ -38,7 +42,7 @@
     "schemaVersion": "0.0.1",
     "hasCpSettings": false,
     "hasCpSection" : false,
-    "changelogUrl" : "https://raw.githubusercontent.com/martinherweg/craft-gonzo/master/CHANGELOG.md",
+    "changelogUrl" : "https://raw.githubusercontent.com/haariga/craft-gonzo/master/CHANGELOG.md",
     "class"        : "martinherweg\\craftgonzo\\CraftGonzo"
   }
 }
