@@ -36,8 +36,10 @@ export default {
     render() {
       const { variants } = this.componentData.config;
       const { assets, templates, templateRender } = this.componentData;
+      const parentStatus = this.infos.status;
 
       return {
+        parentStatus,
         assets,
         templates,
         templateRender: templateRender[0],
