@@ -2151,6 +2151,14 @@ h6,
         opacity: 1;
         width: 20px;
         background-color: #3E4145; }
+  .pl-files__listItemStatus {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    border-radius: 100%; }
 
 .pl-mainNavTrigger {
   position: absolute;
