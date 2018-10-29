@@ -2126,31 +2126,25 @@ h6,
     text-decoration: none;
     position: relative;
     padding-left: 0; }
-    .pl-files__listItemLink::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(-16px, -50%);
-      background-color: #8d99a9;
-      width: 2px;
-      height: 2px;
-      border-radius: 20px;
-      opacity: 0.5;
-      transition: all 0.25s cubic-bezier(0.215, 0.61, 0.355, 1); }
-    .pl-files__listItemLink:hover::before {
-      opacity: 1;
-      width: 8px; }
     .pl-files__listItemLink--active {
-      padding-left: 16px; }
-      .pl-files__listItemLink--active:hover::before {
-        opacity: 1;
-        width: 20px;
-        height: 2px; }
-      .pl-files__listItemLink--active::before {
-        opacity: 1;
-        width: 20px;
-        background-color: #3E4145; }
+      font-weight: 700; }
+      .pl-files__listItemLink--active .pl-files__listItemStatus {
+        width: 7px;
+        height: 7px; }
+    .pl-files__listItemLink:hover .pl-files__listItemStatus {
+      width: 7px;
+      height: 7px; }
+  .pl-files__listItemStatus {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin-top: -1px;
+    left: -16px;
+    top: 50%;
+    transition: all 0.125s cubic-bezier(0.215, 0.61, 0.355, 1); }
 
 .pl-mainNavTrigger {
   position: absolute;
