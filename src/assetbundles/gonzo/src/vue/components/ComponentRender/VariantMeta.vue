@@ -18,6 +18,10 @@ export default {
   name: 'VariantMeta',
   components: {},
   props: {
+    parentStatus: {
+      type: String,
+      default: '',
+    },
     activeVariant: {
       type: Object,
       default() {
@@ -32,7 +36,14 @@ export default {
   },
   computed: {
     status() {
-      return this.$store.getters.compStatus(this.activeVariant.status);
+      let status;
+      if (this.activeVariant.status === '') {
+        status = this.parentStatus;
+      } else {
+        // eslint-disable-next-line
+        status = this.activeVariant.status;
+      }
+      return this.$store.getters.compStatus(status);
     },
   },
 };
