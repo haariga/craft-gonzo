@@ -4,6 +4,7 @@
       <Variants v-if="Object.keys(render.variants).length > 1"
                 :variants="render.variants"
                 :template="render.templates[0]"
+                :parent-status="render.parentStatus"
                 @variantSelected="changeVariant($event)"
       />
       <i-frame-area :frame-src="frameSrc"/>

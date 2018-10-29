@@ -17,7 +17,7 @@
       </select>
       <div class="pl-content__examplesArrow" />
     </div>
-    <VariantMeta :active-variant="activeVariant" />
+    <VariantMeta :active-variant="activeVariant" :parent-status="parentStatus" />
   </div>
 </template>
 
@@ -29,6 +29,10 @@ export default {
   name: 'Variants',
   components: { VariantMeta },
   props: {
+    parentStatus: {
+      type: String,
+      default: '',
+    },
     variants: {
       type: Object,
       default: () => {},
