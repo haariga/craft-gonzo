@@ -1,5 +1,8 @@
 # Gonzo — Pattern Library
 
+
+![Screenshot](resources/img/plugin-logo.png)
+
 Gonzo is the Pattern Library with less effort. You've just created config files to bring your components in the library. 
 It's quite simple. You need no third party tool to have a pattern library. Just write your code as usual but start not
 with dummy hard written content in your templates. You also need entries in the backend (just some images) to fill your components.
