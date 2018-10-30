@@ -1,5 +1,8 @@
 # Gonzo — Pattern Library
 
+
+![Screenshot](resources/img/plugin-logo.png)
+
 Gonzo is the Pattern Library with less effort. You've just created config files to bring your components in the library. 
 It's quite simple. You need no third party tool to have a pattern library. Just write your code as usual but start not
 with dummy hard written content in your templates. You also need entries in the backend (just some images) to fill your components.
@@ -43,6 +46,8 @@ Go to the Plugin Store and search for: `Gonzo` and install it.
 
 
 ## Configuration
+
+### Plugin Config File
 You must create a `craft-gonzo.php` file in your config folder. 
 Here is a basic config file you can start with. In the `_examples` folder is a more complex one to create additional pages
 and stuff like this.
@@ -80,6 +85,33 @@ return [
     ],
 ];
 ```
+
+### Component Config File
+This are the minimum settings that we can display at the moment. A more complex sample is in the `_examples` folder.
+
+```php
+<?php
+// Describe your component
+$componentMeta = [
+    'title' => 'sampleComponent',
+    'status' => 'wip',
+    'visible' => true,
+    'type' => 'atom',
+    'path' => '_atoms/sampleComponent/',
+    'description' => 'sampleComponent Description'
+];
+
+$defaultVariant = [
+    'title' => 'sampleComponent Variant Title',
+    'status' => '', // if empty the global status is used
+    'description' => 'sampleComponent Variant Description'
+];
+
+return [
+    'meta' => array_merge($componentMeta, []),
+];
+```
+
 
 
 ## Screenshots
