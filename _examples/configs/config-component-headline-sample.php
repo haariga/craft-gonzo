@@ -49,7 +49,7 @@ return [
         ]),
         'headline--h5' => array_merge($defaultVariant, [
             'title' => 'Headline H5',
-            'description' => 'This is a H5 Headline.',
+            'description' => 'This is a H5 Headline.',Pattern Library
             'size' => 'h5',
         ]),
         'headline--h6' => array_merge($defaultVariant, [

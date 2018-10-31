@@ -88,18 +88,12 @@ $wrapperWidth: 2200px;
   height: 120px;
   position: fixed;
   top: 0;
-  line-height: 120px;
-  font-weight: 900;
-  @include ms-respond(font-size, 1);
-  pointer-events: none;
-  padding-right: s(4);
-  text-transform: uppercase;
 
-  span {
-    font-weight: 300;
-    text-transform: none;
-    color: c('blue');
-    @include ms-respond(font-size, 0);
+  img {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 240px;
   }
 }
 

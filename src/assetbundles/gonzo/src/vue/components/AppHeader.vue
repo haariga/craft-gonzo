@@ -1,7 +1,7 @@
 <template>
   <aside class="pl-aside">
     <div class="pl-logo">
-      Gonzo <span>Pattern Library</span>
+      <img src="../../img/logo.svg" alt="">
     </div>
     <input id="mainNav"
            class="pl-mainNavCheckBox"
