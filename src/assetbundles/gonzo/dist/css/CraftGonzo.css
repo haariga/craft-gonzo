@@ -1599,30 +1599,12 @@ h6,
 .pl-logo {
   height: 120px;
   position: fixed;
-  top: 0;
-  line-height: 120px;
-  font-weight: 900;
-  font-size: 18px;
-  pointer-events: none;
-  padding-right: 32px;
-  text-transform: uppercase; }
-  @media (min-width: 320px) and (max-width: 1440px) {
-    .pl-logo {
-      font-size: calc( 18px + 7 * ( ( 100vw - 320px) / 1120 )); } }
-  @media (min-width: 1440px) {
-    .pl-logo {
-      font-size: 25px; } }
-  .pl-logo span {
-    font-weight: 300;
-    text-transform: none;
-    color: #8d99a9;
-    font-size: 16px; }
-    @media (min-width: 320px) and (max-width: 1440px) {
-      .pl-logo span {
-        font-size: calc( 16px + 3 * ( ( 100vw - 320px) / 1120 )); } }
-    @media (min-width: 1440px) {
-      .pl-logo span {
-        font-size: 19px; } }
+  top: 0; }
+  .pl-logo img {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 240px; }
 
 .pl-main {
   width: 100%; }
