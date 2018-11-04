@@ -128,56 +128,35 @@
     position: relative;
     padding-left: 0;
 
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(s(-2), -50%);
-      background-color: c('blue');
-      width: 2px;
-      height: 2px;
-      border-radius: 20px;
-      opacity: 0.5;
-      transition: all 0.25s ease('out-cubic');
+    &--active {
+      font-weight: 700;
+
+      #{$root}__listItemStatus {
+        width: 7px;
+        height: 7px;
+      }
     }
 
     &:hover {
-      &::before {
-        opacity: 1;
-        width: 8px;
-      }
-    }
-
-    &--active {
-      padding-left: s(2);
-
-      &:hover {
-        &::before {
-          opacity: 1;
-          width: 20px;
-          height: 2px;
-        }
-      }
-
-      &::before {
-        opacity: 1;
-        width: 20px;
-        background-color: c('blue', 'dark');
+      #{$root}__listItemStatus {
+        width: 7px;
+        height: 7px;
       }
     }
   }
 
   &__listItemStatus {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
     position: absolute;
-    right: 0;
+    margin-top: -1px;
+    left: s(-2);
     top: 50%;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-    border-radius: 100%;
+    transition: all 0.125s ease('out-cubic');
   }
-
 }
 
 .pl-mainNavTrigger {

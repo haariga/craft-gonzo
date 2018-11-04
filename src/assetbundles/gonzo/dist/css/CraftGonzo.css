@@ -1599,30 +1599,12 @@ h6,
 .pl-logo {
   height: 120px;
   position: fixed;
-  top: 0;
-  line-height: 120px;
-  font-weight: 900;
-  font-size: 18px;
-  pointer-events: none;
-  padding-right: 32px;
-  text-transform: uppercase; }
-  @media (min-width: 320px) and (max-width: 1440px) {
-    .pl-logo {
-      font-size: calc( 18px + 7 * ( ( 100vw - 320px) / 1120 )); } }
-  @media (min-width: 1440px) {
-    .pl-logo {
-      font-size: 25px; } }
-  .pl-logo span {
-    font-weight: 300;
-    text-transform: none;
-    color: #8d99a9;
-    font-size: 16px; }
-    @media (min-width: 320px) and (max-width: 1440px) {
-      .pl-logo span {
-        font-size: calc( 16px + 3 * ( ( 100vw - 320px) / 1120 )); } }
-    @media (min-width: 1440px) {
-      .pl-logo span {
-        font-size: 19px; } }
+  top: 0; }
+  .pl-logo img {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 240px; }
 
 .pl-main {
   width: 100%; }
@@ -2126,39 +2108,25 @@ h6,
     text-decoration: none;
     position: relative;
     padding-left: 0; }
-    .pl-files__listItemLink::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(-16px, -50%);
-      background-color: #8d99a9;
-      width: 2px;
-      height: 2px;
-      border-radius: 20px;
-      opacity: 0.5;
-      transition: all 0.25s cubic-bezier(0.215, 0.61, 0.355, 1); }
-    .pl-files__listItemLink:hover::before {
-      opacity: 1;
-      width: 8px; }
     .pl-files__listItemLink--active {
-      padding-left: 16px; }
-      .pl-files__listItemLink--active:hover::before {
-        opacity: 1;
-        width: 20px;
-        height: 2px; }
-      .pl-files__listItemLink--active::before {
-        opacity: 1;
-        width: 20px;
-        background-color: #3E4145; }
+      font-weight: 700; }
+      .pl-files__listItemLink--active .pl-files__listItemStatus {
+        width: 7px;
+        height: 7px; }
+    .pl-files__listItemLink:hover .pl-files__listItemStatus {
+      width: 7px;
+      height: 7px; }
   .pl-files__listItemStatus {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
     position: absolute;
-    right: 0;
+    margin-top: -1px;
+    left: -16px;
     top: 50%;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-    border-radius: 100%; }
+    transition: all 0.125s cubic-bezier(0.215, 0.61, 0.355, 1); }
 
 .pl-mainNavTrigger {
   position: absolute;
