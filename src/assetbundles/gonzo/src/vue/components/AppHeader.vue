@@ -1,7 +1,7 @@
 <template>
   <aside class="pl-aside">
     <div class="pl-logo">
-      <img src="../../img/logo.svg" alt="">
+      <img :src="logoSrc" alt="Craft Gonzo">
     </div>
     <input id="mainNav"
            class="pl-mainNavCheckBox"
@@ -16,10 +16,16 @@
   </aside>
 </template>
 <script>
+import LogoSvg from '@Images/logo.svg';
 import TemplatelistNavigation from '@Components/TemplatelistNavigation';
 
 export default {
   name: 'AppHeader',
   components: { TemplatelistNavigation },
+  computed: {
+    logoSrc() {
+      return window.assetsUrl + LogoSvg;
+    },
+  },
 };
 </script>
