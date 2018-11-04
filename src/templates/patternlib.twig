@@ -1,6 +1,6 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 <!doctype html>
-<html lang="en">
+<html lang="en">`
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -9,6 +9,10 @@
   <title>patternlib</title>
   <link href="//fonts.googleapis.com/css?family=Roboto+Mono:300,400,500|Roboto:300,400,500,700,900" rel="stylesheet">
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <script>
+    window.assetsUrl =  "{{ craft.app.config.general.devMode ? '' : view.getAssetManager().getPublishedUrl('@martinherweg/craftgonzo/assetbundles/gonzo/dist') }}/"
+  </script>
   
   
     
