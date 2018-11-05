@@ -107,7 +107,7 @@ const webpackConfig = (env = {}) => {
         vue$: 'vue/dist/vue.esm.js',
         Modules: assetBundles('src/vue/components/'),
         '@Components': assetBundles('src/vue/components/'),
-        '@images': assetBundles('src/img/'),
+        '@Images': assetBundles('src/img/'),
         '@Views': assetBundles('src/vue/views/'),
       },
     },
@@ -124,7 +124,6 @@ const webpackConfig = (env = {}) => {
           use: [
             {
               loader: 'file-loader',
-              options: {},
             },
           ],
         },

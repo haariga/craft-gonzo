@@ -273,6 +273,7 @@ class DefaultController extends Controller
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
         $variables['pluginSettings'] = CraftGonzo::getInstance()->getSettings();
         $variables['patternlibBaseUrl'] = UrlHelper::siteUrl();
+        $variables['assetsUrl'] = Craft::$app->assetManager->getPublishedUrl('@martinherweg/craftgonzo');
         $html = Craft::$app->view->renderTemplate('craft-gonzo/patternlib.twig', $variables);
         Craft::$app->view->setTemplateMode($oldMode);
         Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
