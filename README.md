@@ -20,6 +20,7 @@ Third benefit is you can discuss about specific components with the client witho
 It's a living library and if your project grows your library will grow too!
 
 ---
+
 **Table of contents**
 
 * [Requirements](#requirements)
@@ -28,6 +29,7 @@ It's a living library and if your project grows your library will grow too!
 * [Screenshots](#screenshots)
 * [Example](#example)
 * [Roadmap](#roadmap)
+
 ---
 
 
