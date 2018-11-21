@@ -43,6 +43,8 @@
     width: 100%;
     max-width: 100%;
     position: relative;
+    // TODO: Remove later
+    overflow-x: scroll;
 
     &::after {
       content: '';
@@ -85,7 +87,7 @@
       margin-top: 16px;
       width: 100vw;
       min-height: 240px;
-      max-width: 100%;
+      // max-width: 100%; // TODO: Remove later
       position: relative;
       z-index: 100;
       border-radius: 5px;
