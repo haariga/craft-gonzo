@@ -45,11 +45,11 @@ export default {
   },
   data() {
     return {
-      activeWidth: '100vw',
+      activeWidth: '100%',
       iFrame: {
         loaded: false,
         height: 0,
-        width: '100vw',
+        width: '100%',
       },
     };
   },
@@ -70,7 +70,7 @@ export default {
   },
   mounted() {
     if (!this.$route.query.frameSize) {
-      this.setFrameSizeQuery('100vw');
+      this.setFrameSizeQuery('100%');
     } else {
       this.activeWidth = this.$route.query.frameSize;
       this.iFrame.width = this.$route.query.frameSize;
@@ -83,12 +83,17 @@ export default {
       });
     },
     iFrameWidth(width) {
-      let widthNumber = width.replace('px', '').replace('vw', '');
+      let widthNumber = width
+        .replace('px', '')
+        .replace('%', '')
+        .replace('vw', '');
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
       this.setFrameSizeQuery(width);
       if (width.includes('px')) {
         this.$set(this.iFrame, 'width', `${widthNumber}px`);
+      } else if (width.includes('%')) {
+        this.$set(this.iFrame, 'width', `${widthNumber}%`);
       } else if (width.includes('vw')) {
         this.$set(this.iFrame, 'width', `${widthNumber}vw`);
       } else {
