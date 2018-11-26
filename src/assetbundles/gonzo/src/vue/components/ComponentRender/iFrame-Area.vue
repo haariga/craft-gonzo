@@ -46,11 +46,11 @@ export default {
   },
   data() {
     return {
-      activeWidth: '100%',
+      activeWidth: '100vw',
       iFrame: {
         loaded: false,
         height: '240px',
-        width: '100%',
+        width: '100vw',
       },
     };
   },
@@ -61,7 +61,7 @@ export default {
   },
   mounted() {
     if (!this.$route.query.frameSize) {
-      this.setFrameSizeQuery('100%');
+      this.setFrameSizeQuery('100vw');
     } else {
       this.activeWidth = this.$route.query.frameSize;
       this.iFrame.width = this.$route.query.frameSize;
