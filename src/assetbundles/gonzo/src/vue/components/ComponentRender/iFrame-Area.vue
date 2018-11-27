@@ -51,7 +51,7 @@ export default {
         loaded: false,
         height: '240px',
         width: '100vw',
-        maxWidth: 'auto',
+        maxWidth: '100%',
       },
     };
   },

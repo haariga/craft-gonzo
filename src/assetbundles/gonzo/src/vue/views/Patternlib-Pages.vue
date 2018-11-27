@@ -89,13 +89,18 @@ export default {
         .replace('vw', '');
       widthNumber = Number.parseInt(widthNumber, 10);
       this.activeWidth = width;
+
       this.setFrameSizeQuery(width);
+
       if (width.includes('px')) {
-        this.$set(this.iFrame, 'width', `${widthNumber}px`);
+        this.$set(this.iFrame, 'width', `${widthNumber + 16}px`);
+        this.$set(this.iFrame, 'maxWidth', 'none');
       } else if (width.includes('%')) {
         this.$set(this.iFrame, 'width', `${widthNumber}%`);
+        this.$set(this.iFrame, 'maxWidth', '100%');
       } else if (width.includes('vw')) {
         this.$set(this.iFrame, 'width', `${widthNumber}vw`);
+        this.$set(this.iFrame, 'maxWidth', '100%');
       } else {
         this.$set(this.iFrame, 'width', 'none');
       }
