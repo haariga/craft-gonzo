@@ -84,6 +84,7 @@ class DefaultController extends Controller
             'js',
             'vue',
             'html',
+            'twig',
         ];
         $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'opt';
     }
