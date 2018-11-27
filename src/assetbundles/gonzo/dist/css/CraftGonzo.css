@@ -1829,7 +1829,6 @@ h6,
       resize: both;
       background-color: #e7edf1;
       opacity: 0;
-      box-sizing: content-box;
       transition: opacity 0.25s 0.5s ease-in-out; }
       .pl-content__container--iframe iframe.iFrameLoaded {
         opacity: 1; }
