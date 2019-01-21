@@ -9,6 +9,10 @@
 !IMPORTANT NOTE!
 This plugin is currently under development and requires a special structure in your templates folder to be used.
 Please scroll to the Structure example to learn more.
+If you have any recommendations on how to improve it please create a ticket on GitHub.
+
+Thank you very much
+David & Martin
 
 *******************
 ```
@@ -416,4 +420,4 @@ Some things to do, and ideas for potential features:
 
 * Release it
 
-Brought to you by [Martin Herweg](https://martinherweg.de)
+Brought to you by [Martin Herweg](https://martinherweg.de) & [David Hellmann](https://davidhellmann.com)
