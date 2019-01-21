@@ -6,10 +6,17 @@
 ```
 *** BETA **********
 
-Your text here
+!IMPORTANT NOTE!
+This plugin is currently under development and requires a special structure in your templates folder to be used.
+Please scroll to the Structure example to learn more.
 
 *******************
 ```
+
+## Demo
+
+You can this plugin in action here:
+https://craft3.baukasten.io/patternlib#/
 
 ## Description
 
@@ -37,7 +44,9 @@ It's a living library and if your project grows your library will grow too!
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Screenshots](#screenshots)
+* [Folder Structure](#structure)
 * [Example](#example)
+* [Pages](#pages)
 * [Roadmap](#roadmap)
 
 ---
@@ -94,6 +103,16 @@ return [
         1 => ["name" => "review", "color" => "#369BF4"],
         2 => ["name" => "done", "color" => "#4CAF50"],
         3 => ["name" => "discarded", "color" => "#F44336"],
+    ],
+    // You can configure custom pages for this plugin
+    "pages" => [
+	    'typography' => [
+		    'label' => 'Typography',
+		    'options' => [...]
+			],
+			'colors' => [
+				'label' => 'Colors',
+				'options' => [...],
     ],
 ];
 ```
@@ -163,7 +182,54 @@ return [
 ![Screenshot](resources/img/craft-gonzo-screenshot-colors-02.png)
 
 
+## Structure
+The plugin currently works best with a maximum of 2 levels
+```
+├── _atoms
+│   ├── button
+│   │   ├── _button.js
+│   │   ├── _button.scss
+│   │   ├── _button.{twig|html}
+│   │   └── config.php
+│   ├── headline
+│   │   ├── _headline.js
+│   │   ├── _headline.scss
+│   │   ├── _headline.{twig|html}
+│   │   └── config.php
+│   ├── image
+│   │   ├── _image.js
+│   │   ├── _image.scss
+│   │   ├── _image.{twig|html}
+│   │   └── config.php
+├── _molecules
+│   ├── card
+│   │   ├── _script.js
+│   │   ├── _style.scss
+│   │   ├── _template.{twig|html}
+│   │   └── config.php
+├── _organisms
+│   ├── accordion
+│   │   ├── _script.js
+│   │   ├── _style.scss
+│   │   ├── _template.{twig|html}
+│   │   └── config.php
+│   ├── cards
+│   │   ├── _script.js
+│   │   ├── _style.scss
+│   │   ├── _template.{twig|html}
+│   │   └── config.php
+```
 
+You can have other folders and files in your templates folder but this is a tested and used structure.
+You should set the `"compFolders"` setting to something like this:
+```
+"compFolders" => [
+	"_atoms",
+	"_molecules",
+	"_organisms",
+]
+```
+All filenames except the config.php don't really matter, the plugin searches for `*.twig`, `*.scss` and `*.js` files.
 
 ## Example
 ### Headline Component
@@ -339,6 +405,11 @@ export default headline
 
 ```
 
+## Pages
+You can create custom pages for example a color page where you can show Colors used on the site.
+
+To create a custom page just add it to the `pages` option and create a template in `patternlib/pages` the `key` should be the same as the filename for example `colors` -> `colors.{twig|html}`.
+Every page should have a label key which is used for the navigation and an options key where you can define options you can use in this template.
 
 ## Roadmap
 Some things to do, and ideas for potential features:
