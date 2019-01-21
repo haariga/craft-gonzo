@@ -3,11 +3,13 @@
 
 ![Screenshot](resources/img/plugin-logo.png)
 
+```
 *** BETA **********
 
 Your text here
 
 *******************
+```
 
 Gonzo is the Pattern Library with less effort. You've just created config files to bring your components in the library. 
 It's quite simple. You need no third party tool to have a pattern library. Just write your code as usual but start not
