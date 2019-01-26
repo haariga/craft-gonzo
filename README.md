@@ -3,6 +3,27 @@
 
 ![Screenshot](resources/img/plugin-logo.png)
 
+```
+*** BETA **********
+
+!IMPORTANT NOTE!
+This plugin is currently under development and requires a special structure in your templates folder to be used.
+Please scroll to the Structure example to learn more.
+If you have any recommendations on how to improve it please create a ticket on GitHub.
+
+Thank you very much
+David & Martin
+
+*******************
+```
+
+## Demo
+
+You can this plugin in action here:
+https://craft3.baukasten.io/patternlib#/
+
+## Description
+
 Gonzo is the Pattern Library with less effort. You've just created config files to bring your components in the library. 
 It's quite simple. You need no third party tool to have a pattern library. Just write your code as usual but start not
 with dummy hard written content in your templates. You also need entries in the backend (just some images) to fill your components.
@@ -20,14 +41,18 @@ Third benefit is you can discuss about specific components with the client witho
 It's a living library and if your project grows your library will grow too!
 
 ---
+
 **Table of contents**
 
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Screenshots](#screenshots)
+* [Folder Structure](#structure)
 * [Example](#example)
+* [Pages](#pages)
 * [Roadmap](#roadmap)
+
 ---
 
 
@@ -82,6 +107,16 @@ return [
         1 => ["name" => "review", "color" => "#369BF4"],
         2 => ["name" => "done", "color" => "#4CAF50"],
         3 => ["name" => "discarded", "color" => "#F44336"],
+    ],
+    // You can configure custom pages for this plugin
+    "pages" => [
+	    'typography' => [
+		    'label' => 'Typography',
+		    'options' => [...]
+			],
+			'colors' => [
+				'label' => 'Colors',
+				'options' => [...],
     ],
 ];
 ```
@@ -151,7 +186,54 @@ return [
 ![Screenshot](resources/img/craft-gonzo-screenshot-colors-02.png)
 
 
+## Structure
+The plugin currently works best with a maximum of 2 levels
+```
+├── _atoms
+│   ├── button
+│   │   ├── _button.js
+│   │   ├── _button.scss
+│   │   ├── _button.{twig|html}
+│   │   └── config.php
+│   ├── headline
+│   │   ├── _headline.js
+│   │   ├── _headline.scss
+│   │   ├── _headline.{twig|html}
+│   │   └── config.php
+│   ├── image
+│   │   ├── _image.js
+│   │   ├── _image.scss
+│   │   ├── _image.{twig|html}
+│   │   └── config.php
+├── _molecules
+│   ├── card
+│   │   ├── _script.js
+│   │   ├── _style.scss
+│   │   ├── _template.{twig|html}
+│   │   └── config.php
+├── _organisms
+│   ├── accordion
+│   │   ├── _script.js
+│   │   ├── _style.scss
+│   │   ├── _template.{twig|html}
+│   │   └── config.php
+│   ├── cards
+│   │   ├── _script.js
+│   │   ├── _style.scss
+│   │   ├── _template.{twig|html}
+│   │   └── config.php
+```
 
+You can have other folders and files in your templates folder but this is a tested and used structure.
+You should set the `"compFolders"` setting to something like this:
+```
+"compFolders" => [
+	"_atoms",
+	"_molecules",
+	"_organisms",
+]
+```
+All filenames except the config.php don't really matter, the plugin searches for `*.twig`, `*.scss` and `*.js` files.
 
 ## Example
 ### Headline Component
@@ -327,10 +409,15 @@ export default headline
 
 ```
 
+## Pages
+You can create custom pages for example a color page where you can show Colors used on the site.
+
+To create a custom page just add it to the `pages` option and create a template in `patternlib/pages` the `key` should be the same as the filename for example `colors` -> `colors.{twig|html}`.
+Every page should have a label key which is used for the navigation and an options key where you can define options you can use in this template.
 
 ## Roadmap
 Some things to do, and ideas for potential features:
 
 * Release it
 
-Brought to you by [Martin Herweg](https://martinherweg.de)
+Brought to you by [Martin Herweg](https://martinherweg.de) & [David Hellmann](https://davidhellmann.com)

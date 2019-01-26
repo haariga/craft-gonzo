@@ -10,14 +10,14 @@
 
 namespace martinherweg\craftgonzo\controllers;
 
+use Craft;
 use craft\helpers\Template;
 use craft\helpers\UrlHelper;
-use craft\web\View;
-use martinherweg\craftgonzo\CraftGonzo;
-use martinherweg\craftgonzo\assetbundles\gonzo\GonzoAsset;
-use Craft;
 use craft\web\Controller;
+use craft\web\View;
 use Illuminate\Support\Collection;
+use martinherweg\craftgonzo\assetbundles\gonzo\GonzoAsset;
+use martinherweg\craftgonzo\CraftGonzo;
 
 /**
  * Default Controller
@@ -84,6 +84,7 @@ class DefaultController extends Controller
             'js',
             'vue',
             'html',
+            'twig',
         ];
         $this->optionsKey = CraftGonzo::getInstance()->getSettings()->optionsKey ? CraftGonzo::getInstance()->getSettings()->optionsKey : 'opt';
     }
@@ -192,7 +193,8 @@ class DefaultController extends Controller
         $collection = $collection->filter(function ($item) {
             return count($item['children']);
         })->sortBy(function ($item, $key) {
-            return $key;
+            $configOrderIndex = array_search($key, $this->compFolders);
+            return $configOrderIndex;
         });
 
         return $collection->map(function ($item, $key) {
