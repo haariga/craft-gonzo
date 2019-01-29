@@ -2,7 +2,7 @@
   "name"       : "haariga/craft-gonzo",
   "description": "Component Library from your templates Folder",
   "type"       : "craft-plugin",
-  "version"    : "0.0.1",
+  "version"    : "1.0.0-beta.1",
   "keywords"   : [
     "craft",
     "cms",
@@ -28,7 +28,7 @@
     }
   ],
   "require"    : {
-    "craftcms/cms"     : "^3.0.0-RC1",
+    "craftcms/cms"     : "^3.0.0",
     "tightenco/collect": "^5.5.9"
   },
   "autoload"   : {
@@ -39,7 +39,7 @@
   "extra"      : {
     "name"         : "Craft Gonzo",
     "handle"       : "craft-gonzo",
-    "schemaVersion": "0.0.1",
+    "schemaVersion": "1.0.0-beta.1",
     "hasCpSettings": false,
     "hasCpSection" : false,
     "changelogUrl" : "https://raw.githubusercontent.com/haariga/craft-gonzo/master/CHANGELOG.md",
