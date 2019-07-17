@@ -2,7 +2,7 @@
   "name"       : "haariga/craft-gonzo",
   "description": "Component Library from your templates Folder",
   "type"       : "craft-plugin",
-  "version"    : "1.0.0-beta.2",
+  "version"    : "1.0.0-beta.3",
   "keywords"   : [
     "craft",
     "cms",
