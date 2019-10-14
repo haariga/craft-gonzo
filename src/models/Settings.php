@@ -10,6 +10,7 @@ use craft\base\Model;
         public $patternLibFolder = 'patternlib';
         public $optionsKey = 'opt';
         public $compFolders = [];
+        public $subFolder = '';
         public $navigation = [
             0 => [
                 'name' => 'home',

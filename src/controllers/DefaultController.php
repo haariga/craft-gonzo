@@ -101,6 +101,11 @@ class DefaultController extends Controller
      */
     public function dirtree($dir, $regex = '', $ignoreEmpty = false, $depth = 0)
     {
+        // Powered by Internetzstube
+        if (CraftGonzo::getInstance()->getSettings()->subFolder) {
+            $dir .= DIRECTORY_SEPARATOR . CraftGonzo::getInstance()->getSettings()->subFolder;
+        }
+
         // https://stackoverflow.com/questions/18251505/file-structure-to-multidimensional-array
         $origin = new \IteratorIterator(new \DirectoryIterator($dir));
         $dirs = [];
