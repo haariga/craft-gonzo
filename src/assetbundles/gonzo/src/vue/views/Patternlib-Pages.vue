@@ -62,7 +62,9 @@ export default {
     },
     frameSrc() {
       const previewUrl = '/patternlib';
-      return `${previewUrl}/pages-render/${this.$route.params.name}`;
+      return `${previewUrl}/pages-render/${this.$route.params.name}?fullSize${
+        this.$route.params.name.includes('views') ? '?isView' : ''
+      }`;
     },
     mqButtons() {
       return this.$store.state.pluginSettings.mqButtons;

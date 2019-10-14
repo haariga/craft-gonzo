@@ -9,7 +9,7 @@
                 @click="iFrameWidth(width)"
                 v-text="width" />
 
-        <a :href="frameSrc" target="_blank" class="pl-button pl-button--newWindow">Open in new tab</a>
+        <a :href="newTabLink" target="_blank" class="pl-button pl-button--newWindow">Open in new tab</a>
       </div>
     </div>
 
@@ -58,6 +58,11 @@ export default {
   computed: {
     mqButtons() {
       return this.$store.state.pluginSettings.mqButtons;
+    },
+    newTabLink() {
+      return `${this.frameSrc}?fullSize${
+        this.$route.params.name.includes('views') ? '&isView' : ''
+      }`;
     },
   },
   mounted() {
