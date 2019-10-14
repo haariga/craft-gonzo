@@ -34,6 +34,8 @@
      * @package   CraftGonzo
      * @since     0.0.1
      *
+     * @property GonzoService $helper
+     *
      */
     class CraftGonzo extends Plugin
     {
@@ -137,5 +139,14 @@
         protected function createSettingsModel()
         {
             return new models\Settings();
+        }
+
+        /**
+         * @return GonzoService
+         * @throws \yii\base\InvalidConfigException
+         */
+        public static function getGonzoService(): GonzoService
+        {
+            return self::$plugin->get('helper');
         }
     }
