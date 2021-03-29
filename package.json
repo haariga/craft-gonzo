@@ -51,7 +51,7 @@
     "jest-cli": "^23.6.0",
     "jest-localstorage-mock": "^2.2.0",
     "jest-serializer-vue": "^2.0.2",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.1",
     "prettier-eslint-cli": "^4.7.1",
     "prettier-stylelint": "^0.4.2",
     "regenerator-runtime": "^0.12.1",
