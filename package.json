@@ -86,7 +86,7 @@
     "modularscale": "^2.0.1",
     "modularscale-sass": "^3.0.5",
     "pretty": "^2.0.0",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.24.0",
     "vue": "^2.5.17",
     "vue-meta": "^1.5.5",
     "vue-router": "^3.0.1",
