@@ -1,7 +1,7 @@
 <?php
 
 
-namespace martinherweg\craftgonzo\assetbundles\gonzo;
+namespace haariga\craftgonzo\assetbundles\gonzo;
 
 
 use craft\web\AssetBundle;
@@ -11,7 +11,7 @@ class GonzoAsset extends AssetBundle
 {
     public function init()
     {
-        $this->sourcePath = '@martinherweg/craftgonzo/web/assets/dist';
+        $this->sourcePath = '@haariga/craftgonzo/web/assets/dist';
         $this->depends = [
             CpAsset::class,
         ];

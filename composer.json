@@ -29,12 +29,12 @@
   ],
   "require"    : {
     "craftcms/cms"     : "^3.0.0",
-    "tightenco/collect": "^8.34.0",
-    "nystudio107/craft-plugin-vite": "^1.0.6"
+    "illuminate/collections": "^v8.83.3",
+    "nystudio107/craft-plugin-vite": "^1.0.22"
   },
   "autoload"   : {
     "psr-4": {
-      "martinherweg\\craftgonzo\\": "src/"
+      "haariga\\craftgonzo\\": "src/"
     }
   },
   "extra"      : {
@@ -44,6 +44,6 @@
     "hasCpSettings": false,
     "hasCpSection" : false,
     "changelogUrl" : "https://raw.githubusercontent.com/haariga/craft-gonzo/master/CHANGELOG.md",
-    "class"        : "martinherweg\\craftgonzo\\CraftGonzo"
+    "class"        : "haariga\\craftgonzo\\CraftGonzo"
   }
 }

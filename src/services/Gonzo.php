@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2021 Martin Herweg
  */
 
-namespace martinherweg\craftgonzo\services;
+namespace haariga\craftgonzo\services;
 
-use martinherweg\craftgonzo\CraftGonzo;
+use haariga\craftgonzo\CraftGonzo;
 
 use Craft;
 use craft\base\Component;

@@ -8,11 +8,11 @@
  * @copyright Copyright (c) 2021 Martin Herweg
  */
 
-namespace martinherweg\craftgonzo;
+namespace haariga\craftgonzo;
 
 use craft\web\twig\variables\CraftVariable;
-use martinherweg\craftgonzo\assetbundles\gonzo\GonzoAsset;
-use martinherweg\craftgonzo\services\Gonzo;
+use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
+use haariga\craftgonzo\services\Gonzo;
 
 use Craft;
 use craft\base\Plugin;

@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2021 Martin Herweg
  */
 
-namespace martinherweg\craftgonzo\variables;
+namespace haariga\craftgonzo\variables;
 
-use martinherweg\craftgonzo\CraftGonzo;
+use haariga\craftgonzo\CraftGonzo;
 use nystudio107\pluginvite\variables\ViteVariableInterface;
 use nystudio107\pluginvite\variables\ViteVariableTrait;
 

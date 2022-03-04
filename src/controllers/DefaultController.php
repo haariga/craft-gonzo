@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2021 Martin Herweg
  */
 
-namespace martinherweg\craft3gonzo\controllers;
+namespace haariga\craftgonzo\controllers;
 
-use martinherweg\craft3gonzo\Craft3Gonzo;
+use haariga\craftgonzo\CraftGonzo;
 
 use Craft;
 use craft\web\Controller;

@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2021 Martin Herweg
  */
 
-namespace martinherweg\craftgonzo\controllers;
+namespace haariga\craftgonzo\controllers;
 
 use Craft;
 use craft\web\Controller;
 use craft\web\View;
-use martinherweg\craftgonzo\assetbundles\gonzo\GonzoAsset;
+use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
 
 /**
  * FrontEndRoutes Controller
