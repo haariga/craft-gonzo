@@ -20,7 +20,8 @@ use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
-use martinherweg\craftgonzo\variables\CraftGonzoVariable;
+use haariga\craftgonzo\variables\CraftGonzoVariable;
+use haariga\craftgonzo\services\TemplatesFolder;
 use nystudio107\pluginvite\services\VitePluginService;
 
 use yii\base\Event;
@@ -39,7 +40,7 @@ use yii\base\Event;
  * @package   CraftGonzo
  * @since     2.0.0-alpha.1
  *
- * @property  GonzoService $gonzo
+ * @property  Gonzo $gonzo
  */
 class CraftGonzo extends Plugin
 {
@@ -92,7 +93,7 @@ class CraftGonzo extends Plugin
                 'devServerPublic' => 'http://localhost:3001',
                 'serverPublic' => 'http://localhost:8000',
                 'errorEntry' => '/src/js/app.ts',
-                'devServerInternal' => 'http://craft-gonzo-buildchain:3001',
+                'devServerInternal' => 'http://localhost:3001',
                 'checkDevServer' => true
             ],
         ];
@@ -163,6 +164,11 @@ class CraftGonzo extends Plugin
                 ]);
             }
         );
+
+
+        $this->setComponents([
+            'templatesFolder' => TemplatesFolder::class,
+        ]);
 
         /**
          * Logging in Craft involves using one of the following methods:

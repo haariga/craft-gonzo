@@ -46,4 +46,9 @@ class CraftGonzoVariable implements ViteVariableInterface
      *     {{ craft.craftGonzo.exampleVariable(twigValue) }}
      *
      */
+
+    public function getTemplates()
+    {
+        CraftGonzo::$plugin->templatesFolder->readTemplatesFolderV2();
+    }
 }
