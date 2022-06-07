@@ -70,7 +70,7 @@ class CraftGonzo extends Plugin
      *
      * @var bool
      */
-    public $hasCpSettings = false;
+    public $hasCpSettings = true;
 
     /**
      * Set to `true` if the plugin should have its own section (main nav item) in the control panel.
@@ -201,4 +201,8 @@ class CraftGonzo extends Plugin
     // Protected Methods
     // =========================================================================
 
+    protected function createSettingsModel()
+    {
+        return new \haariga\craftgonzo\models\Settings();
+    }
 }
