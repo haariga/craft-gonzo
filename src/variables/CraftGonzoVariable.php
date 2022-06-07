@@ -49,6 +49,13 @@ class CraftGonzoVariable implements ViteVariableInterface
 
     public function getTemplates()
     {
-        CraftGonzo::$plugin->templatesFolder->readTemplatesFolderV2();
+        $templates = CraftGonzo::$plugin->templatesFolder->readTemplatesFolderV2();
+
+        return $templates;
+    }
+
+    public function getComponents()
+    {
+        return CraftGonzo::$plugin->templatesFolder->getComponents();
     }
 }

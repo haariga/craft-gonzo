@@ -9,7 +9,8 @@
 </head>
 <body>
 <h1>Gonzo Patternlib</h1>
-{{ craft.gonzo.getTemplates() }}
+{% set components = craft.gonzo.getTemplates() %}
+{{ dd(components) }}
 <div id="app-container"></div>
 
 {% set scriptTagOptions = {

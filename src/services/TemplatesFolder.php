@@ -13,6 +13,7 @@ namespace haariga\craftgonzo\services;
 use Craft;
 use craft\base\Component;
 use FilesystemIterator;
+use haariga\craftgonzo\CraftGonzo;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -42,6 +43,7 @@ class TemplatesFolder extends Component
         Craft::$app->view->setTemplateMode('site');
         $this->templateDir = Craft::$app->view->getTemplatesPath();
         Craft::$app->view->setTemplateMode($oldTemplateMode);
+        $this->pathsToSearch = CraftGonzo::$plugin->getSettings()->compFolders;
     }
     // Public Methods
     // =========================================================================
@@ -81,12 +83,38 @@ class TemplatesFolder extends Component
 
     public function readTemplatesFolderV2()
     {
-        $paths = $this->buildComponentTree();
+        $paths = $this->buildComponentTree(true);
 
         return $paths;
     }
 
-    private function buildComponentTree()
+    public function getComponents()
+    {
+        $tree = $this->buildComponentTree();
+        return $this->removeEmptyValues($tree);
+    }
+
+    /**
+     * Remove any elements where the value is empty
+     *
+     * @param array $array the array to walk
+     *
+     * @return array
+     */
+    private function removeEmptyValues(array &$array)
+    {
+        foreach ($array as $key => &$value) {
+            if (is_array($value)) {
+                $value = $this->removeEmptyValues($value);
+            }
+            if (empty($value)) {
+                unset($array[$key]);
+            }
+        }
+        return $array;
+    }
+
+    private function buildComponentTree($full = false)
     {
         $dir = new RecursiveDirectoryIterator($this->templateDir, FilesystemIterator::SKIP_DOTS);
         $filtered = new RecursiveCallbackFilterIterator($dir, function($current, $key, $iterator) {
@@ -116,7 +144,7 @@ class TemplatesFolder extends Component
             }
 
             if ($fileinfo->isDir()) {
-                $parrentAttr[$name] = $this->buildFileTree($fileinfo->getPathname());
+                $parrentAttr[$name] = $this->buildFileTree($fileinfo->getPathname(), $full);
             }
         }
         unset($parrentAttr);
@@ -124,7 +152,8 @@ class TemplatesFolder extends Component
         return $tree;
     }
 
-    private function buildFileTree($dir)
+
+    private function buildFileTree($dir, $full = false)
     {
         $_dir = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
         $iterator = new RecursiveIteratorIterator($_dir, RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
@@ -133,6 +162,8 @@ class TemplatesFolder extends Component
 
         foreach ($iterator as $fileinfo) {
             $name = $fileinfo->getFilename();
+            $path = $fileinfo->getPathname();
+            $type = pathinfo($path, PATHINFO_EXTENSION);
             $sub_path_name = $iterator->getSubPathName();
             $parts = explode(DIRECTORY_SEPARATOR, $sub_path_name);
             array_pop($parts);
@@ -146,11 +177,24 @@ class TemplatesFolder extends Component
             if ($fileinfo->isDir()) {
                 $parrentAttr[$name] = [];
             } else {
-                $parrentAttr['files'][] = [
-                    'filename' => $name,
-                ];
+                if (!$full) {
+                    if (file_exists($_dir->getPathname().'/gonzo.php')) {
+                        $parrentAttr['files'][] = [
+                            'filename' => $name,
+                            'filepath' => $path,
+                            'filetype' => $type,
+                        ];
+                    }
+                } else {
+                    $parrentAttr['files'][] = [
+                        'filename' => $name,
+                        'filepath' => $path,
+                        'filetype' => $type,
+                    ];
+                }
             }
         }
+
         unset($parrentAttr);
 
         return $tree;
