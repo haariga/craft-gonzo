@@ -17,6 +17,7 @@ use haariga\craftgonzo\CraftGonzo;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use function Composer\Autoload\includeFile;
 
 /**
  * TemplatesFolder Service
@@ -178,7 +179,14 @@ class TemplatesFolder extends Component
                 $parrentAttr[$name] = [];
             } else {
                 if (!$full) {
-                    if (file_exists($_dir->getPathname().'/gonzo.php')) {
+                    if (!empty(glob($_dir->getPathname() . '/Gonzo*.php'))) {
+                        if (str_contains($name, 'Config')) {
+                            require_once $path;
+                            $class = basename($path, '.php');
+                            $instance =new $class();
+                            $instance->setPath($_dir->getPathname() . DIRECTORY_SEPARATOR);
+                            $parrentAttr['config'] = $instance;
+                        }
                         $parrentAttr['files'][] = [
                             'filename' => $name,
                             'filepath' => $path,
