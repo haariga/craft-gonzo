@@ -181,17 +181,21 @@ class TemplatesFolder extends Component
                 if (!$full) {
                     if (!empty(glob($_dir->getPathname() . '/Gonzo*.php'))) {
                         if (str_contains($name, 'Config')) {
+                            // alternatively use plugin settings to reference config instances
+                            // init the class instance in the config and use key value pairs to compare here
+                            // and use the class instance in the config
                             require_once $path;
                             $class = basename($path, '.php');
                             $instance =new $class();
                             $instance->setPath($_dir->getPathname() . DIRECTORY_SEPARATOR);
                             $parrentAttr['config'] = $instance;
+                        } else {
+                            $parrentAttr['files'][] = [
+                                'filename' => $name,
+                                'filepath' => $path,
+                                'filetype' => $type,
+                            ];
                         }
-                        $parrentAttr['files'][] = [
-                            'filename' => $name,
-                            'filepath' => $path,
-                            'filetype' => $type,
-                        ];
                     }
                 } else {
                     $parrentAttr['files'][] = [
