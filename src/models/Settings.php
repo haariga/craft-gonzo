@@ -7,6 +7,7 @@ use craft\base\Model;
 class Settings extends Model
 {
     public $compFolders = [];
+    public $comps = [];
     public $mqButtons = [];
     public $compStatus = [];
     public $pages = [];

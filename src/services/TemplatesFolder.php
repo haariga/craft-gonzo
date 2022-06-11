@@ -179,16 +179,18 @@ class TemplatesFolder extends Component
                 $parrentAttr[$name] = [];
             } else {
                 if (!$full) {
-                    if (!empty(glob($_dir->getPathname() . '/Gonzo*.php'))) {
+                    // TODO: Optimize Condition to only add comps added in the comps array
+                    if (!empty(glob($_dir->getPathname().'/Gonzo*.php'))) {
                         if (str_contains($name, 'Config')) {
-                            // alternatively use plugin settings to reference config instances
-                            // init the class instance in the config and use key value pairs to compare here
-                            // and use the class instance in the config
-                            require_once $path;
-                            $class = basename($path, '.php');
-                            $instance =new $class();
-                            $instance->setPath($_dir->getPathname() . DIRECTORY_SEPARATOR);
-                            $parrentAttr['config'] = $instance;
+                            $comps = collect(CraftGonzo::$plugin->getSettings()->comps);
+                            $class = $comps->first(function($value, $key) use ($name) {
+                                $basename = basename($name, '.php');
+                                return $key === $basename;
+                            });
+                            if ($class) {
+                                $class->setPath($_dir->getPathname().DIRECTORY_SEPARATOR);
+                                $parrentAttr['config'] = $class;
+                            }
                         } else {
                             $parrentAttr['files'][] = [
                                 'filename' => $name,
