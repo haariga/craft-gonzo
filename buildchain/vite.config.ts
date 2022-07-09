@@ -1,5 +1,6 @@
 import { build, defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import ViteRestart from 'vite-plugin-restart';
 import viteCompression from 'vite-plugin-compression';
 import manifestSRI from 'vite-plugin-manifest-sri';
@@ -31,6 +32,7 @@ export default defineConfig(({ command }) => ({
       reload: ['./src/templates/**/*.{twig,html}'],
     }),
     vue(),
+    vueJsx(),
     viteCompression({
       filter: /\.(js|mjs|json|css|map)$/i,
     }),
