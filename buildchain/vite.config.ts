@@ -10,7 +10,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import path from 'path';
 
 export default defineConfig(({ command }) => ({
-  base: command === 'serve' ? '' : '/dist/',
+  base: command === 'serve' ? '/patternlib/' : '/dist/',
   build: {
     emptyOutDir: true,
     manifest: true,
