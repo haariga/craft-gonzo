@@ -48,40 +48,7 @@ class TemplatesFolder extends Component
     // Public Methods
     // =========================================================================
 
-    /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
-     *
-     * From any other plugin file, call it like this:
-     *
-     *     CraftGonzo::$plugin->templatesFolder->exampleService()
-     *
-     * @return mixed
-     */
     public function readTemplatesFolder()
-    {
-
-        $paths = [];
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->templateDir));
-        foreach ($iterator as $file) {
-            if ($file->isDir()) {
-                continue;
-            }
-            $paths[dirname($file->getPathname())][] = $file->getPathname();
-        }
-        $collection = collect($paths);
-        $components = $collection->filter(function($comp) {
-            return collect($comp)->contains(function($value) {
-                return str_contains($value, 'config');
-            });
-        })->mapToGroups(function($item) {
-            return [pathinfo($item[0])['dirname'] => $item];
-        });
-
-        return $components;
-    }
-
-    public function readTemplatesFolderV2()
     {
         $paths = $this->buildComponentTree(true);
 
@@ -145,7 +112,7 @@ class TemplatesFolder extends Component
             }
 
             if ($fileinfo->isDir()) {
-                $parrentAttr[$name] = $this->buildFileTree($fileinfo->getPathname(), $full);
+                $parrentAttr[$name]['children'] = $this->buildFileTree($fileinfo->getPathname(), $full);
             }
         }
         unset($parrentAttr);
@@ -176,12 +143,14 @@ class TemplatesFolder extends Component
             }
 
             if ($fileinfo->isDir()) {
-                $parrentAttr[$name] = [];
+                if ($iterator->callGetChildren()->isDir()) {
+                    $parrentAttr[$name]['children'] = $this->buildFileTree($fileinfo->getPathname(), $full);
+                 }
             } else {
                 if (!$full) {
                     // TODO: Optimize Condition to only add comps added in the comps array
-                    if (!empty(glob($_dir->getPathname().'/Gonzo*.php'))) {
-                        if (str_contains($name, 'Config')) {
+                    if (!empty(glob($fileinfo->getPathInfo()->getPathname().'/Gonzo*.php'))) {
+                        if (mb_strpos($name, 'Config')) {
                             $comps = collect(CraftGonzo::$plugin->getSettings()->comps);
                             $class = $comps->first(function($value, $key) use ($name) {
                                 $basename = basename($name, '.php');
@@ -190,7 +159,8 @@ class TemplatesFolder extends Component
                             if ($class) {
                                 $class->setPath($_dir->getPathname().DIRECTORY_SEPARATOR);
                                 $class->setTemplatePath($_dir->getSubPathname().DIRECTORY_SEPARATOR);
-                                $parrentAttr['config']['title'] = basename($_dir->getPathname().DIRECTORY_SEPARATOR);
+                                $parrentAttr['configs'][] = $class;
+                                $parrentAttr['config']['title'] = basename($fileinfo->getPathinfo()->getPathname().DIRECTORY_SEPARATOR);
                             }
                         } else {
                             $parrentAttr['files'][] = [
