@@ -4,11 +4,12 @@ namespace haariga\craftgonzo\models;
 
 class ComponentConfig
 {
-    private string $title = '';
-    private string $status = '';
+    public string $title = '';
+    public string $status = '';
+    public bool $visible = true;
+    public string $description = '';
+    public string $templatePath = '';
     private string $path = '';
-    private bool $visible = true;
-    private string $description = '';
 
     /**
      * @return string
@@ -111,4 +112,19 @@ class ComponentConfig
         $this->path = $path;
     }
 
+    /**
+     * @return string
+     */
+    public function getTemplatePath(): string
+    {
+        return $this->templatePath;
+    }
+
+    /**
+     * @param string $templatePath
+     */
+    public function setTemplatePath(string $templatePath): void
+    {
+        $this->templatePath = $templatePath;
+    }
 }

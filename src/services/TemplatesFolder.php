@@ -17,7 +17,6 @@ use haariga\craftgonzo\CraftGonzo;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use function Composer\Autoload\includeFile;
 
 /**
  * TemplatesFolder Service
@@ -35,7 +34,7 @@ use function Composer\Autoload\includeFile;
 class TemplatesFolder extends Component
 {
     private $templateDir = '';
-    private $pathsToSearch = ['_embeds', '_atoms'];
+    private $pathsToSearch = ['Embeds' => '_embeds', 'Atoms' => '_atoms'];
 
     public function __construct($config = [])
     {
@@ -121,7 +120,7 @@ class TemplatesFolder extends Component
         $filtered = new RecursiveCallbackFilterIterator($dir, function($current, $key, $iterator) {
             $filename = $current->getFilename();
 
-            if (in_array($filename, $this->pathsToSearch)) {
+            if (in_array($filename, array_values($this->pathsToSearch))) {
                 return true;
             }
 
@@ -133,7 +132,8 @@ class TemplatesFolder extends Component
         $tree = [];
 
         foreach ($iterator as $fileinfo) {
-            $name = $fileinfo->getFilename();
+            $comps = collect($this->pathsToSearch);
+            $name = $comps->search($fileinfo->getFilename());
             $sub_path_name = $iterator->getSubPathName();
             $parts = explode(DIRECTORY_SEPARATOR, $sub_path_name);
             array_pop($parts);
@@ -189,7 +189,8 @@ class TemplatesFolder extends Component
                             });
                             if ($class) {
                                 $class->setPath($_dir->getPathname().DIRECTORY_SEPARATOR);
-                                $parrentAttr['config'] = $class;
+                                $class->setTemplatePath($_dir->getSubPathname().DIRECTORY_SEPARATOR);
+                                $parrentAttr['config']['title'] = basename($_dir->getPathname().DIRECTORY_SEPARATOR);
                             }
                         } else {
                             $parrentAttr['files'][] = [
