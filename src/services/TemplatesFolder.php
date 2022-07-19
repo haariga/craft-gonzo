@@ -58,7 +58,8 @@ class TemplatesFolder extends Component
     public function getComponents()
     {
         $tree = $this->buildComponentTree();
-        return $this->removeEmptyValues($tree);
+        $tree = $this->removeEmptyValues($tree);
+        return $tree;
     }
 
     /**
@@ -112,10 +113,40 @@ class TemplatesFolder extends Component
             }
 
             if ($fileinfo->isDir()) {
-                $parrentAttr[$name]['children'] = $this->buildFileTree($fileinfo->getPathname(), $full);
+                $parrentAttr[$name]['config'] = [
+                    'title' => $name,
+                ];
+                $parrentAttr[$name]['children'] = $this->buildFileTreeV2($fileinfo->getPathname());
             }
         }
         unset($parrentAttr);
+
+        return $tree;
+    }
+
+    private function buildFileTreeV2(string $dir)
+    {
+
+        $_dir = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+
+        $tree = [];
+
+        foreach ($_dir as $item) {
+            $name = basename($item->getPathname());
+            $attr = &$tree;
+            if ($item->isDir()) {
+                $attr[$name] = [];
+                if (!empty(glob($item->getPathname().'/Gonzo*.php'))) {
+                    $attr[$name]['files'][] = $item->getFilename();
+                } else {
+                    $attr[$name]['children'] = $this->buildFileTreeV2($item->getPathname());
+                }
+            }
+        }
+
+        $tree = $this->removeEmptyValues($tree);
+
+        unset($attr);
 
         return $tree;
     }
@@ -127,6 +158,7 @@ class TemplatesFolder extends Component
         $iterator = new RecursiveIteratorIterator($_dir, RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
 
         $tree = [];
+        $level = 0;
 
         foreach ($iterator as $fileinfo) {
             $name = $fileinfo->getFilename();
@@ -145,7 +177,7 @@ class TemplatesFolder extends Component
             if ($fileinfo->isDir()) {
                 if ($iterator->callGetChildren()->isDir()) {
                     $parrentAttr[$name]['children'] = $this->buildFileTree($fileinfo->getPathname(), $full);
-                 }
+                }
             } else {
                 if (!$full) {
                     // TODO: Optimize Condition to only add comps added in the comps array
