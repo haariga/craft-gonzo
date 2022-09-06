@@ -1,0 +1,11 @@
+{
+  "src/web/assets/src/js/app.ts": {
+    "file": "assets/app.945f3498.js",
+    "src": "src/web/assets/src/js/app.ts",
+    "isEntry": true,
+    "css": [
+      "assets/app.abc5ca10.css"
+    ],
+    "integrity": "sha384-TUyT0BZHlWoBIl6VW+yVYeDthZP3RYmnWQMb/P+ar/53fNvU4d4PgAc8T64j1dgP"
+  }
+}

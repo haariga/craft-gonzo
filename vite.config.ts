@@ -14,10 +14,10 @@ export default defineConfig(({ command }) => ({
   build: {
     emptyOutDir: true,
     manifest: true,
-    outDir: '../src/web/assets/dist',
+    outDir: './src/web/assets/dist',
     rollupOptions: {
       input: {
-        app: 'src/js/app.ts',
+        app: './src/web/assets/src/js/app.ts',
       },
       output: {
         sourcemap: true,
@@ -49,7 +49,7 @@ export default defineConfig(({ command }) => ({
   publicDir: '../src/web/assets/public',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './src/web/assets/src/'),
     },
     preserveSymlinks: true,
   },

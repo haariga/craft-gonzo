@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="bg-black" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -8,16 +8,14 @@
   <title>Craft Gonzo</title>
 </head>
 <body>
-<h1>Gonzo Patternlib</h1>
-{% set components = craft.gonzo.getTemplates() %}
-{{ dd(components) }}
-<div id="app-container"></div>
+{% set components = craft.gonzo.getComponents() %}
+<div id="app-container" data-components="{{ components | json_encode }}"></div>
 
 {% set scriptTagOptions = {
   'depends': [
     'haariga\\craftgonzo\\assetbundles\\gonzo\\GonzoAsset'
   ]
 } %}
-{{ craft.gonzo.script('/src/js/app.ts', false, scriptTagOptions) }}
+{{ craft.gonzo.script('/src/web/assets/src/js/app.ts', false, scriptTagOptions) }}
 </body>
 </html>

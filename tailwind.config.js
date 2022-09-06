@@ -1,8 +1,8 @@
 // module exports
 module.exports = {
     content: [
-        '../src/templates/**/*.{twig,html,vue}',
-        '../src/vue/**/*.{vue,html}'
+        './src/web/assets/src/**/*.{twig,html,vue,pcss,ts}',
+        './src/templates/**/*.{twig}',
     ],
     theme: {},
     corePlugins: {},

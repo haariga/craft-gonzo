@@ -3,9 +3,13 @@ import '@/css/app.pcss';
 import { createApp } from 'vue';
 import router from '../vue/router';
 import GonzoPatternLibrary from '../vue/App.vue';
-import { createPinia } from "pinia";
+import { createPinia } from 'pinia';
 
-const app = createApp(GonzoPatternLibrary);
+const appContainer = document.querySelector('#app-container');
+
+const app = createApp(GonzoPatternLibrary, {
+  components: JSON.parse(appContainer.dataset.components),
+});
 
 app.use(router);
 app.use(createPinia());
