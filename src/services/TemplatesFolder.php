@@ -90,7 +90,8 @@ class TemplatesFolder extends Component
         return $array;
     }
 
-    private function array_flatten_with_keys($a, &$collection = []) {
+    private function array_flatten_with_keys($a, &$collection = [])
+    {
         if (is_array($a)) {
             foreach ($a as $key => $item) {
                 array_push($collection, $key);
@@ -98,7 +99,7 @@ class TemplatesFolder extends Component
             }
         }
 
-       return $collection;
+        return $collection;
     }
 
     private function searchForFiles(array &$children): array
@@ -170,7 +171,7 @@ class TemplatesFolder extends Component
         return $tree;
     }
 
-    private function buildFileTree(\SplFileInfo $dir, array $tree)
+    private function buildFileTree(\SplFileInfo $dir, array $tree, bool $config = false)
     {
         $_dir = new \RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
         $iterator = new RecursiveIteratorIterator($_dir, RecursiveIteratorIterator::SELF_FIRST);
@@ -182,11 +183,31 @@ class TemplatesFolder extends Component
                     $tree[$name] = [];
                     $tree[$name]['files'] = [];
                     $tree[$name]['files'] = $this->buildFileTree($item, []);
+                    $tree[$name]['config'] = collect($this->buildFileTree($item, [], true))->flatten()->all();
                 } else {
                     $tree[$name]['children'] = $this->buildFileTree($item, []);
                 }
             } else {
-                $tree[] = $item;
+                if ($config) {
+                    if (mb_strpos($item->getBasename(), 'Config')) {
+                        $comps = collect(CraftGonzo::$plugin->getSettings()->comps);
+                        $class = $comps->first(function($value, $key) use ($name) {
+                            $basename = basename($name, '.php');
+                            return $key === $basename;
+                        });
+                        if ($class) {
+                            $class->setPath($_dir->getPathname().DIRECTORY_SEPARATOR);
+                            $class->setTemplatePath($_dir->getSubPathname().DIRECTORY_SEPARATOR);
+                            $tree[$name]['config']['title'] = basename($_dir->getPathname().DIRECTORY_SEPARATOR);
+                            $tree[$name]['configs'][] = $class;
+                            $tree[$name]['config']['title'] = basename($item->getPathinfo()->getPathname().DIRECTORY_SEPARATOR);
+                        }
+                    }
+                } else {
+                    if ($item->getExtension() !== 'php') {
+                        $tree[] = $item;
+                    }
+                }
             }
         }
 
