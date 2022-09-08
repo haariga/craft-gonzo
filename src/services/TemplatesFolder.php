@@ -12,6 +12,7 @@ namespace haariga\craftgonzo\services;
 
 use Craft;
 use craft\base\Component;
+use craft\helpers\StringHelper;
 use FilesystemIterator;
 use haariga\craftgonzo\CraftGonzo;
 use RecursiveCallbackFilterIterator;
@@ -171,20 +172,19 @@ class TemplatesFolder extends Component
         return $tree;
     }
 
-    private function buildFileTree(\SplFileInfo $dir, array $tree, bool $config = false)
+    private function buildFileTree(\SplFileInfo $dir, array $tree, bool $config = false): array
     {
         $_dir = new \RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-        $iterator = new RecursiveIteratorIterator($_dir, RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($_dir as $item) {
             $name = $item->getBasename();
             if ($item->isDir()) {
                 if (!empty(glob($item->getPathname().'/Gonzo*.php'))) {
                     $tree[$name] = [];
-                    $tree[$name]['files'] = [];
                     $tree[$name]['files'] = $this->buildFileTree($item, []);
-                    $tree[$name]['config'] = collect($this->buildFileTree($item, [], true))->flatten()->all();
+                    $tree[$name]['config'] = collect($this->buildFileTree($item, [], true))->all();
                 } else {
+                    $tree[$name]['title'] = $name;
                     $tree[$name]['children'] = $this->buildFileTree($item, []);
                 }
             } else {
@@ -198,14 +198,24 @@ class TemplatesFolder extends Component
                         if ($class) {
                             $class->setPath($_dir->getPathname().DIRECTORY_SEPARATOR);
                             $class->setTemplatePath($_dir->getSubPathname().DIRECTORY_SEPARATOR);
-                            $tree[$name]['config']['title'] = basename($_dir->getPathname().DIRECTORY_SEPARATOR);
-                            $tree[$name]['configs'][] = $class;
-                            $tree[$name]['config']['title'] = basename($item->getPathinfo()->getPathname().DIRECTORY_SEPARATOR);
+                            $slug = dirname(str_replace($this->templateDir, '', $item->getPathname()));
+                            $class->setSlug($slug . '/' . StringHelper::slugify($class->getTitle() ?? $item->getBasename('.' . $item->getExtension())));
+                            $fileIdentfier = $class->getFileIdentifier() !== '' ? $class->getFileIdentifier() : ($class->getTitle() ?? 'no-identfier');
+                            $tree['configs'][StringHelper::camelCase($fileIdentfier)] = $class;
+                            $tree['slug'] = $slug . '/';
+                            $tree['title'] = basename($item->getPathinfo()->getPathname().DIRECTORY_SEPARATOR);
                         }
                     }
                 } else {
                     if ($item->getExtension() !== 'php') {
-                        $tree[] = $item;
+                        $basename = $item->getBasename('.' . $item->getExtension());
+                        $tree[$basename][$item->getExtension()] = collect($tree[$basename][$item->getExtension()] ?? []);
+                        $file = [
+                            'filename' => $item->getFilename(),
+                            'extension' => $item->getExtension(),
+                            'size' => $item->getSize(),
+                        ];
+                        $tree[$basename][$item->getExtension()]->push($file);
                     }
                 }
             }
