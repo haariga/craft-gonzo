@@ -2,35 +2,17 @@
 
 namespace haariga\craftgonzo\models;
 
-class ComponentConfig
+class ComponentConfig extends ComponentData
 {
-    public string $title = '';
-    public string $status = '';
     public bool $visible = true;
-    public string $description = '';
     public string $templatePath = '';
     private string $path = '';
-
-    /**
-     * @return string
-     */
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     */
-    public function setStatus(string $status): void
-    {
-        $this->status = $status;
-    }
+    public string $slug = '';
 
     /**
      * @var ComponentVariant[]
      */
-    private array $variants = [];
+    public array $variants = [];
 
     /**
      * @return ComponentVariant[]
@@ -46,22 +28,6 @@ class ComponentConfig
     public function setVariants(array $variants): void
     {
         $this->variants = $variants;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
     }
 
     /**
@@ -126,5 +92,21 @@ class ComponentConfig
     public function setTemplatePath(string $templatePath): void
     {
         $this->templatePath = $templatePath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }
