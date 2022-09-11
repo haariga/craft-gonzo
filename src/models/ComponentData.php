@@ -4,6 +4,7 @@ namespace haariga\craftgonzo\models;
 
 abstract class ComponentData
 {
+    public string $uuid = '';
     public string $title = '';
     public string $status = '';
     public string $description = '';
@@ -87,5 +88,21 @@ abstract class ComponentData
     public function setFileIdentifier(string $fileIdentifier): void
     {
         $this->fileIdentifier = $fileIdentifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param string $uuid
+     */
+    public function setUuid(string $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 }
