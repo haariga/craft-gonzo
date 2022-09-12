@@ -1,11 +1,41 @@
 <!doctype html>
-<html class="bg-black" lang="en">
+<html class="bg-slate-100" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Craft Gonzo</title>
+  {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@haariga/craftgonzo/web/assets/dist', true) %}
+  <style>
+    /* figtree-regular - latin */
+    @font-face {
+      font-family: 'Figtree';
+      font-style: normal;
+      font-weight: 400;
+      src: local(''),
+      url('{{ baseAssetsUrl }}/fonts/figtree-v1-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url('{{ baseAssetsUrl }}/fonts/figtree-v1-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    }
+    /* figtree-600 - latin */
+    @font-face {
+      font-family: 'Figtree';
+      font-style: normal;
+      font-weight: 600;
+      src: local(''),
+      url('{{ baseAssetsUrl }}/fonts/figtree-v1-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url('{{ baseAssetsUrl }}/fonts/figtree-v1-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    }
+    /* figtree-900 - latin */
+    @font-face {
+      font-family: 'Figtree';
+      font-style: normal;
+      font-weight: 900;
+      src: local(''),
+      url('{{ baseAssetsUrl }}/fonts/figtree-v1-latin-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url('{{ baseAssetsUrl }}/fonts/figtree-v1-latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    }
+  </style>
 </head>
 <body>
 {% set components = craft.gonzo.getComponents() %}
