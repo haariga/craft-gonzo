@@ -57,11 +57,12 @@ class FrontEndRoutesController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex(string $uri = '')
     {
         $oldMode = Craft::$app->view->getTemplateMode();
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
-        $html = Craft::$app->view->renderTemplate('craft-gonzo/patternlib.twig');
+
+        $html = Craft::$app->view->renderTemplate('craft-gonzo/patternlib.twig', ['uri' => $uri]);
         Craft::$app->view->setTemplateMode($oldMode);
         Craft::$app->getView()->registerAssetBundle(GonzoAsset::class);
 
