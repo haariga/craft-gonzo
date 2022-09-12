@@ -1,5 +1,3 @@
-<template>
-  <h1>Gonzo Patternlibrary</h1>
-</template>
+<template>main</template>
 
 <script setup></script>
