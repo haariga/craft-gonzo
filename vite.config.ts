@@ -46,7 +46,7 @@ export default defineConfig(({ command }) => ({
       cache: false,
     }),
   ],
-  publicDir: '../src/web/assets/public',
+  publicDir: './src/web/assets/public',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/web/assets/src/'),
