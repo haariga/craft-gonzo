@@ -4,3 +4,58 @@
  * Project-wide styles
  *
  */
+
+body,html {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+.gonzo-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(200px, 320px) 1fr;
+  column-gap: theme('spacing.8');
+  grid-template-rows: max-content 1fr max-content;
+  grid-template-areas: "header header"
+"sidebar main"
+"footer footer";
+}
+
+.gonzo-header {
+  grid-area: header;
+}
+
+.gonzo-sidebar {
+  grid-area: sidebar;
+}
+
+.gonzo-main {
+  grid-area: main;
+}
+
+.gonzo-footer {
+  grid-area: footer;
+}
+
+.gonzo-componentView {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  grid-template-areas: "componentHeader"
+"componentRender"
+"componentFiles";
+}
+
+.gonzo-componentHeader {
+  grid-area: componentHeader;
+}
+
+.gonzo-componentRender {
+  grid-area: componentRender;
+}
+
+.gonzo-componentFiles {
+  grid-area: componentFiles;
+}
