@@ -39,7 +39,8 @@
 </head>
 <body>
 {% set components = craft.gonzo.getComponents() %}
-<div id="app-container" data-components="{{ components | json_encode }}"></div>
+{% set activeComponent = craft.gonzo.getActiveComponent(components, uri) ?? null %}
+<div id="app-container" data-components="{{ components | json_encode }}" data-activeComponent="{{ activeComponent | json_encode }}"></div>
 
 {% set scriptTagOptions = {
   'depends': [

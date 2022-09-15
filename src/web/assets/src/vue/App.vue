@@ -19,15 +19,24 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { onBeforeRouteUpdate, RouterView, useRoute } from 'vue-router';
 import Sidebar from './components/Sidebar/SidebarList.vue';
 import { useMainStore } from '@/vue/stores/Main';
+import { useActiveComponentStore } from '@/vue/stores/ActiveComponent';
+import { onMounted } from 'vue';
 
 const props = defineProps({
   components: Object,
+  activeComponent: Object,
 });
 
 const store = useMainStore();
+const activeComponent = useActiveComponentStore();
+const route = useRoute();
+
 store.addComponents(props.components);
+if (props.activeComponent) {
+  activeComponent.setActiveComponent(props.activeComponent);
+}
 const currentYear = new Date().getFullYear();
 </script>

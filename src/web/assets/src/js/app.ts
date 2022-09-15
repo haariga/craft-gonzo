@@ -9,6 +9,7 @@ const appContainer = document.querySelector('#app-container');
 
 const app = createApp(GonzoPatternLibrary, {
   components: JSON.parse(appContainer.dataset.components),
+  activeComponent: JSON.parse(appContainer.dataset.activecomponent ?? '{}'),
 });
 
 app.use(router);

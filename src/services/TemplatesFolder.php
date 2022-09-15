@@ -150,7 +150,7 @@ class TemplatesFolder extends Component
 
         foreach ($iterator as $fileinfo) {
             $comps = collect($this->pathsToSearch);
-            $name = $comps->search($fileinfo->getFilename());
+            $name = $fileinfo->getFilename();
             $sub_path_name = $iterator->getSubPathName();
             $parts = explode(DIRECTORY_SEPARATOR, $sub_path_name);
             array_pop($parts);
@@ -163,7 +163,7 @@ class TemplatesFolder extends Component
 
             if ($fileinfo->isDir()) {
                 $parrentAttr[$name]['config'] = [
-                    'title' => $name,
+                    'title' => $comps->search($fileinfo->getFilename()),
                 ];
                 $subtree = [];
                 $parrentAttr[$name]['children'] = collect($this->buildFileTree($fileinfo, $subtree))->sort()->all();

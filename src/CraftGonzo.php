@@ -22,6 +22,7 @@ use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
 use haariga\craftgonzo\variables\CraftGonzoVariable;
 use haariga\craftgonzo\services\TemplatesFolder;
+use haariga\craftgonzo\services\FindActiveComponent;
 use nystudio107\pluginvite\services\VitePluginService;
 
 use yii\base\Event;
@@ -169,6 +170,7 @@ class CraftGonzo extends Plugin
 
         $this->setComponents([
             'templatesFolder' => TemplatesFolder::class,
+            'findActiveComponent' => FindActiveComponent::class,
         ]);
 
         /**
