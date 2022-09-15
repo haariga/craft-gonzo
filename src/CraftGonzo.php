@@ -22,6 +22,7 @@ use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
 use haariga\craftgonzo\variables\CraftGonzoVariable;
 use haariga\craftgonzo\services\TemplatesFolder;
+use haariga\craftgonzo\services\FindActiveComponent;
 use nystudio107\pluginvite\services\VitePluginService;
 
 use yii\base\Event;
@@ -139,6 +140,7 @@ class CraftGonzo extends Plugin
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function(RegisterUrlRulesEvent $event) {
                 $event->rules['patternlib'] = 'craft-gonzo/front-end-routes/index';
+                $event->rules['patternlib/component/<uri:.+?>'] = 'craft-gonzo/front-end-routes/index';
             }
     );
 
@@ -168,6 +170,7 @@ class CraftGonzo extends Plugin
 
         $this->setComponents([
             'templatesFolder' => TemplatesFolder::class,
+            'findActiveComponent' => FindActiveComponent::class,
         ]);
 
         /**

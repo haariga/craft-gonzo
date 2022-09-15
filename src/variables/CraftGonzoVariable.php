@@ -58,4 +58,9 @@ class CraftGonzoVariable implements ViteVariableInterface
     {
         return CraftGonzo::$plugin->templatesFolder->getComponents();
     }
+
+    public function getActiveComponent(array $tree, string $uri)
+    {
+        return CraftGonzo::$plugin->findActiveComponent->findActiveComponent($tree, $uri);
+    }
 }
