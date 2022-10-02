@@ -38,6 +38,7 @@ class TemplatesFolder extends Component
 {
     private $templateDir = '';
     private $pathsToSearch = ['Embeds' => '_embeds', 'Atoms' => '_atoms'];
+    private $templates = [];
 
     public function __construct($config = [])
     {
@@ -47,10 +48,14 @@ class TemplatesFolder extends Component
         $this->templateDir = Craft::$app->view->getTemplatesPath();
         Craft::$app->view->setTemplateMode($oldTemplateMode);
         $this->pathsToSearch = CraftGonzo::$plugin->getSettings()->compFolders;
+        $this->getComponents();
     }
     // Public Methods
     // =========================================================================
 
+    /**
+     * @return array|mixed
+     */
     public function readTemplatesFolder()
     {
         $paths = $this->buildComponentTree();
@@ -58,6 +63,11 @@ class TemplatesFolder extends Component
         return $paths;
     }
 
+    /**
+     * @param $tree
+     *
+     * @return array
+     */
     private function cleanUp($tree)
     {
         $tree = $this->removeEmptyValues($tree);
@@ -66,10 +76,15 @@ class TemplatesFolder extends Component
         return $tree;
     }
 
+    /**
+     * @return array
+     */
     public function getComponents()
     {
         $tree = $this->buildComponentTree();
         $tree = $this->cleanUp($tree);
+        $this->setTemplates($tree);
+
         return $tree;
     }
 
@@ -93,6 +108,12 @@ class TemplatesFolder extends Component
         return $array;
     }
 
+    /**
+     * @param $a
+     * @param $collection
+     *
+     * @return array|mixed
+     */
     private function array_flatten_with_keys($a, &$collection = [])
     {
         if (is_array($a)) {
@@ -105,6 +126,11 @@ class TemplatesFolder extends Component
         return $collection;
     }
 
+    /**
+     * @param array $children
+     *
+     * @return array
+     */
     private function searchForFiles(array &$children): array
     {
         foreach ($children as $key => $child) {
@@ -119,6 +145,11 @@ class TemplatesFolder extends Component
         return $children;
     }
 
+    /**
+     * @param array $tree
+     *
+     * @return array
+     */
     private function removeNonSuitableFolders(array &$tree): array
     {
         foreach ($tree as $key => $item) {
@@ -130,6 +161,9 @@ class TemplatesFolder extends Component
         return $tree;
     }
 
+    /**
+     * @return array|mixed
+     */
     private function buildComponentTree()
     {
         $dir = new RecursiveDirectoryIterator($this->templateDir, FilesystemIterator::SKIP_DOTS);
@@ -174,6 +208,13 @@ class TemplatesFolder extends Component
         return $tree;
     }
 
+    /**
+     * @param \SplFileInfo $dir
+     * @param array        $files
+     * @param              $identifier
+     *
+     * @return array
+     */
     private function componentFiles(\SplFileInfo $dir, array $files, $identifier): array
     {
         $_dir = new \RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
@@ -184,6 +225,7 @@ class TemplatesFolder extends Component
             if ($item->isFile() && $item->getExtension() !== 'php' && str_contains($identifier, $basename)) {
                 $files[$item->getExtension()][] = [
                     'name' => $item->getFilename(),
+                    'path' => dirname(str_replace($this->templateDir, '', $item->getPathname()) . '/' . $item->getFilename()),
                     'size' => $item->getSize(),
                 ];
             }
@@ -192,6 +234,14 @@ class TemplatesFolder extends Component
         return $files;
     }
 
+    /**
+     * @param \SplFileInfo $dir
+     * @param array        $tree
+     * @param bool         $config
+     *
+     * @return array
+     * @throws \Exception
+     */
     private function buildFileTree(\SplFileInfo $dir, array $tree, bool $config = false): array
     {
         $_dir = new \RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
@@ -234,5 +284,21 @@ class TemplatesFolder extends Component
         }
 
         return $tree;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTemplates(): array
+    {
+        return $this->templates;
+    }
+
+    /**
+     * @param array $templates
+     */
+    public function setTemplates(array $templates): void
+    {
+        $this->templates = $templates;
     }
 }

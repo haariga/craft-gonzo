@@ -14,6 +14,9 @@ use Craft;
 use craft\web\Controller;
 use craft\web\View;
 use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
+use haariga\craftgonzo\CraftGonzo;
+use haariga\craftgonzo\helpers\ActiveComponent;
+use haariga\craftgonzo\models\ComponentVariant;
 
 /**
  * FrontEndRoutes Controller
@@ -46,16 +49,20 @@ class FrontEndRoutesController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['index', 'render-template'];
 
     // Public Methods
     // =========================================================================
 
     /**
-     * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/craft-gonzo/front-end-routes
+     * @param string $uri
      *
-     * @return mixed
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionIndex(string $uri = '')
     {
@@ -69,16 +76,19 @@ class FrontEndRoutesController extends Controller
         return $html;
     }
 
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/craft-gonzo/front-end-routes/do-something
-     *
-     * @return mixed
-     */
-    public function actionDoSomething()
-    {
-        $result = 'Welcome to the FrontEndRoutesController actionDoSomething() method';
 
-        return $result;
+    /**
+     * @param string $slug
+     *
+     * @return string
+     */
+    public function actionRenderTemplate(string $slug)
+    {
+        $activeComponent = CraftGonzo::getInstance()->findActiveComponent->findActiveComponent($slug);
+        $templatePath = $activeComponent['files']['twig'][0]['path'];
+        $componentData = $activeComponent['config']->getVariants();
+        $html = CraftGonzo::$plugin->renderComponent->renderTemplate($templatePath, $componentData);
+
+        return $html;
     }
 }
