@@ -39,7 +39,7 @@
 </head>
 <body>
 {% set components = craft.gonzo.getComponents() %}
-{% set activeComponent = craft.gonzo.getActiveComponent(components, uri) ?? null %}
+{% set activeComponent = craft.gonzo.getActiveComponent(uri) ?? null %}
 <div id="app-container" data-components="{{ components | json_encode }}" data-activeComponent="{{ activeComponent | json_encode }}"></div>
 
 {% set scriptTagOptions = {

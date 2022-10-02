@@ -7,6 +7,7 @@ use craft\base\Model;
 class Settings extends Model
 {
     public $compFolders = [];
+    public $layoutFile = '/_layouts/patternlib.twig';
     public $comps = [];
     public $mqButtons = [];
     public $compStatus = [];
@@ -15,7 +16,7 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['compFolders'], 'required'],
+            [['compFolders', 'comps',], 'required'],
         ];
     }
 }

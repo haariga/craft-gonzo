@@ -20,6 +20,7 @@ use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
+use haariga\craftgonzo\services\RenderComponent;
 use haariga\craftgonzo\variables\CraftGonzoVariable;
 use haariga\craftgonzo\services\TemplatesFolder;
 use haariga\craftgonzo\services\FindActiveComponent;
@@ -42,6 +43,9 @@ use yii\base\Event;
  * @since     2.0.0-alpha.1
  *
  * @property  Gonzo $gonzo
+ * @property FindActiveComponent $findActiveComponent
+ * @property RenderComponent $renderComponent
+ * @property TemplatesFolder $templatesFolder
  */
 class CraftGonzo extends Plugin
 {
@@ -117,6 +121,17 @@ class CraftGonzo extends Plugin
         parent::init();
         self::$plugin = $this;
 
+        $this->setComponents([
+            'templatesFolder' => TemplatesFolder::class,
+            'findActiveComponent' => FindActiveComponent::class,
+            'renderComponent' => RenderComponent::class,
+        ]);
+
+        Craft::$app->view->hook('gonzo.injectContent', function(array &$context) {
+            $html = Craft::$app->view->renderTemplate($context['templatePath'], $context['variables'], Craft::$app->view::TEMPLATE_MODE_SITE);
+            return $html;
+        });
+
         // Register our site routes
 //        Event::on(
 //            UrlManager::class,
@@ -139,6 +154,7 @@ class CraftGonzo extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function(RegisterUrlRulesEvent $event) {
+                $event->rules['patternlib/component/render/<slug:.+?>'] = 'craft-gonzo/front-end-routes/render-template';
                 $event->rules['patternlib'] = 'craft-gonzo/front-end-routes/index';
                 $event->rules['patternlib/component/<uri:.+?>'] = 'craft-gonzo/front-end-routes/index';
             }
@@ -167,11 +183,6 @@ class CraftGonzo extends Plugin
             }
         );
 
-
-        $this->setComponents([
-            'templatesFolder' => TemplatesFolder::class,
-            'findActiveComponent' => FindActiveComponent::class,
-        ]);
 
         /**
          * Logging in Craft involves using one of the following methods:

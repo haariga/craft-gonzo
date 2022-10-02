@@ -11,6 +11,8 @@
 namespace haariga\craftgonzo\variables;
 
 use haariga\craftgonzo\CraftGonzo;
+use haariga\craftgonzo\helpers\ActiveComponent;
+use haariga\craftgonzo\models\ActiveComponentModel;
 use nystudio107\pluginvite\variables\ViteVariableInterface;
 use nystudio107\pluginvite\variables\ViteVariableTrait;
 
@@ -47,6 +49,9 @@ class CraftGonzoVariable implements ViteVariableInterface
      *
      */
 
+    /**
+     * @return array|mixed
+     */
     public function getTemplates()
     {
         $templates = CraftGonzo::$plugin->templatesFolder->readTemplatesFolder();
@@ -54,13 +59,23 @@ class CraftGonzoVariable implements ViteVariableInterface
         return $templates;
     }
 
+    /**
+     * @return array
+     */
     public function getComponents()
     {
         return CraftGonzo::$plugin->templatesFolder->getComponents();
     }
 
-    public function getActiveComponent(array $tree, string $uri)
+    /**
+     * @param string $uri
+     *
+     * @return mixed|null
+     */
+    public function getActiveComponent(string $uri)
     {
-        return CraftGonzo::$plugin->findActiveComponent->findActiveComponent($tree, $uri);
+        $activeComponent = CraftGonzo::$plugin->findActiveComponent->findActiveComponent($uri);
+
+        return $activeComponent;
     }
 }
