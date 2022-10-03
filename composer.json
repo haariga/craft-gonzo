@@ -45,5 +45,17 @@
     "hasCpSection" : false,
     "changelogUrl" : "https://raw.githubusercontent.com/haariga/craft-gonzo/master/CHANGELOG.md",
     "class"        : "haariga\\craftgonzo\\CraftGonzo"
-  }
+  },
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.8",
+    "craftcms/rector": "dev-main"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
