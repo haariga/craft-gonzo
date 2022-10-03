@@ -10,22 +10,19 @@
 
 namespace haariga\craftgonzo;
 
-use craft\web\twig\variables\CraftVariable;
-use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
-use haariga\craftgonzo\services\Gonzo;
-
 use Craft;
 use craft\base\Plugin;
-use craft\services\Plugins;
 use craft\events\PluginEvent;
-use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
-use haariga\craftgonzo\services\RenderComponent;
-use haariga\craftgonzo\variables\CraftGonzoVariable;
-use haariga\craftgonzo\services\TemplatesFolder;
+use craft\services\Plugins;
+use craft\web\twig\variables\CraftVariable;
+use craft\web\UrlManager;
+use haariga\craftgonzo\base\PluginTrait;
 use haariga\craftgonzo\services\FindActiveComponent;
-use nystudio107\pluginvite\services\VitePluginService;
-
+use haariga\craftgonzo\services\Gonzo;
+use haariga\craftgonzo\services\RenderComponent;
+use haariga\craftgonzo\services\TemplatesFolder;
+use haariga\craftgonzo\variables\CraftGonzoVariable;
 use yii\base\Event;
 
 /**
@@ -49,16 +46,9 @@ use yii\base\Event;
  */
 class CraftGonzo extends Plugin
 {
+    use PluginTrait;
     // Static Properties
     // =========================================================================
-
-    /**
-     * Static property that is an instance of this plugin class so that it can be accessed via
-     * CraftGonzo::$plugin
-     *
-     * @var CraftGonzo
-     */
-    public static $plugin;
 
     // Public Properties
     // =========================================================================
@@ -87,23 +77,6 @@ class CraftGonzo extends Plugin
     // Public Methods
     // =========================================================================
 
-    public function __construct($id, $parent = null, array $config = [])
-    {
-        $config['components'] = [
-            'craftGonzo' => Gonzo::class,
-            'vite' => [
-                'class' => VitePluginService::class,
-                'assetClass' => GonzoAsset::class,
-                'useDevServer' => true,
-                'devServerPublic' => 'http://localhost:3001',
-                'serverPublic' => 'http://localhost:8000',
-                'errorEntry' => '/src/js/app.ts',
-                'devServerInternal' => 'http://localhost:3001',
-                'checkDevServer' => true
-            ],
-        ];
-        parent::__construct($id, $parent, $config);
-    }
 
     /**
      * Set our $plugin static property to this class so that it can be accessed via
@@ -121,11 +94,7 @@ class CraftGonzo extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        $this->setComponents([
-            'templatesFolder' => TemplatesFolder::class,
-            'findActiveComponent' => FindActiveComponent::class,
-            'renderComponent' => RenderComponent::class,
-        ]);
+        $this->_registerComponents();
 
         Craft::$app->view->hook('gonzo.injectContent', function(array &$context) {
             $html = Craft::$app->view->renderTemplate($context['templatePath'], $context['variables'], Craft::$app->view::TEMPLATE_MODE_SITE);
