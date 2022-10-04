@@ -249,7 +249,7 @@ class TemplatesFolder extends Component
         foreach ($_dir as $item) {
             $name = $item->getBasename();
             if ($item->isDir()) {
-                if (!empty(glob($item->getPathname().'/Gonzo*.php'))) {
+                if (!empty(glob($item->getPathname().'/*Gonzo*.php'))) {
                     $tree[$name] = [];
                     $tree[$name] = collect($this->buildFileTree($item, [], true))->all();
                 } else {
