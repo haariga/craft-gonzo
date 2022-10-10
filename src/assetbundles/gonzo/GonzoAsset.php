@@ -9,7 +9,7 @@ use craft\web\assets\cp\CpAsset;
 
 class GonzoAsset extends AssetBundle
 {
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = '@haariga/craftgonzo/web/assets/dist';
         $this->depends = [

@@ -1,3 +1,5 @@
+{% do view.registerAssetBundle("haariga\\craftgonzo\\assetbundles\\gonzo\\GonzoAsset") %}
+
 <!doctype html>
 <html class="bg-slate-100" lang="en">
 <head>
@@ -38,15 +40,16 @@
   </style>
 </head>
 <body>
+
 {% set components = craft.gonzo.getComponents() %}
 {% set activeComponent = craft.gonzo.getActiveComponent(uri) ?? null %}
 <div id="app-container" data-components="{{ components | json_encode }}" data-activeComponent="{{ activeComponent | json_encode }}"></div>
 
-{% set scriptTagOptions = {
+{% set tagOptions = {
   'depends': [
     'haariga\\craftgonzo\\assetbundles\\gonzo\\GonzoAsset'
-  ]
+  ],
 } %}
-{{ craft.gonzo.script('/src/web/assets/src/js/app.ts', false, scriptTagOptions) }}
+{{ craft.gonzo.script('/src/web/assets/src/js/app.ts', false, tagOptions, tagOptions) }}
 </body>
 </html>

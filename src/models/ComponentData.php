@@ -9,6 +9,7 @@ abstract class ComponentData
     public string $status = '';
     public string $description = '';
     public string $fileIdentifier = '';
+    public bool $visible = true;
 
     /**
      * @return string

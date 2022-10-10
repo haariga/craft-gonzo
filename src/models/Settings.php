@@ -13,7 +13,7 @@ class Settings extends Model
     public $compStatus = [];
     public $pages = [];
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['compFolders', 'comps',], 'required'],
