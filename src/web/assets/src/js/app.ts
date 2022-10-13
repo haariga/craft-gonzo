@@ -1,5 +1,6 @@
 // Import our CSS
 import '@/css/app.pcss';
+import 'spinkit/spinkit.css';
 import { createApp } from 'vue';
 import router from '../vue/router';
 import GonzoPatternLibrary from '../vue/App.vue';

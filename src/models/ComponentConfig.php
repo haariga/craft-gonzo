@@ -22,6 +22,11 @@ class ComponentConfig extends ComponentData
         return $this->variants;
     }
 
+    public function getDefaultVariant(): ComponentVariant
+    {
+        return $this->variants[0];
+    }
+
     /**
      * @param ComponentVariant[] $variants
      */

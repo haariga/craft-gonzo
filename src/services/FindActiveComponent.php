@@ -21,6 +21,7 @@ class FindActiveComponent extends Component
         if (empty($slug)) {
             return null;
         }
+        // /_components/accordion/accordion
         $tree = CraftGonzo::getInstance()->templatesFolder->getTemplates();
         $collection = collect($tree);
         $dots = collect(mb_split('/', $slug));

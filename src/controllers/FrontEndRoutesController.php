@@ -16,7 +16,6 @@ use craft\web\View;
 use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
 use haariga\craftgonzo\CraftGonzo;
 use haariga\craftgonzo\helpers\ActiveComponent;
-use haariga\craftgonzo\models\ComponentVariant;
 
 /**
  * FrontEndRoutes Controller
@@ -49,7 +48,7 @@ class FrontEndRoutesController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected array|int|bool $allowAnonymous = ['index', 'render-template'];
+    protected array|int|bool $allowAnonymous = ['index', 'render-template', 'get-file-content', 'get-template-render'];
 
     // Public Methods
     // =========================================================================
@@ -85,10 +84,35 @@ class FrontEndRoutesController extends Controller
     public function actionRenderTemplate(string $slug)
     {
         $activeComponent = CraftGonzo::getInstance()->findActiveComponent->findActiveComponent($slug);
-        $templatePath = $activeComponent['files']['twig'][0]['path'];
+        $templatePath = $activeComponent['files']['twig']['path'];
         $componentData = $activeComponent['config']->getVariants();
         $html = CraftGonzo::$plugin->renderComponent->renderTemplate($templatePath, $componentData);
 
         return $html;
+    }
+
+    public function actionGetTemplateRender()
+    {
+        $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
+        $slug = $request->getBodyParam('slug');
+        $activeComponent = CraftGonzo::getInstance()->findActiveComponent->findActiveComponent($slug);
+        $templatePath = $activeComponent['files']['twig']['path'];
+        $componentData = $activeComponent['config']->getVariants();
+        $html = Craft::$app->view->renderTemplate($templatePath, $componentData[0]->getData());
+
+        return $html;
+    }
+
+
+    public function actionGetFileContent()
+    {
+        $this->requirePostRequest();
+
+        $request = Craft::$app->getRequest();
+
+        $code = CraftGonzo::getInstance()->filePreview->getFileContent($request->getBodyParam('filePath'));
+
+        return $code;
     }
 }

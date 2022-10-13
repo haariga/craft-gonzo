@@ -9,7 +9,9 @@
     <div class="gonzo-componentRender">
       <render-component :url="url" />
     </div>
-    <div class="gonzo-componentFiles bg-white p-10"></div>
+    <div class="gonzo-componentFiles bg-white p-10">
+      <ComponentFiles :files="store.activeComponent.files" />
+    </div>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ import { computed } from 'vue';
 import { useActiveComponentStore } from '@/vue/stores/ActiveComponent';
 import { storeToRefs } from 'pinia';
 import RenderComponent from '@/vue/components/Component/RenderComponent.vue';
+import ComponentFiles from '@/vue/components/Component/ComponentFiles.vue';
 
 const store = useActiveComponentStore();
 const { title } = storeToRefs(store);
