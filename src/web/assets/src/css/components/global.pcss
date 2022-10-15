@@ -16,7 +16,7 @@ body {
 .gonzo-layout {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(200px, 320px) 1fr;
+  grid-template-columns: 320px 1fr;
   column-gap: theme('spacing.8');
   grid-template-rows: max-content 1fr max-content;
   grid-template-areas: "header header"
@@ -42,7 +42,8 @@ body {
 
 .gonzo-componentView {
   display: grid;
-  grid-template-rows: max-content 1fr max-content;
+  grid-template-rows: max-content 1fr max(450px);
+  overflow: hidden;
   grid-template-areas: "componentHeader"
 "componentRender"
 "componentFiles";
@@ -58,4 +59,5 @@ body {
 
 .gonzo-componentFiles {
   grid-area: componentFiles;
+  max-width: calc(100vw - 340px);
 }
