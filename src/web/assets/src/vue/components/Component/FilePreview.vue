@@ -2,7 +2,7 @@
   <highlightjs
     :language="lang"
     :code="code"
-    className="overflow-x-scroll w-full"
+    className="overflow-scroll w-full"
   />
 </template>
 
@@ -17,5 +17,5 @@ interface IProps {
   code: string;
   lang: string;
 }
-const props = defineProps<IProps>();
+defineProps<IProps>();
 </script>
