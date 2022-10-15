@@ -223,7 +223,7 @@ class TemplatesFolder extends Component
         foreach ($iterator as $item) {
             $basename = $item->getBasename('.'.$item->getExtension());
             if ($item->isFile() && $item->getExtension() !== 'php' && str_contains($identifier, $basename)) {
-                $files[$item->getExtension()][] = [
+                $files[$item->getExtension()] = [
                     'name' => $item->getFilename(),
                     'path' => dirname(str_replace($this->templateDir, '', $item->getPathname()) . '/' . $item->getFilename()),
                     'size' => $item->getSize(),
@@ -274,7 +274,7 @@ class TemplatesFolder extends Component
                             $fileIdentfier = StringHelper::camelCase($fileIdentfier);
                             $tree['configs'][] = [
                                 'config' => $class,
-                                'files' => $this->componentFiles($dir, [], $fileIdentfier),
+                                'files' => array_merge($this->componentFiles($dir, [], $fileIdentfier), ['config' => $class]),
                             ];
                             $tree['title'] = basename($item->getPathinfo()->getPathname().DIRECTORY_SEPARATOR);
                         }

@@ -51,5 +51,15 @@
   ],
 } %}
 {{ craft.gonzo.script('/src/web/assets/src/js/app.ts', false, tagOptions, tagOptions) }}
+
+<script>
+  window.$gonzo = {
+    baseUrl: '{{ siteUrl }}',
+    csrfToken: {
+      name: '{{ craft.app.config.general.csrfTokenName|e('js') }}',
+      value: '{{ craft.app.request.csrfToken|e('js') }}'
+    }
+  }
+</script>
 </body>
 </html>

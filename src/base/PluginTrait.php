@@ -8,6 +8,7 @@ use haariga\craftgonzo\services\FindActiveComponent;
 use haariga\craftgonzo\services\Gonzo;
 use haariga\craftgonzo\services\RenderComponent;
 use haariga\craftgonzo\services\TemplatesFolder;
+use haariga\craftgonzo\services\FilePreview;
 use nystudio107\pluginvite\services\VitePluginService;
 
 trait PluginTrait {
@@ -19,6 +20,7 @@ trait PluginTrait {
             'templatesFolder' => TemplatesFolder::class,
             'findActiveComponent' => FindActiveComponent::class,
             'renderComponent' => RenderComponent::class,
+            'filePreview' => FilePreview::class,
             'craftGonzo' => Gonzo::class,
             'vite' => [
                 'class' => VitePluginService::class,
