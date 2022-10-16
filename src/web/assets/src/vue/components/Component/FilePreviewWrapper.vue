@@ -55,10 +55,10 @@ async function changePreview() {
 }
 
 onMounted(async () => {
-  changePreview();
+  await changePreview();
 });
 
-watch(route, () => {
-  changePreview();
+watch(route, async () => {
+  await changePreview();
 });
 </script>
