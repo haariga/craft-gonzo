@@ -9,8 +9,8 @@
     <div class="gonzo-componentRender">
       <render-component :url="url" />
     </div>
-    <div class="gonzo-componentFiles bg-white p-10">
-      <ComponentFiles :files="store.activeComponent.files" />
+    <div class="gonzo-componentFiles mt-10 bg-slate-700">
+      <ComponentFiles :files="componentFiles" />
     </div>
   </div>
 </template>
@@ -23,7 +23,18 @@ import RenderComponent from '@/vue/components/Component/RenderComponent.vue';
 import ComponentFiles from '@/vue/components/Component/ComponentFiles.vue';
 
 const store = useActiveComponentStore();
-const { title } = storeToRefs(store);
+const { title, files } = storeToRefs(store);
+
+const componentFiles = computed(() => {
+  const { twig, config, ...rest } = files.value;
+  const html = twig;
+  return {
+    twig,
+    html,
+    ...rest,
+    config,
+  };
+});
 
 const url = computed(() => {
   return store.activeComponent.config.slug ?? '';
