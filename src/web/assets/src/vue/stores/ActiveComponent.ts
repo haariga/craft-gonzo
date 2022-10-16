@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import type { IComponent } from '@/vue/@types/Component';
 
 interface IState {
   activeComponent: IComponent;
@@ -13,6 +12,13 @@ export const useActiveComponentStore = defineStore('activeComponent', {
           title: '',
           slug: '',
         },
+        files: {
+          twig: {
+            path: '',
+            size: 0,
+          },
+          config: {},
+        },
       },
     };
   },
@@ -22,6 +28,9 @@ export const useActiveComponentStore = defineStore('activeComponent', {
     },
     slug(state): string {
       return state.activeComponent.config.slug;
+    },
+    files(state): object {
+      return state.activeComponent.files;
     },
   },
   actions: {

@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onUpdated, ref } from 'vue';
 
 interface IProps {
   url: string;
@@ -27,7 +27,8 @@ const iFrameSize = ref({
   width: '100%',
   height: '100%',
 });
-onMounted(() => {
+
+function updateIframe() {
   if (iframe.value) {
     iframe.value.onload = function () {
       iFrameSize.value.width =
@@ -45,5 +46,12 @@ onMounted(() => {
 
     observer.observe(iframe.value);
   }
+}
+onMounted(() => {
+  updateIframe();
+});
+
+onUpdated(() => {
+  updateIframe();
 });
 </script>

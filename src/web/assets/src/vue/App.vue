@@ -1,16 +1,7 @@
 <template>
-  <div class="gonzo-layout">
-    <header class="gonzo-header px-4">
-      <h1 class="uppercase">
-        Gonzo
-        <span class="text-base normal-case text-slate-400 font-normal"
-          >Pattern Library</span
-        >
-      </h1>
-    </header>
-
+  <div class="gonzo-layout relative bg-slate-800">
     <Sidebar />
-    <main class="gonzo-main bg-slate-300 shadow-2xl">
+    <main class="gonzo-main">
       <RouterView />
     </main>
 

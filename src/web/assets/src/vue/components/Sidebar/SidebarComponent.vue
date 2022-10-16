@@ -1,12 +1,16 @@
 <template>
-  <router-link :to="slug" @click.prevent="handleClick(slug, component)">
+  <router-link
+    class="text-slate-200"
+    :to="slug"
+    @click.prevent="handleClick(slug, component)"
+  >
     {{ component.config.title }}
   </router-link>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useActiveComponentStore } from '@/vue/stores/ActiveComponent';
 
 type FileType = 'twig' | 'pcss' | 'css' | 'scss' | 'sass' | 'ts' | 'js';
@@ -40,6 +44,7 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const router = useRouter();
+const route = useRoute();
 const store = useActiveComponentStore();
 
 const slug = computed(() => {
@@ -49,6 +54,9 @@ const slug = computed(() => {
 function handleClick(target: string, component: IComponent) {
   router.push({
     path: target,
+    query: {
+      ...route.query,
+    },
   });
   store.setActiveComponent(component);
 }
