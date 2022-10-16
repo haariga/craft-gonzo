@@ -15,7 +15,9 @@ use craft\web\Controller;
 use craft\web\View;
 use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
 use haariga\craftgonzo\CraftGonzo;
+use haariga\craftgonzo\exceptions\NewSearchStringException;
 use haariga\craftgonzo\helpers\ActiveComponent;
+use haariga\craftgonzo\models\ComponentConfig;
 
 /**
  * FrontEndRoutes Controller
@@ -48,7 +50,7 @@ class FrontEndRoutesController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected array|int|bool $allowAnonymous = ['index', 'render-template', 'get-file-content', 'get-template-render'];
+    protected array|int|bool $allowAnonymous = ['index', 'render-template', 'get-file-content', 'get-template-render', 'search-for-component'];
 
     // Public Methods
     // =========================================================================
@@ -114,5 +116,35 @@ class FrontEndRoutesController extends Controller
         $code = CraftGonzo::getInstance()->filePreview->getFileContent($request->getBodyParam('filePath'));
 
         return $code;
+    }
+
+    public function actionSearchForComponent()
+    {
+        $this->requirePostRequest();
+
+        $request = Craft::$app->getRequest();
+        $searchString = $request->getBodyParam('searchString');
+
+        if (!$searchString) {
+            return $this->asJson([
+                'searchValue' => $searchString,
+                'results' => [],
+                'errors' => new NewSearchStringException(204, 'No Search String provided'),
+            ]);
+        }
+
+        $tree = CraftGonzo::getInstance()->templatesFolder->getComponentsArray();
+        $collectedTree = collect($tree);
+
+        $filteredTree = $collectedTree->filter(function($item) use ($searchString) {
+            $title = $item['config']->getTitle();
+            $pattern = "/$searchString/i";
+            return preg_match($pattern, $title);
+        });
+
+        return $this->asJson([
+            'searchValue' => $searchString,
+            'results' => $filteredTree->values()->all(),
+        ]);
     }
 }
