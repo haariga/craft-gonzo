@@ -16,6 +16,7 @@ use craft\helpers\StringHelper;
 use FilesystemIterator;
 use haariga\craftgonzo\CraftGonzo;
 use haariga\craftgonzo\models\ComponentConfig;
+use Illuminate\Support\Collection;
 use Psy\Util\Str;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
@@ -39,6 +40,7 @@ class TemplatesFolder extends Component
     private $templateDir = '';
     private $pathsToSearch = ['Embeds' => '_embeds', 'Atoms' => '_atoms'];
     private $templates = [];
+    private $componentsArray = [];
 
     public function __construct($config = [])
     {
@@ -272,11 +274,19 @@ class TemplatesFolder extends Component
                             $class->setSlug($slug.'/'.StringHelper::slugify($class->getTitle() ?? $item->getBasename('.'.$item->getExtension())));
                             $fileIdentfier = $class->getFileIdentifier() !== '' ? $class->getFileIdentifier() : ($class->getTitle() ?? 'no-identfier');
                             $fileIdentfier = StringHelper::camelCase($fileIdentfier);
+                            $files = array_merge($this->componentFiles($dir, [], $fileIdentfier), ['config' => $class]);
                             $tree['configs'][] = [
                                 'config' => $class,
-                                'files' => array_merge($this->componentFiles($dir, [], $fileIdentfier), ['config' => $class]),
+                                'files' => $files,
                             ];
                             $tree['title'] = basename($item->getPathinfo()->getPathname().DIRECTORY_SEPARATOR);
+
+                            $component = [
+                                'config' => $class,
+                                'files' => $files,
+                            ];
+
+                            $this->addToComponentsArray($component);
                         }
                     }
                 }
@@ -300,5 +310,18 @@ class TemplatesFolder extends Component
     public function setTemplates(array $templates): void
     {
         $this->templates = $templates;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComponentsArray(): array
+    {
+        return $this->componentsArray;
+    }
+
+    public function addToComponentsArray(array $component): void
+    {
+        array_push($this->componentsArray, $component);
     }
 }
