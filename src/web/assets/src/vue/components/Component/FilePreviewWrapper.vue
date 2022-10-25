@@ -17,6 +17,7 @@ interface IProps {
 }
 
 const loading = ref(false);
+const store = useActiveComponentStore();
 
 async function loadData(slug: string, key: string): Promise<string> {
   loading.value = true;
@@ -28,6 +29,7 @@ async function loadData(slug: string, key: string): Promise<string> {
   }
   const { data } = await api.post(url, {
     [dataKey]: slug,
+    variant: store.activeVariant ?? 'Default',
   });
 
   loading.value = false;
@@ -39,7 +41,6 @@ const props = defineProps<IProps>();
 const { fileType, slug } = toRefs(props);
 
 const code = ref('');
-const store = useActiveComponentStore();
 const route = useRoute();
 
 async function changePreview() {

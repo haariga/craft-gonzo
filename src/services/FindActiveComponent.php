@@ -14,31 +14,21 @@ class FindActiveComponent extends Component
     /**
      * @param string $slug
      *
-     * @return mixed|null
+     * @return mixed
      */
     public function findActiveComponent(string $slug)
     {
-        if (empty($slug)) {
-            return null;
-        }
-        // /_components/accordion/accordion
-        $tree = CraftGonzo::getInstance()->templatesFolder->getTemplates();
-        $collection = collect($tree);
-        $dots = collect(mb_split('/', $slug));
-        $last = $dots->pop();
-        $walker = $dots->map(function ($item) use($dots) {
-            if ($item == $dots->last()) return ['item' => $item];
-            return ['item' => $item, 'children' => 'children'];
-        })->flatten();
-        $dots = implode('.', $walker->all());
-        $walking = collect([$collection])->pluck($dots);
-        $activeComponent = collect($walking->first()['configs'])->filter(function($config) use ($slug){
-            return $config['config']->getSlug() == '/' . $slug;
+        $components = collect(CraftGonzo::getInstance()->templatesFolder->getComponentsArray());
+        $components = $components->filter(function ($item) use ($slug) {
+            $componentSlug = $item['config']->getSlug();
+            $slug = preg_quote($slug, '/');
+            $pattern = "/$slug/i";
+            return preg_match($pattern, $componentSlug);
         });
 
-        $this->setActiveComponent($activeComponent->first());
-        return $activeComponent->first();
+        $this->setActiveComponent($components->first());
 
+        return $components->first();
     }
 
     /**

@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
 
 interface IState {
+  activeVariant: string;
   activeComponent: IComponent;
 }
 
 export const useActiveComponentStore = defineStore('activeComponent', {
   state: (): IState => {
     return {
+      activeVariant: 'Default',
       activeComponent: {
         config: {
           title: '',
@@ -34,6 +36,9 @@ export const useActiveComponentStore = defineStore('activeComponent', {
     },
   },
   actions: {
+    setActiveVariant(variant: string) {
+      this.activeVariant = variant;
+    },
     setActiveComponent(component: IComponent) {
       this.activeComponent = component;
     },

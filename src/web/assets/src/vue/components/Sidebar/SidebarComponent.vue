@@ -52,10 +52,12 @@ const slug = computed(() => {
 });
 
 function handleClick(target: string, component: IComponent) {
+  store.setActiveVariant('Default');
   router.push({
     path: target,
     query: {
       ...route.query,
+      variant: 'Default',
     },
   });
   store.setActiveComponent(component);

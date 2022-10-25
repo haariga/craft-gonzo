@@ -123,7 +123,7 @@ class CraftGonzo extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function(RegisterUrlRulesEvent $event) {
-                $event->rules['patternlib/component/render/<slug:.+?>'] = 'craft-gonzo/front-end-routes/render-template';
+                $event->rules['patternlib/component/render/<slug:.+?>/<variant:[^\/]+$>'] = 'craft-gonzo/front-end-routes/render-template';
                 $event->rules['patternlib'] = 'craft-gonzo/front-end-routes/index';
                 $event->rules['patternlib/component/<uri:.+?>'] = 'craft-gonzo/front-end-routes/index';
             }
