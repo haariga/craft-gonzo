@@ -2,14 +2,18 @@
 
 namespace haariga\craftgonzo\models;
 
+use haariga\craftgonzo\services\GetStatus;
+
 abstract class ComponentData
 {
     public string $uuid = '';
     public string $title = '';
-    public string $status = '';
+    public ComponentStatus $status;
     public string $description = '';
     public string $fileIdentifier = '';
     public bool $visible = true;
+
+
 
     /**
      * @return string
@@ -54,9 +58,14 @@ abstract class ComponentData
     /**
      * @param string $status
      */
-    public function setStatus(string $status): void
+    public function setStatus(string|ComponentStatus $status): void
     {
-        $this->status = $status;
+        if ($status instanceof ComponentStatus) {
+            $findStatus = GetStatus::instance()->getStatus($status->getLabel());
+        } else {
+            $findStatus = GetStatus::instance()->getStatus($status);
+        }
+        $this->status = $findStatus;
     }
 
     /**

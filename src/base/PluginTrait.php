@@ -5,6 +5,7 @@ namespace haariga\craftgonzo\base;
 use haariga\craftgonzo\assetbundles\gonzo\GonzoAsset;
 use haariga\craftgonzo\CraftGonzo;
 use haariga\craftgonzo\services\FindActiveComponent;
+use haariga\craftgonzo\services\GetStatus;
 use haariga\craftgonzo\services\Gonzo;
 use haariga\craftgonzo\services\RenderComponent;
 use haariga\craftgonzo\services\TemplatesFolder;
@@ -21,6 +22,7 @@ trait PluginTrait {
             'findActiveComponent' => FindActiveComponent::class,
             'renderComponent' => RenderComponent::class,
             'filePreview' => FilePreview::class,
+            'getStatus' => GetStatus::class,
             'craftGonzo' => Gonzo::class,
             'vite' => [
                 'class' => VitePluginService::class,
