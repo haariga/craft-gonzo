@@ -83,11 +83,16 @@ class FrontEndRoutesController extends Controller
      *
      * @return string
      */
-    public function actionRenderTemplate(string $slug)
+    public function actionRenderTemplate(string $slug, string $variant = 'Default')
     {
         $activeComponent = CraftGonzo::getInstance()->findActiveComponent->findActiveComponent($slug);
         $templatePath = $activeComponent['files']['twig']['path'];
-        $componentData = $activeComponent['config']->getVariants();
+        $componentData = collect($activeComponent['config']->getVariants());
+        $componentData = $componentData->filter(function($item) use ($variant) {
+           return $item->getName() == $variant;
+        })->first();
+
+
         $html = CraftGonzo::$plugin->renderComponent->renderTemplate($templatePath, $componentData);
 
         return $html;
@@ -98,10 +103,15 @@ class FrontEndRoutesController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $slug = $request->getBodyParam('slug');
+        $variant = $request->getBodyParam('variant') ?? 'Default';
         $activeComponent = CraftGonzo::getInstance()->findActiveComponent->findActiveComponent($slug);
         $templatePath = $activeComponent['files']['twig']['path'];
-        $componentData = $activeComponent['config']->getVariants();
-        $html = Craft::$app->view->renderTemplate($templatePath, $componentData[0]->getData());
+        $componentData = collect($activeComponent['config']->getVariants());
+        $componentData = $componentData->filter(function($item) use ($variant) {
+            return $item->getName() == $variant;
+        })->first();
+
+        $html = Craft::$app->view->renderTemplate($templatePath, $componentData->getData());
 
         return $html;
     }

@@ -28,7 +28,7 @@
     }
   ],
   "require"    : {
-    "craftcms/cms"     : "^4.0.0-alpha.1",
+    "craftcms/cms"     : "^4.2.0",
     "nystudio107/craft-plugin-vite": "^4.0.6"
   },
   "autoload"   : {

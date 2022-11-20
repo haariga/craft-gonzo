@@ -10,16 +10,18 @@
 </template>
 
 <script setup lang="ts">
+import type { IComponent } from '@/vue/components/Sidebar/SidebarComponent.vue';
 import { computed, onMounted, onUpdated, ref } from 'vue';
 
 interface IProps {
   url: string;
+  variant: IComponent;
 }
 
 const props = defineProps<IProps>();
 
 const url = computed(() => {
-  return '/patternlib/component/render' + props.url;
+  return '/patternlib/component/render' + props.url + '/' + props.variant.name;
 });
 
 const iframe = ref<HTMLIFrameElement | null>(null);

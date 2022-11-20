@@ -9,6 +9,11 @@ class ComponentConfig extends ComponentData
     private string $path = '';
     public string $slug = '';
 
+    public function __construct()
+    {
+        $this->setStatus('wip');
+    }
+
     /**
      * @var ComponentVariant[]
      */

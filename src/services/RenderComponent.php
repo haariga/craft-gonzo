@@ -38,9 +38,10 @@ class RenderComponent extends Component
         }
 
         $layoutFile = CraftGonzo::$plugin->getSettings()->layoutFile;
+
         $layoutFile = Craft::$app->view->renderTemplate($layoutFile, [
             'templatePath' => $templatePath,
-            'variables' => $variables[0]->getData(),
+            'variables' => $variables->getData(),
         ]);
 
         return $layoutFile;
