@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import type { IComponent } from '@/vue/components/Sidebar/SidebarComponent.vue';
 
 interface IState {
   activeVariant: string;

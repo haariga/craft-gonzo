@@ -1,20 +1,12 @@
 <template>
   <div class="gonzo-componentView">
     <div class="gonzo-componentHeader bg-slate-700 p-10">
-      <h1>{{ title }}</h1>
-      <p class="text-slate-500">
-        {{ store.activeComponent.config.description }}
-      </p>
-      <ul class="flex list-none space-x-4">
-        <li
-          v-for="variant in store.activeComponent.config.variants"
-          :key="variant.title"
-        >
-          <button @click="setVariant(variant.title)">
-            {{ variant.name }}
-          </button>
-        </li>
-      </ul>
+      <ComponentHeader
+        :variants="store.activeComponent.config.variants"
+        :status="store.activeComponent.config.status"
+        :model-value="activeVariant"
+        @update:modelValue="setVariant"
+      />
     </div>
     <div class="gonzo-componentRender p-10 bg-white">
       <render-component :url="url" :variant="variant" />
@@ -33,6 +25,8 @@ import { storeToRefs } from 'pinia';
 import RenderComponent from '@/vue/components/Component/RenderComponent.vue';
 import ComponentFiles from '@/vue/components/Component/ComponentFiles.vue';
 import { useRoute, useRouter } from 'vue-router';
+import ComponentHeader from '@/vue/components/Component/ComponentHeader.vue';
+import type { IComponent } from '@/vue/components/Sidebar/SidebarComponent.vue';
 
 const store = useActiveComponentStore();
 const { title, files } = storeToRefs(store);
@@ -71,11 +65,15 @@ onMounted(() => {
 });
 
 const variant = computed(() => {
-  return store.activeComponent.config.variants.find((variant) => {
+  return store.activeComponent.config.variants.find((variant: IComponent) => {
     return (
       variant.title === store.activeVariant ||
       variant.name === store.activeVariant
     );
   });
+});
+
+const activeVariant = computed(() => {
+  return variant.value.name ?? 'Default';
 });
 </script>

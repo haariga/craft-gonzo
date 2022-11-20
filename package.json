@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.3",
+    "@heroicons/vue": "^2.0.13",
     "@highlightjs/vue-plugin": "^2.1.0",
     "axios": "^1.1.2",
     "pinia": "^2.0.22",

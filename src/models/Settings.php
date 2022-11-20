@@ -3,7 +3,6 @@
 namespace haariga\craftgonzo\models;
 
 use craft\config\BaseConfig;
-use haariga\craftgonzo\models\ComponentStatus;
 
 class Settings extends BaseConfig
 {
