@@ -36,6 +36,11 @@ class Settings extends BaseConfig
      */
     public array $pages = [];
 
+    /**
+     * @var array If defined the Sidebar structure is used from this array, it can be multidimensional
+     */
+    public array $structure;
+
     public function init(): void
     {
         $this->compStatus([
@@ -49,7 +54,7 @@ class Settings extends BaseConfig
     public function rules(): array
     {
         return [
-            [['compFolders', 'comps',], 'required'],
+            [['compFolders',], 'required'],
             ['compStatus', ComponentStatus::class],
         ];
     }
@@ -63,7 +68,7 @@ class Settings extends BaseConfig
     {
         $this->compFolders = $compFolders;
         return $this;
-}
+    }
 
     /**
      * @param string $layoutFile
@@ -74,7 +79,7 @@ class Settings extends BaseConfig
     {
         $this->layoutFile = $layoutFile;
         return $this;
-}
+    }
 
     /**
      * @param array $comps
@@ -85,7 +90,7 @@ class Settings extends BaseConfig
     {
         $this->comps = $comps;
         return $this;
-}
+    }
 
     /**
      * @param array $mqButtons
@@ -96,7 +101,7 @@ class Settings extends BaseConfig
     {
         $this->mqButtons = $mqButtons;
         return $this;
-}
+    }
 
     /**
      * @param array $compStatus
@@ -107,7 +112,7 @@ class Settings extends BaseConfig
     {
         $this->compStatus = $compStatus;
         return $this;
-}
+    }
 
     /**
      * @param array $pages
@@ -118,5 +123,16 @@ class Settings extends BaseConfig
     {
         $this->pages = $pages;
         return $this;
-}
+    }
+
+    /**
+     * @param array $structure
+     *
+     * @return Settings
+     */
+    public function setStructure(array $structure): Settings
+    {
+        $this->structure = $structure;
+        return $this;
+    }
 }

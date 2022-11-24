@@ -19,7 +19,7 @@ class FindActiveComponent extends Component
     public function findActiveComponent(string $slug)
     {
         $components = collect(CraftGonzo::getInstance()->templatesFolder->getComponentsArray());
-        $components = $components->filter(function ($item) use ($slug) {
+        $components = $components->unique()->filter(function ($item) use ($slug) {
             $componentSlug = $item['config']->getSlug();
             $slug = preg_quote($slug, '/');
             $pattern = "/$slug/i";
