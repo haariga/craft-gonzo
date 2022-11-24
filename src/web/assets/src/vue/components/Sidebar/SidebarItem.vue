@@ -2,7 +2,7 @@
   <ul>
     <li v-for="(child, index) in children" :key="index">
       <template v-if="child.children">
-        Nested: {{ child.title }}
+        {{ child.config.title }}
         <SidebarItem :children="child.children" />
       </template>
       <SidebarSub v-if="!child.children" :item="child" />
