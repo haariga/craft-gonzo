@@ -83,10 +83,52 @@ class TemplatesFolder extends Component
      */
     public function getComponents()
     {
-        $tree = $this->buildComponentTree();
-        $tree = $this->cleanUp($tree);
+        if (!empty(CraftGonzo::$plugin->getSettings()->structure)) {
+            $tree = $this->buildStructure(CraftGonzo::$plugin->getSettings()->structure);
+        } else {
+            $tree = $this->buildComponentTree();
+            $tree = $this->cleanUp($tree);
+        }
         $this->setTemplates($tree);
 
+        return $tree;
+    }
+
+    private function buildStructure($structure, $tree = []): array
+    {
+        foreach ($structure as $parent => $child) {
+            if (is_array($child)) {
+                $tree[$parent]['config'] = [
+                    'title' => $parent
+                ];
+                $tree[$parent]['children'] = $this->buildStructure($child, []);
+            } else {
+                if ($child instanceof ComponentConfig) {
+                    $reflection = new \ReflectionClass($child);
+                    $filename = $reflection->getFileName();
+                    $pathinfo = pathinfo($filename);
+                    $child->setPath($pathinfo['dirname']);
+                    $child->setUuid(StringHelper::UUID());
+                    $slug = dirname(str_replace($this->templateDir, '', $pathinfo['dirname']));
+                    $child->setSlug($slug.'/'.StringHelper::slugify($child->getTitle() ?? $pathinfo['filename']));
+                    $fileIdentfier = $child->getFileIdentifier() !== '' ? $child->getFileIdentifier() : ($child->getTitle() ?? 'no-identfier');
+                    $fileIdentfier = StringHelper::camelCase($fileIdentfier);
+                    $files = array_merge($this->componentFiles($pathinfo['dirname'], [], $fileIdentfier), ['config' => $child]);
+
+                    $component = [
+                        'config' => $child,
+                        'files' => $files
+                    ];
+                    $tree[$parent] = [
+                        'configs' => [
+                            $component
+                        ],
+                        'title' => $parent,
+                    ];
+                    $this->addToComponentsArray($component);
+                }
+            }
+        }
         return $tree;
     }
 
@@ -217,7 +259,7 @@ class TemplatesFolder extends Component
      *
      * @return array
      */
-    private function componentFiles(\SplFileInfo $dir, array $files, $identifier): array
+    private function componentFiles(string $dir, array $files, $identifier): array
     {
         $_dir = new \RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
         $iterator = new RecursiveIteratorIterator($_dir);
@@ -323,5 +365,13 @@ class TemplatesFolder extends Component
     public function addToComponentsArray(array $component): void
     {
         array_push($this->componentsArray, $component);
+    }
+
+    /**
+     * @param array $componentsArray
+     */
+    public function setComponentsArray(array $componentsArray): void
+    {
+        $this->componentsArray = $componentsArray;
     }
 }
