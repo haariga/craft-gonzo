@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <div class="p-4 border-b border-0 border-solid border-b-slate-800">
       <button
         v-for="tab in tabNames"
@@ -11,7 +11,7 @@
         {{ tab }}
       </button>
     </div>
-    <div>
+    <div class="overflow-scroll h-full">
       <FilePreviewWrapper
         :file-type="activeTab"
         :slug="files[activeTab].path ?? ''"
