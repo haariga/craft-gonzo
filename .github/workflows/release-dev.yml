@@ -17,7 +17,7 @@ jobs:
         run: npm run build
 
       - name: Set up Git identity
-              run: |
+              run:
                 git config --global user.email "${{ secrets.GIT_EMAIL }}"
                 git config --global user.name "${{ secrets.GIT_USER }}"
 
