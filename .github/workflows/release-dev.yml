@@ -16,6 +16,11 @@ jobs:
       - name: Build assets
         run: npm run build
 
+      - name: Set up Git identity
+              run: |
+                git config --global user.email "${{ secrets.GIT_EMAIL }}"
+                git config --global user.name "${{ secrets.GIT_USER }}"
+
       - name: Determine tag name
         id: tag_name
         run: echo "::set-output name=TAG_NAME::v$(jq -r '.version' composer.json)"
