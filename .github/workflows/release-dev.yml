@@ -8,22 +8,13 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.0 # Replace with your desired PHP version
-
       - name: Install dependencies
         uses: ./github/actions/npm-install
-
       - name: Build assets
         run: npm run build
-          # Add commands to build and test your package here
 
       - name: Create a release
         id: create_release
