@@ -13,7 +13,7 @@ import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useActiveComponentStore } from '@/vue/stores/ActiveComponent';
 
-type FileType = 'twig' | 'pcss' | 'css' | 'scss' | 'sass' | 'ts' | 'js';
+export type FileType = 'twig' | 'pcss' | 'css' | 'scss' | 'sass' | 'ts' | 'js';
 
 export interface IFile {
   name: string;
