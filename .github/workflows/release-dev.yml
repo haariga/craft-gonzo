@@ -23,17 +23,22 @@ jobs:
       - name: Create Git tag
         run: git tag ${{ steps.tag_name.outputs.TAG_NAME }} -m "Release ${{ steps.tag_name.outputs.TAG_NAME }}"
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub token for authentication
 
       - name: Push Git tag
         run: git push origin ${{ steps.tag_name.outputs.TAG_NAME }}
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub token for authentication
 
       - name: Create a release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: ./* # Replace with the path to your plugin files
-          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the GitHub token for authentication
 
       - name: Notify Packagist
         env:
