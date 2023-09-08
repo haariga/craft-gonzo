@@ -43,7 +43,10 @@
     "hasCpSettings": false,
     "hasCpSection" : false,
     "changelogUrl" : "https://raw.githubusercontent.com/haariga/craft-gonzo/master/CHANGELOG.md",
-    "class"        : "haariga\\craftgonzo\\CraftGonzo"
+    "class"        : "haariga\\craftgonzo\\CraftGonzo",
+    "branch-alias": {
+      "dev-v2": "2.0.x-dev"
+    }
   },
   "config": {
     "allow-plugins": {
