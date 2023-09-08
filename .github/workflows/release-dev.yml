@@ -1,0 +1,45 @@
+name: Release dev
+on:
+  push:
+    branches:
+      - main # Stable release on main branch
+      - develop # Development release on develop branch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0 # Replace with your desired PHP version
+
+      - name: Install dependencies
+        uses: ./github/actions/npm-install
+
+      - name: Build assets
+        run: npm run build
+          # Add commands to build and test your package here
+
+      - name: Create a release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./* # Replace with the path to your plugin files
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify Packagist
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "repository": "https://github.com/haariga/craft-gonzo",
+            "package": "haariga/craft-gonzo",
+            "version": "${{ steps.create_release.outputs.tag_name }}"
+          }' https://packagist.org/api/update-package?username=$PACKAGIST_USERNAME&apiToken=$PACKAGIST_TOKEN
