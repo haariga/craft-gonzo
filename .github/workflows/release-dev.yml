@@ -1,9 +1,9 @@
 name: Release dev
 on:
   push:
-    branches:
-      - main # Stable release on main branch
-      - develop # Development release on develop branch
+      branches:
+        - main
+        - develop
 
 jobs:
   release:
@@ -16,6 +16,18 @@ jobs:
       - name: Build assets
         run: npm run build
 
+      - name: Determine tag name
+        id: tag_name
+        run: echo "::set-output name=TAG_NAME::v$(jq -r '.version' composer.json)"
+
+      - name: Create Git tag
+        run: git tag ${{ steps.tag_name.outputs.TAG_NAME }} -m "Release ${{ steps.tag_name.outputs.TAG_NAME }}"
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+
+      - name: Push Git tag
+        run: git push origin ${{ steps.tag_name.outputs.TAG_NAME }}
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+
       - name: Create a release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -24,7 +36,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Notify Packagist
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
         env:
           PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
           PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
