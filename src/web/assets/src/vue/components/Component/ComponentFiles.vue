@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { FileType } from '@/vue/@types/Component';
+import type { FileType } from '@/vue/@types/Component';
 import FilePreviewWrapper from '@/vue/components/Component/FilePreviewWrapper.vue';
 import { useSetUrlParams } from '@/vue/composeables/useSetUrlParams';
 import { useActiveComponentStore } from '@/vue/stores/ActiveComponent';

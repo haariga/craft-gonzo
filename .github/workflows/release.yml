@@ -1,0 +1,50 @@
+name: Create GitHub Release and Notify Packagist
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true && (github.event.pull_request.base.ref == 'develop' || github.event.pull_request.base.ref == 'main')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get Composer version
+        id: composer-version
+        run: echo "::set-output name=version::$(composer --no-ansi -n -q show -D | grep -oP 'version\s+\K\S+')"
+
+      - name: Set Git Tag
+        id: set-tag
+        run: echo "::set-output name=tag_name::v${{ steps.composer-version.outputs.version }}"
+
+      - name: Create Tag
+             uses: actions/github-script@v3
+             env:
+                TAG: ${{ steps.set-tag.outputs.tag_name }}
+             with:
+                github-token: ${{ github.token }}
+                script: |
+                  github.git.createRef({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                   ref: "refs/tags/${{ steps.set-tag.outputs.tag_name }}",
+                    sha: context.sha
+                  })
+
+      - name: Create release
+             uses: ncipollo/release-action@v1
+             with:
+              tag: ${{ steps.set-tag.outputs.tag_name }}
+              token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify Packagist
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d "{\"repository\":\"${{ github.repository }}\"}" "https://packagist.org/api/update-package?username=$PACKAGIST_USERNAME&token=$PACKAGIST_TOKEN"

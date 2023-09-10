@@ -1,4 +1,4 @@
-Copyright (c) 2017 Martin Herweg
+Copyright © haariga
 
 Permission is hereby granted to any person obtaining a copy of this software (the “Software”) to use, copy, modify, merge, publish and/or distribute copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
