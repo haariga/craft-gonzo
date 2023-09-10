@@ -28,14 +28,9 @@
     }
   ],
   "require"    : {
-<<<<<<< HEAD
-    "craftcms/cms"     : "^3.0.0-RC1",
+    "craftcms/cms"     : "^3.0.0",
     "tightenco/collect": "^5.5.9",
     "fzaninotto/faker": "^1.8"
-=======
-    "craftcms/cms"     : "^3.0.0",
-    "tightenco/collect": "^5.5.9"
->>>>>>> master
   },
   "autoload"   : {
     "psr-4": {
