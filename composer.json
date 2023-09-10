@@ -2,7 +2,7 @@
   "name"       : "haariga/craft-gonzo",
   "description": "Component Library from your templates Folder",
   "type"       : "craft-plugin",
-  "version"    : "2.0.0-alpha-2",
+  "version"    : "2.0.0-alpha-3",
   "keywords"   : [
     "craft",
     "cms",
@@ -40,7 +40,7 @@
   "extra"      : {
     "name"         : "Craft Gonzo",
     "handle"       : "craft-gonzo",
-    "schemaVersion": "2.0.0-alpha.1",
+    "schemaVersion": "2.0.0-alpha.3",
     "hasCpSettings": false,
     "hasCpSection" : false,
     "changelogUrl" : "https://raw.githubusercontent.com/haariga/craft-gonzo/master/CHANGELOG.md",
