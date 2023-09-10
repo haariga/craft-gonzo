@@ -74,6 +74,32 @@ const variant = computed(() => {
 });
 
 const activeVariant = computed(() => {
-  return variant.value.name ?? 'Default';
+  return variant.value?.name ?? 'Default';
 });
 </script>
+
+<style>
+.gonzo-componentView {
+  display: grid;
+  grid-template-rows: max-content minmax(50vh, 80vh) max(450px);
+  overflow: hidden;
+  grid-template-areas:
+    'componentHeader'
+    'componentRender'
+    'componentFiles';
+}
+
+.gonzo-componentHeader {
+  grid-area: componentHeader;
+}
+
+.gonzo-componentRender {
+  grid-area: componentRender;
+  overflow-y: scroll;
+}
+
+.gonzo-componentFiles {
+  grid-area: componentFiles;
+  max-width: calc(100vw - 340px);
+}
+</style>

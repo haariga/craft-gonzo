@@ -1,5 +1,6 @@
 <template>
   <iframe
+    v-if="url"
     contenteditable="true"
     :src="url"
     frameborder="0"
@@ -7,6 +8,7 @@
     :height="iFrameSize.height"
     ref="iframe"
   ></iframe>
+  <div v-else>No component found.</div>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +23,9 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const url = computed(() => {
-  return '/patternlib/component/render' + props.url + '/' + props.variant.name;
+  return (
+    '/patternlib/component/render' + props.url + '/' + props.variant?.name ?? ''
+  );
 });
 
 const iframe = ref<HTMLIFrameElement | null>(null);
