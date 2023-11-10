@@ -10,7 +10,7 @@
     "@headlessui/vue": "^1.7.3",
     "@heroicons/vue": "^2.0.13",
     "@highlightjs/vue-plugin": "^2.1.0",
-    "axios": "^1.1.2",
+    "axios": "^1.6.0",
     "pinia": "^2.0.22",
     "qs": "^6.11.0",
     "shiki": "^0.11.1",
